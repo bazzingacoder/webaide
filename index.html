@@ -507,7 +507,13 @@
                         li.className = 'suggestion-item';
                         li.setAttribute('role', 'option');
                         li.id = `suggestion-${index}`;
-                        li.addEventListener('click', () => { searchInput.value = item['Resource Text']; suggestionsList.innerHTML = ''; suggestionsList.classList.add('hidden'); searchInput.setAttribute('aria-expanded', 'false'); filterAndSearch(); });
+                        li.addEventListener('click', () => {
+                            searchInput.value = item['Resource Text'];
+                            suggestionsList.innerHTML = '';
+                            suggestionsList.classList.add('hidden');
+                            searchInput.setAttribute('aria-expanded', 'false');
+                            filterAndSearch();
+                        });
                         suggestionsList.appendChild(li);
                     });
                     suggestionsList.classList.remove('hidden');
@@ -521,11 +527,32 @@
 
             function handleKeyboardNavigation(e) {
                 const items = suggestionsList.querySelectorAll('.suggestion-item');
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (activeSuggestionIndex > -1) {
+                        items[activeSuggestionIndex].click();
+                    } else {
+                        filterAndSearch();
+                    }
+                    suggestionsList.classList.add('hidden');
+                    searchInput.setAttribute('aria-expanded', 'false');
+                    return;
+                }
+
                 if (suggestionsList.classList.contains('hidden') || items.length === 0) return;
-                if (e.key === 'ArrowDown') { e.preventDefault(); activeSuggestionIndex = (activeSuggestionIndex + 1) % items.length; updateSuggestionHighlight(items); } 
-                else if (e.key === 'ArrowUp') { e.preventDefault(); activeSuggestionIndex = (activeSuggestionIndex - 1 + items.length) % items.length; updateSuggestionHighlight(items); } 
-                else if (e.key === 'Enter') { if (activeSuggestionIndex > -1) { e.preventDefault(); items[activeSuggestionIndex].click(); } } 
-                else if (e.key === 'Escape') { suggestionsList.classList.add('hidden'); searchInput.setAttribute('aria-expanded', 'false'); }
+
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    activeSuggestionIndex = (activeSuggestionIndex + 1) % items.length;
+                    updateSuggestionHighlight(items);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    activeSuggestionIndex = (activeSuggestionIndex - 1 + items.length) % items.length;
+                    updateSuggestionHighlight(items);
+                } else if (e.key === 'Escape') {
+                    suggestionsList.classList.add('hidden');
+                    searchInput.setAttribute('aria-expanded', 'false');
+                }
             }
 
             function updateSuggestionHighlight(items) {
@@ -534,7 +561,7 @@
                 if (currentActiveItem) { currentActiveItem.classList.add('active'); searchInput.setAttribute('aria-activedescendant', currentActiveItem.id); currentActiveItem.scrollIntoView({ block: 'nearest' }); }
             }
 
-            searchInput.addEventListener('input', () => { filterAndSearch(); showSuggestions(); });
+            searchInput.addEventListener('input', showSuggestions);
             searchInput.addEventListener('keydown', handleKeyboardNavigation);
             document.addEventListener('click', (e) => { if (!e.target.closest('#search-container')) { suggestionsList.classList.add('hidden'); searchInput.setAttribute('aria-expanded', 'false'); } });
             window.addEventListener('scroll', () => {
