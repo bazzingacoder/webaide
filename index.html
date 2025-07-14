@@ -23,10 +23,10 @@
     </script>
     
     <style>
-        /* Base styles, will be overridden by dark mode */
+        html {
+            scroll-padding-top: 180px; 
+        }
         body { background-color: #f8fafc; color: #1f2937; }
-        
-        /* Specificity for dark mode overrides */
         html.dark body { background-color: #030712; color: #f9fafb; }
         html.dark .resource-card { background-color: #1f2937; border-color: #374151; }
         html.dark #resources > section:nth-of-type(even) { background-color: #111827; }
@@ -37,7 +37,6 @@
         html.dark #search-input::placeholder { color: #6b7280; }
         html.dark #suggestions-list { background-color: #1f2937; border-color: #374151; }
         html.dark .suggestion-item.active, html.dark .suggestion-item:hover { background-color: #374151; }
-
         .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: -9999; }
         .skip-link:focus { position: fixed; top: 10px; left: 10px; background-color: #4f46e5; color: #fff; padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-weight: 600; z-index: 9999; width: auto; height: auto; }
         #search-and-filter-controls { transition: transform 0.3s ease-in-out; }
@@ -60,18 +59,9 @@
         #feedback-modal { max-height: 90vh; overflow-y: auto; }
         .hidden { display: none !important; }
 
-        @keyframes pulse {
-            50% { opacity: .5; }
-        }
-        .skeleton-card {
-            background-color: #e5e7eb;
-            border-radius: 0.75rem;
-            height: 140px;
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        html.dark .skeleton-card {
-            background-color: #374151;
-        }
+        @keyframes pulse { 50% { opacity: .5; } }
+        .skeleton-card { background-color: #e5e7eb; border-radius: 0.75rem; height: 140px; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        html.dark .skeleton-card { background-color: #374151; }
     </style>
 </head>
 <body class="bg-slate-50 text-gray-800 transition-colors duration-300">
@@ -113,13 +103,14 @@
         <search id="search-and-filter-controls" class="mb-12 sticky top-[88px] z-40 bg-slate-50/80 dark:bg-gray-900/80 backdrop-blur-sm -mx-6 px-6 py-4" role="search">
             <div class="max-w-4xl mx-auto">
                 <div class="flex flex-col md:flex-row gap-4">
-                    <div class="relative flex-grow">
+                    <div id="search-container" class="relative flex-grow">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <input type="text" id="search-input" placeholder="Search for any resource..." class="w-full p-4 pl-10 border-2 rounded-full text-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                        <input type="text" id="search-input" placeholder="Search for any resource..." class="w-full p-4 pl-10 border-2 rounded-full text-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="suggestions-list">
+                         <ul id="suggestions-list" role="listbox" aria-label="Search suggestions" class="hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md mt-1 shadow-lg z-10"></ul>
                     </div>
                     <div id="filter-container" class="flex flex-wrap justify-center items-center gap-2" role="group" aria-label="Resource Categories"></div>
                 </div>
@@ -416,11 +407,26 @@
             });
 
             function createSections() {
+                const categoryIconMap = {
+                    "Accessibility Standards": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A11.953 11.953 0 0 1 12 16.5c-2.998 0-5.74-1.1-7.843-2.918m15.686-5.418A8.959 8.959 0 0 0 21 12c0 .778-.099 1.533-.284 2.253m0 0a8.997 8.997 0 0 1-7.843 4.582M12 16.5a8.997 8.997 0 0 0-7.843-4.582m7.843 0a11.953 11.953 0 0 0 7.843-2.918m-15.686 0A11.953 11.953 0 0 0 12 10.5c2.998 0 5.74 1.1 7.843 2.918" /></svg>`,
+                    "Useful tools, resources and references": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h12M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-12a2.25 2.25 0 0 1-2.25-2.25V3.75m16.5 0v16.5h-16.5V3.75m16.5 0L12 14.25 3.75 3.75" /></svg>`,
+                    "Guides & Cheat Sheets": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>`,
+                    "Checklists": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.4-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.4-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.4 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.4.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" /></svg>`,
+                    "Auditing and Testing tools": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>`,
+                    "License/Certificates": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>`,
+                    "Other": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>`,
+                    "Other must read resources from web accessibility initiative": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" /></svg>`,
+                    "blogs / people / other resources to follow": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.952a4.5 4.5 0 0 1-9 0m9 0a4.5 4.5 0 0 0-9 0m9 0h.008c.341 0 .62.279.62.62v.008a.62.62 0 0 1-.62.62h-.008a.62.62 0 0 1-.62-.62v-.008c0-.341.279-.62.62-.62Z" /></svg>`
+                };
+
                 allCategories.forEach(category => {
                     const section = document.createElement('section');
                     const title = document.createElement('h2');
-                    title.className = 'text-3xl font-bold mb-8 border-l-4 border-indigo-500 dark:border-indigo-400 pl-4';
-                    title.textContent = category;
+                    title.className = 'text-3xl font-bold mb-8 border-l-4 border-indigo-500 dark:border-indigo-400 pl-4 flex items-center gap-3';
+                    
+                    const iconSVG = categoryIconMap[category] || '';
+                    title.innerHTML = `${iconSVG}<span>${category}</span>`;
+
                     const grid = document.createElement('div');
                     grid.className = 'grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6';
                     section.appendChild(title);
@@ -432,7 +438,7 @@
             function renderCards(dataToRender) {
                 resourcesContainer.querySelectorAll('.grid').forEach(grid => grid.innerHTML = '');
                 dataToRender.forEach((item, index) => {
-                    const parentSection = Array.from(document.querySelectorAll('#resources section')).find(s => s.querySelector('h2').textContent === item.Category);
+                    const parentSection = Array.from(document.querySelectorAll('#resources section')).find(s => s.querySelector('h2 > span').textContent === item.Category);
                     if (parentSection) {
                         const grid = parentSection.querySelector('.grid');
                         const card = document.createElement('div');
@@ -504,12 +510,11 @@
                     filteredSuggestions.forEach((item, index) => {
                         const li = document.createElement('li');
                         li.textContent = item['Resource Text'];
-                        li.className = 'suggestion-item';
+                        li.className = 'suggestion-item p-2 hover:bg-indigo-100 dark:hover:bg-gray-600 cursor-pointer';
                         li.setAttribute('role', 'option');
                         li.id = `suggestion-${index}`;
                         li.addEventListener('click', () => {
                             searchInput.value = item['Resource Text'];
-                            suggestionsList.innerHTML = '';
                             suggestionsList.classList.add('hidden');
                             searchInput.setAttribute('aria-expanded', 'false');
                             filterAndSearch();
@@ -527,9 +532,10 @@
 
             function handleKeyboardNavigation(e) {
                 const items = suggestionsList.querySelectorAll('.suggestion-item');
+                
                 if (e.key === 'Enter') {
                     e.preventDefault();
-                    if (activeSuggestionIndex > -1) {
+                    if (activeSuggestionIndex > -1 && items[activeSuggestionIndex]) {
                         items[activeSuggestionIndex].click();
                     } else {
                         filterAndSearch();
@@ -556,9 +562,13 @@
             }
 
             function updateSuggestionHighlight(items) {
-                items.forEach(item => item.classList.remove('active'));
+                items.forEach(item => item.classList.remove('active', 'bg-indigo-100', 'dark:bg-gray-600'));
                 const currentActiveItem = items[activeSuggestionIndex];
-                if (currentActiveItem) { currentActiveItem.classList.add('active'); searchInput.setAttribute('aria-activedescendant', currentActiveItem.id); currentActiveItem.scrollIntoView({ block: 'nearest' }); }
+                if (currentActiveItem) { 
+                    currentActiveItem.classList.add('active', 'bg-indigo-100', 'dark:bg-gray-600'); 
+                    searchInput.setAttribute('aria-activedescendant', currentActiveItem.id); 
+                    currentActiveItem.scrollIntoView({ block: 'nearest' }); 
+                }
             }
 
             searchInput.addEventListener('input', showSuggestions);
