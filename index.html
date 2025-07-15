@@ -23,145 +23,35 @@
     </script>
     
     <style>
-        /* 1.0 Design Tokens as CSS Variables */
-        :root {
-            /* 1.1 Color Palette (Light Mode) */
-            --primary: #4f46e5;
-            --primary-hover: #4338ca;
-            --primary-focus: #6366f1;
-            --text-primary: #1f2937;
-            --text-secondary: #4b5563;
-            --background-primary: #ffffff;
-            --background-secondary: #f9fafb;
-            --border-primary: #e5e7eb;
-            --text-on-primary: #ffffff;
-
-            /* 1.2 Typography */
-            --font-family-heading: 'Inter', sans-serif;
-            --font-family-body: 'Inter', sans-serif;
-            --line-height-body: 1.6;
-
-            /* 1.3 Spacing */
-            --spacing-unit: 4px;
-            --padding-card: calc(8 * var(--spacing-unit));      /* 32px */
-            --padding-modal: calc(8 * var(--spacing-unit));     /* 32px */
-            --padding-section-y: calc(16 * var(--spacing-unit));/* 64px */
-            --padding-section-x: calc(6 * var(--spacing-unit)); /* 24px */
-            --gap-grid: calc(6 * var(--spacing-unit));          /* 24px */
-            --gap-form: calc(6 * var(--spacing-unit));          /* 24px */
-
-            /* 1.4 Border Radius */
-            --border-radius-card: 0.75rem;  /* 12px */
-            --border-radius-button: 0.5rem; /* 8px */
-            --border-radius-input: 0.375rem;/* 6px */
-            --border-radius-pill: 9999px;
-
-            /* 1.5 Shadows */
-            --box-shadow-card: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+        html {
+            scroll-padding-top: 180px; 
         }
-
-        html[data-theme="dark"] {
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --primary-focus: #818cf8;
-            --text-primary: #f9fafb;
-            --text-secondary: #d1d5db;
-            --background-primary: #030712;
-            --background-secondary: #111827;
-            --border-primary: #374151;
-        }
-        
-        /* Base Body Styles */
-        body {
-            background-color: var(--background-primary);
-            color: var(--text-primary);
-            font-family: var(--font-family-body);
-            line-height: var(--line-height-body);
-            transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
-        }
-
-        /* 3.0 General Implementation Rules */
-        .resource-card, .filter-btn, .suggestion-item, #search-and-filter-controls {
-             transition: color 300ms ease-in-out, background-color 300ms ease-in-out, transform 300ms ease-in-out, border-color 300ms ease-in-out;
-        }
-
-        /* 2.1 Search & Filter Bar */
-        #search-and-filter-controls {
-            background-color: var(--background-primary);
-            border-bottom: 1px solid var(--border-primary);
-        }
-        html[data-theme="dark"] #search-and-filter-controls {
-            background-color: var(--background-secondary);
-        }
-
-        /* 2.2 Search Suggestions */
-        #suggestions-list {
-            background-color: var(--background-primary);
-            border: 1px solid var(--border-primary);
-        }
-        html[data-theme="dark"] #suggestions-list {
-            background-color: var(--background-secondary);
-            border-color: var(--border-primary);
-        }
-        .suggestion-item {
-            background-color: var(--background-primary);
-            color: var(--text-primary);
-            cursor: pointer;
-        }
-        html[data-theme="dark"] .suggestion-item {
-            background-color: var(--background-secondary);
-            color: var(--text-primary);
-        }
-        .suggestion-item:hover, .suggestion-item.active {
-            background-color: var(--primary);
-            color: var(--text-on-primary);
-        }
-       
-        /* 2.3 Filter Buttons */
-        .filter-btn {
-            background-color: var(--background-secondary);
-            color: var(--text-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: var(--border-radius-pill);
-            cursor: pointer;
-        }
-        html[data-theme="dark"] .filter-btn {
-            background-color: var(--background-secondary);
-            color: var(--text-secondary);
-        }
-        .filter-btn.active {
-            background-color: var(--primary);
-            color: var(--text-on-primary);
-            border-color: transparent;
-        }
-       
-        /* 2.4 Resource Cards */
-        .resource-card {
-            padding: var(--padding-card);
-            background-color: var(--background-primary);
-            border-radius: var(--border-radius-card);
-            box-shadow: var(--box-shadow-card);
-        }
-        html[data-theme="dark"] .resource-card {
-            background-color: var(--background-secondary);
-        }
-
-        /* Other styles from original file */
-        html { scroll-padding-top: 180px; }
+        body { background-color: #f8fafc; color: #1f2937; }
+        html.dark body { background-color: #030712; color: #f9fafb; }
+        html.dark .resource-card { background-color: #1f2937; border-color: #374151; }
+        html.dark #resources > section:nth-of-type(even) { background-color: #111827; }
+        html.dark .filter-btn { background-color: #1f2937; color: #a5b4fc; border-color: #4f46e5; }
+        html.dark .filter-btn:hover { background-color: #374151; }
+        html.dark .filter-btn.active { background-color: #4f46e5; color: #fff; }
+        html.dark #search-input { background-color: #1f2937; border-color: #4b5563; color: #f9fafb; }
+        html.dark #search-input::placeholder { color: #6b7280; }
+        html.dark #suggestions-list { background-color: #1f2937; border-color: #374151; }
+        html.dark .suggestion-item.active, html.dark .suggestion-item:hover { background-color: #374151; }
         .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: -9999; }
-        .skip-link:focus { position: fixed; top: 10px; left: 10px; background-color: var(--primary); color: var(--text-on-primary); padding: 0.75rem 1.25rem; border-radius: var(--border-radius-button); font-weight: 600; z-index: 9999; width: auto; height: auto; }
+        .skip-link:focus { position: fixed; top: 10px; left: 10px; background-color: #4f46e5; color: #fff; padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-weight: 600; z-index: 9999; width: auto; height: auto; }
+        #search-and-filter-controls { transition: transform 0.3s ease-in-out; }
         #search-and-filter-controls.is-hidden { transform: translateY(-110%); }
-        .resource-card { position: relative; display: flex; flex-direction: column; opacity: 0; transform: translateY(20px); }
+        .resource-card { position: relative; border: 1px solid #e5e7eb; border-radius: 0.75rem; padding: 1.5rem; display: flex; flex-direction: column; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease-out, transform 0.4s ease-out, background-color 0.3s, border-color 0.3s; }
         .resource-card.is-visible { opacity: 1; transform: translateY(0); }
-        .resource-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .resource-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); transition: all 0.2s ease-in-out; }
         .card-menu-btn { position: absolute; top: 0.75rem; right: 0.75rem; width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; border-radius: 9999px; background-color: transparent; border: none; cursor: pointer; }
-        html[data-theme="dark"] .card-menu-btn:hover, html[data-theme="dark"] .card-menu-btn:focus-visible { background-color: #374151; }
-        .card-menu { position: absolute; top: 3.25rem; right: 0.75rem; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); border: 1px solid var(--border-primary); z-index: 20; min-width: 180px; }
-        html[data-theme="dark"] .card-menu { background-color: #1f2937; border-color: #4b5563; }
+        html.dark .card-menu-btn:hover, html.dark .card-menu-btn:focus-visible { background-color: #374151; }
+        .card-menu { position: absolute; top: 3.25rem; right: 0.75rem; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); border: 1px solid #e5e7eb; z-index: 20; min-width: 180px; }
+        html.dark .card-menu { background-color: #1f2937; border-color: #4b5563; }
         .card-menu-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; font-size: 0.875rem; background: none; border: none; width: 100%; text-align: left; cursor: pointer; }
-        html[data-theme="dark"] .card-menu-item { color: #d1d5db; }
+        html.dark .card-menu-item { color: #d1d5db; }
         .card-menu-item:hover, .card-menu-item:focus { background-color: #eef2ff; outline: none; }
-        html[data-theme="dark"] .card-menu-item:hover, html[data-theme="dark"] .card-menu-item:focus { background-color: #374151; }
+        html.dark .card-menu-item:hover, html.dark .card-menu-item:focus { background-color: #374151; }
         .card-menu-item svg { width: 1rem; height: 1rem; }
         #back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; transition: opacity 0.3s; z-index: 100; }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
@@ -171,23 +61,23 @@
 
         @keyframes pulse { 50% { opacity: .5; } }
         .skeleton-card { background-color: #e5e7eb; border-radius: 0.75rem; height: 140px; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-        html[data-theme="dark"] .skeleton-card { background-color: #374151; }
+        html.dark .skeleton-card { background-color: #374151; }
     </style>
 </head>
-<body data-theme="light">
+<body class="bg-slate-50 text-gray-800 transition-colors duration-300">
 
     <div class="sr-only" id="announcer" aria-live="polite" aria-atomic="true"></div>
 
     <a href="#search-input" id="skip-to-search" class="skip-link">Skip to search</a>
     <a href="#main-content" id="skip-to-main" class="skip-link">Skip to main content</a>
 
-    <header class="p-6 shadow-md sticky top-0 z-50">
+    <header class="p-6 bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50 transition-colors duration-300">
         <nav class="container mx-auto flex justify-between items-center" aria-label="Main Navigation">
-            <a href="#" class="text-2xl font-bold text-indigo-600">Webaide</a>
+            <a href="#" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">Webaide</a>
             <div class="flex items-center gap-4">
-                <button id="open-feedback-modal-btn" class="font-semibold py-2 px-4 rounded-lg">Suggest / Feedback</button>
-                <button id="theme-toggle" aria-label="Activate light mode" class="w-10 h-10 p-2 rounded-full">
-                    <svg id="theme-toggle-sun" class="w-full h-full hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                <button id="open-feedback-modal-btn" class="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition duration-300">Suggest / Feedback</button>
+                <button id="theme-toggle" aria-label="Activate light mode" class="w-10 h-10 p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+                    <svg id="theme-toggle-sun" class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     <svg id="theme-toggle-moon" class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
             </div>
@@ -196,21 +86,21 @@
 
     <main id="main-content" class="container mx-auto p-6 lg:p-8 outline-none">
         <section class="text-center my-12 md:my-16">
-            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-2">Welcome to <span>Webaide</span></h1>
-            <p class="text-xl max-w-3xl mx-auto mb-8">The Web Accessibility Info & Development Ecosystem,<br/>"Your toolkit for building accessible digital experiences."</p>
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-2 text-gray-900 dark:text-gray-100">Welcome to <span class="text-indigo-600 dark:text-indigo-400">Webaide</span></h1>
+            <p class="text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto mb-8">The Web Accessibility Info & Development Ecosystem,<br/>"Your toolkit for building accessible digital experiences."</p>
             
             <div id="social-share-container" class="mt-8">
-                <p class="text-lg font-semibold mb-4">Share this resource hub:</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Share this resource hub:</p>
                 <div class="flex justify-center items-center gap-4">
-                    <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on X"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
-                    <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on Facebook"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
-                    <a id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg></a>
-                    <button id="copy-link-btn" class="copy-link-btn" aria-label="Copy page link"><svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span id="copy-link-text">Copy Link</span></button>
+                    <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on X"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+                    <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on Facebook"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
+                    <a id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg></a>
+                    <button id="copy-link-btn" class="copy-link-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 border-indigo-200 dark:border-gray-600 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Copy page link"><svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span id="copy-link-text">Copy Link</span></button>
                 </div>
             </div>
         </section>
 
-        <search id="search-and-filter-controls" class="mb-12 sticky top-[88px] z-40 -mx-6 px-6 py-4" role="search">
+        <search id="search-and-filter-controls" class="mb-12 sticky top-[88px] z-40 bg-slate-50/80 dark:bg-gray-900/80 backdrop-blur-sm -mx-6 px-6 py-4" role="search">
             <div class="max-w-4xl mx-auto">
                 <div class="flex flex-col md:flex-row gap-4">
                     <div id="search-container" class="relative flex-grow">
@@ -219,10 +109,10 @@
                                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <input type="text" id="search-input" placeholder="Search for any resource..." class="w-full p-4 pl-10 border-2 rounded-full text-lg" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="suggestions-list">
-                         <ul id="suggestions-list" role="listbox" aria-label="Search suggestions" class="hidden absolute top-full left-0 right-0 rounded-md mt-1 shadow-lg z-10"></ul>
+                        <input type="text" id="search-input" placeholder="Search for any resource..." class="w-full p-4 pl-10 border-2 rounded-full text-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="suggestions-list">
+                         <ul id="suggestions-list" role="listbox" aria-label="Search suggestions" class="hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md mt-1 shadow-lg z-10"></ul>
                     </div>
-                    <div id="filter-container" class="flex flex-wrap justify-center items-center gap-2 p-2" role="group" aria-label="Resource Categories"></div>
+                    <div id="filter-container" class="flex flex-wrap justify-center items-center gap-2" role="group" aria-label="Resource Categories"></div>
                 </div>
                  <div id="search-results-announcer" class="sr-only" aria-live="polite"></div>
             </div>
@@ -245,12 +135,12 @@
     </main>
 
     <div id="feedback-modal-overlay" class="hidden fixed inset-0 items-center justify-center p-4 bg-black/60">
-        <div id="feedback-modal" class="relative w-full max-w-2xl p-8 rounded-2xl shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="feedback-modal-title">
-            <button id="close-feedback-modal-btn" class="absolute top-4 right-4">
+        <div id="feedback-modal" class="relative bg-white dark:bg-gray-800 w-full max-w-2xl p-8 rounded-2xl shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="feedback-modal-title">
+            <button id="close-feedback-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 dark:hover:text-white transition">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 <span class="sr-only">Close dialog</span>
             </button>
-            <h2 id="feedback-modal-title" class="text-2xl font-bold mb-6">Submit Feedback or Suggest a Resource</h2>
+            <h2 id="feedback-modal-title" class="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">Submit Feedback or Suggest a Resource</h2>
             
             <form name="feedback" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value="feedback" />
@@ -260,76 +150,76 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label for="submitter-name" class="block text-sm font-medium mb-1">Name <span class="text-red-500">*</span></label>
-                        <input type="text" id="submitter-name" name="name" required class="w-full p-2 border rounded-md shadow-sm">
+                        <label for="submitter-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name <span class="text-red-500">*</span></label>
+                        <input type="text" id="submitter-name" name="name" required class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100">
                     </div>
                     <div>
-                        <label for="submitter-email" class="block text-sm font-medium mb-1">Email (Optional)</label>
-                        <input type="email" id="submitter-email" name="email" class="w-full p-2 border rounded-md shadow-sm">
+                        <label for="submitter-email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email (Optional)</label>
+                        <input type="email" id="submitter-email" name="email" class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100">
                     </div>
                 </div>
 
                 <fieldset class="mb-6">
-                    <legend class="block text-sm font-medium mb-2">What would you like to submit? <span class="text-red-500">*</span></legend>
+                    <legend class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">What would you like to submit? <span class="text-red-500">*</span></legend>
                     <div class="flex items-center gap-6">
                         <div class="flex items-center">
-                            <input type="radio" id="type-feedback" name="submission-type" value="feedback" required class="h-4 w-4">
-                            <label for="type-feedback" class="ml-2 block text-sm">Feedback</label>
+                            <input type="radio" id="type-feedback" name="submission-type" value="feedback" required class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                            <label for="type-feedback" class="ml-2 block text-sm text-gray-900 dark:text-gray-200">Feedback</label>
                         </div>
                         <div class="flex items-center">
-                            <input type="radio" id="type-resource" name="submission-type" value="resource" class="h-4 w-4">
-                            <label for="type-resource" class="ml-2 block text-sm">Resource to Feature</label>
+                            <input type="radio" id="type-resource" name="submission-type" value="resource" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                            <label for="type-resource" class="ml-2 block text-sm text-gray-900 dark:text-gray-200">Resource to Feature</label>
                         </div>
                     </div>
                 </fieldset>
                 
                 <div id="feedback-fields" class="hidden space-y-4">
                     <div>
-                        <label for="feedback-text" class="block text-sm font-medium mb-1">Your Feedback <span class="text-red-500">*</span></label>
-                        <textarea id="feedback-text" name="feedback-text" rows="5" class="w-full p-2 border rounded-md shadow-sm"></textarea>
+                        <label for="feedback-text" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Feedback <span class="text-red-500">*</span></label>
+                        <textarea id="feedback-text" name="feedback-text" rows="5" class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100"></textarea>
                     </div>
                 </div>
 
                 <div id="resource-fields" class="hidden space-y-4">
                     <div>
-                        <label for="resource-title" class="block text-sm font-medium mb-1">Resource Title <span class="text-red-500">*</span></label>
-                        <input type="text" id="resource-title" name="resource-title" required class="w-full p-2 border rounded-md shadow-sm">
+                        <label for="resource-title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Resource Title <span class="text-red-500">*</span></label>
+                        <input type="text" id="resource-title" name="resource-title" required class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100">
                     </div>
                     <div>
-                        <label for="resource-category" class="block text-sm font-medium mb-1">Category <span class="text-red-500">*</span></label>
-                        <select id="resource-category" name="resource-category" required class="w-full p-2 border rounded-md shadow-sm">
+                        <label for="resource-category" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category <span class="text-red-500">*</span></label>
+                        <select id="resource-category" name="resource-category" required class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100">
                             <option value="">Select a category...</option>
                         </select>
                     </div>
                     <div>
-                        <label for="resource-description" class="block text-sm font-medium mb-1">Description (Optional)</label>
-                        <textarea id="resource-description" name="resource-description" rows="3" class="w-full p-2 border rounded-md shadow-sm"></textarea>
+                        <label for="resource-description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description (Optional)</label>
+                        <textarea id="resource-description" name="resource-description" rows="3" class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100"></textarea>
                     </div>
                     <div>
-                        <label for="resource-url" class="block text-sm font-medium mb-1">URL <span class="text-red-500">*</span></label>
-                        <input type="url" id="resource-url" name="resource-url" placeholder="https://example.com" required class="w-full p-2 border rounded-md shadow-sm">
+                        <label for="resource-url" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">URL <span class="text-red-500">*</span></label>
+                        <input type="url" id="resource-url" name="resource-url" placeholder="https://example.com" required class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100">
                     </div>
                 </div>
 
                 <div class="mt-8 text-right">
-                    <button type="submit" class="font-bold py-3 px-6 rounded-lg disabled:bg-gray-400">Submit</button>
+                    <button type="submit" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition duration-300 disabled:bg-gray-400">Submit</button>
                 </div>
             </form>
         </div>
     </div>
     
-    <a href="#" id="back-to-top" class="p-3 rounded-full shadow-lg">
+    <a href="#" id="back-to-top" class="bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
     </a>
 
-    <footer class="p-6 text-center mt-12">
-        <p class="mb-4">© 2025 Webaide. All Rights Reserved.</p>
+    <footer class="bg-gray-800 dark:bg-black p-6 text-center mt-12 transition-colors duration-300">
+        <p class="mb-4 text-gray-300 dark:text-gray-400">© 2025 Webaide. All Rights Reserved.</p>
         <section id="follow-links" class="mt-4 hidden">
             <h2 class="font-bold text-lg mb-2">Follow Me</h2>
             <div class="flex justify-center items-center gap-4">
-                <a href="#" class="transition">X / Twitter</a>
-                <a href="#" class="transition">LinkedIn</a>
-                <a href="#" class="transition">GitHub</a>
+                <a href="#" class="text-indigo-300 hover:text-white transition">X / Twitter</a>
+                <a href="#" class="text-indigo-300 hover:text-white transition">LinkedIn</a>
+                <a href="#" class="text-indigo-300 hover:text-white transition">GitHub</a>
             </div>
         </section>
     </footer>
@@ -344,13 +234,13 @@
 
             function applyTheme(theme) {
                 if (theme === 'dark') {
-                    htmlEl.setAttribute('data-theme', 'dark');
+                    htmlEl.classList.add('dark');
                     sunIcon.classList.remove('hidden');
                     moonIcon.classList.add('hidden');
                     themeToggleBtn.setAttribute('aria-label', 'Activate light mode');
                     localStorage.setItem('theme', 'dark');
                 } else {
-                    htmlEl.setAttribute('data-theme', 'light');
+                    htmlEl.classList.remove('dark');
                     sunIcon.classList.add('hidden');
                     moonIcon.classList.remove('hidden');
                     themeToggleBtn.setAttribute('aria-label', 'Activate dark mode');
@@ -359,7 +249,7 @@
             }
 
             function toggleTheme() {
-                const currentTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+                const currentTheme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
                 applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
             }
 
@@ -392,7 +282,7 @@
                 console.error("Could not fetch resources:", error);
                 
                 skeletonLoader.classList.add('hidden');
-                document.getElementById('resources').innerHTML = `<p class="text-center text-red-500">Could not load resources. Please try again later.</p>`;
+                document.getElementById('resources').innerHTML = `<p class="text-center text-red-500 dark:text-red-400">Could not load resources. Please try again later.</p>`;
                 return;
             }
             
@@ -532,7 +422,7 @@
                 allCategories.forEach(category => {
                     const section = document.createElement('section');
                     const title = document.createElement('h2');
-                    title.className = 'text-3xl font-bold mb-8 border-l-4 pl-4 flex items-center gap-3';
+                    title.className = 'text-3xl font-bold mb-8 border-l-4 border-indigo-500 dark:border-indigo-400 pl-4 flex items-center gap-3';
                     
                     const iconSVG = categoryIconMap[category] || '';
                     title.innerHTML = `${iconSVG}<span>${category}</span>`;
@@ -553,9 +443,9 @@
                         const grid = parentSection.querySelector('.grid');
                         const card = document.createElement('div');
                         card.className = 'resource-card';
-                        let descriptionHTML = item.Description ? `<p>${item.Description}</p>` : '';
+                        let descriptionHTML = item.Description ? `<p class="text-gray-600 dark:text-gray-400">${item.Description}</p>` : '';
                         const menuId = `menu-for-item-${index}`;
-                        card.innerHTML = `<h3><a href="${item.URL}" target="_blank" rel="noopener noreferrer">${item['Resource Text']}</a></h3> ${descriptionHTML} <button class="card-menu-btn" aria-haspopup="true" aria-expanded="false" aria-controls="${menuId}" aria-label="Options for ${item['Resource Text']}"><svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01"></path></svg></button><div id="${menuId}" class="card-menu hidden" role="menu" aria-label="Share options for ${item['Resource Text']}"><a href="#" class="card-menu-item" role="menuitem" data-action="share-twitter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>Share on X</a><a href="#" class="card-menu-item" role="menuitem" data-action="share-facebook"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg>Share on Facebook</a><a href="#" class="card-menu-item" role="menuitem" data-action="share-linkedin"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg>Share on LinkedIn</a><button class="card-menu-item" role="menuitem" data-action="copy"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span class="copy-text">Copy Resource</span></button></div>`;
+                        card.innerHTML = `<h3 class="text-gray-900 dark:text-gray-100"><a href="${item.URL}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">${item['Resource Text']}</a></h3> ${descriptionHTML} <button class="card-menu-btn text-gray-500 dark:text-gray-400" aria-haspopup="true" aria-expanded="false" aria-controls="${menuId}" aria-label="Options for ${item['Resource Text']}"><svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01"></path></svg></button><div id="${menuId}" class="card-menu hidden" role="menu" aria-label="Share options for ${item['Resource Text']}"><a href="#" class="card-menu-item" role="menuitem" data-action="share-twitter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>Share on X</a><a href="#" class="card-menu-item" role="menuitem" data-action="share-facebook"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg>Share on Facebook</a><a href="#" class="card-menu-item" role="menuitem" data-action="share-linkedin"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg>Share on LinkedIn</a><button class="card-menu-item" role="menuitem" data-action="copy"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span class="copy-text">Copy Resource</span></button></div>`;
                         grid.appendChild(card);
                     }
                 });
@@ -565,14 +455,14 @@
             function createFilterButtons() {
                 const categoryCounts = allResourceData.reduce((acc, item) => { acc[item.Category] = (acc[item.Category] || 0) + 1; return acc; }, {});
                 const allBtn = document.createElement('button');
-                allBtn.className = 'filter-btn active p-2';
+                allBtn.className = 'filter-btn active';
                 allBtn.textContent = `All (${allResourceData.length})`;
                 allBtn.dataset.category = 'All';
                 allBtn.setAttribute('aria-pressed', 'true');
                 filterContainer.appendChild(allBtn);
                 allCategories.forEach(category => {
                     const btn = document.createElement('button');
-                    btn.className = 'filter-btn p-2';
+                    btn.className = 'filter-btn';
                     btn.setAttribute('aria-pressed', 'false');
                     btn.textContent = `${category} (${categoryCounts[category] || 0})`;
                     btn.dataset.category = category;
@@ -620,7 +510,7 @@
                     filteredSuggestions.forEach((item, index) => {
                         const li = document.createElement('li');
                         li.textContent = item['Resource Text'];
-                        li.className = 'suggestion-item p-2';
+                        li.className = 'suggestion-item p-2 hover:bg-indigo-100 dark:hover:bg-gray-600 cursor-pointer';
                         li.setAttribute('role', 'option');
                         li.id = `suggestion-${index}`;
                         li.addEventListener('click', () => {
@@ -672,10 +562,10 @@
             }
 
             function updateSuggestionHighlight(items) {
-                items.forEach(item => item.classList.remove('active'));
+                items.forEach(item => item.classList.remove('active', 'bg-indigo-100', 'dark:bg-gray-600'));
                 const currentActiveItem = items[activeSuggestionIndex];
                 if (currentActiveItem) { 
-                    currentActiveItem.classList.add('active'); 
+                    currentActiveItem.classList.add('active', 'bg-indigo-100', 'dark:bg-gray-600'); 
                     searchInput.setAttribute('aria-activedescendant', currentActiveItem.id); 
                     currentActiveItem.scrollIntoView({ block: 'nearest' }); 
                 }
