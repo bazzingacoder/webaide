@@ -95,7 +95,7 @@
                     <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on X"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
                     <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on Facebook"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
                     <a id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg></a>
-                    <button id="copy-link-btn" class="copy-link-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 border-indigo-200 dark:border-gray-600 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Copy page link"><svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span id="copy-link-text">Copy Link</span></button>
+                    <button id="copy-link-btn" class="copy-link-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 border-indigo-200 dark:border-gray-600 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Copy page link"><svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span id="copy-link-text">Copy Page Link</span></button>
                 </div>
             </div>
         </section>
@@ -276,12 +276,12 @@
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 allResourceData = await response.json();
                 
-                skeletonLoader.classList.add('hidden');
+                if(skeletonLoader) skeletonLoader.classList.add('hidden');
 
             } catch (error) {
                 console.error("Could not fetch resources:", error);
                 
-                skeletonLoader.classList.add('hidden');
+                if(skeletonLoader) skeletonLoader.classList.add('hidden');
                 document.getElementById('resources').innerHTML = `<p class="text-center text-red-500 dark:text-red-400">Could not load resources. Please try again later.</p>`;
                 return;
             }
@@ -301,12 +301,26 @@
             const feedbackFields = document.getElementById('feedback-fields');
             const resourceFields = document.getElementById('resource-fields');
             const resourceCategorySelect = document.getElementById('resource-category');
+            const skipToSearch = document.getElementById('skip-to-search');
+            const skipToMain = document.getElementById('skip-to-main');
             
             let elementToFocusOnClose = null;
             const allCategories = [...new Set(allResourceData.map(item => item.Category))];
             const activeCategories = new Set();
             let activeSuggestionIndex = -1;
             let lastScrollY = window.scrollY;
+
+            skipToSearch.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('search-input').focus();
+            });
+            skipToMain.addEventListener('click', (e) => {
+                e.preventDefault();
+                const mainHeading = document.getElementById('main-heading');
+                mainHeading.focus();
+                mainHeading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
 
             function updateURL() {
                 const params = new URLSearchParams();
@@ -640,12 +654,31 @@
                 const titleElement = card.querySelector('h3 a');
                 const data = allResourceData.find(d => d['Resource Text'] === titleElement.textContent);
                 if (!data) return;
-                const textToShare = `${data['Resource Text']}\n\n${data.Description}\n\n${data.URL}\n\nFind more resources at ${window.location.href}`;
+                
+                const resourceURL = data.URL;
+                const resourceTitle = data['Resource Text'];
+                const textToShare = `${resourceTitle}: ${resourceURL}`;
+
                 switch (menuItem.dataset.action) {
-                    case 'share-twitter': window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(textToShare)}`, '_blank'); break;
-                    case 'share-facebook': navigator.clipboard.writeText(textToShare).then(() => { alert("Resource details copied to clipboard! Facebook does not support pre-filled text, but you can paste the details into your post."); window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(data.URL)}`, '_blank'); }); break;
-                    case 'share-linkedin': navigator.clipboard.writeText(textToShare).then(() => { alert("Resource details copied to clipboard! LinkedIn does not support pre-filled text, but you can paste the details into your post."); window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(data.URL)}`, '_blank'); }); break;
-                    case 'copy': navigator.clipboard.writeText(textToShare).then(() => { const copyTextSpan = menuItem.querySelector('.copy-text'); const originalText = copyTextSpan.textContent; copyTextSpan.textContent = 'Copied!'; document.getElementById('announcer').textContent = `Copied ${data['Resource Text']} to clipboard.`; setTimeout(() => { copyTextSpan.textContent = originalText; }, 2000); }); break;
+                    case 'share-twitter': 
+                        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(textToShare)}`, '_blank'); 
+                        break;
+                    case 'share-facebook': 
+                        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(resourceURL)}`, '_blank'); 
+                        break;
+                    case 'share-linkedin': 
+                         window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(resourceURL)}&title=${encodeURIComponent(resourceTitle)}`, '_blank');
+                        break;
+                    case 'copy':
+                        const fullTextToCopy = `${resourceTitle}\n\n${data.Description}\n\n${resourceURL}`;
+                        navigator.clipboard.writeText(fullTextToCopy).then(() => { 
+                            const copyTextSpan = menuItem.querySelector('.copy-text'); 
+                            const originalText = copyTextSpan.textContent; 
+                            copyTextSpan.textContent = 'Copied!'; 
+                            document.getElementById('announcer').textContent = `Copied ${resourceTitle} to clipboard.`; 
+                            setTimeout(() => { copyTextSpan.textContent = originalText; }, 2000); 
+                        });
+                        break;
                 }
                 closeMenu(menuItem.parentElement, menuItem.closest('.resource-card').querySelector('.card-menu-btn'));
             }
@@ -655,17 +688,6 @@
             createFilterButtons();
             applyStateFromURL();
             filterAndSearch();
-
-            // Skip Link Logic
-            skipToSearch.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('search-input').focus();
-            });
-
-            skipToMain.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('main-heading').focus();
-            });
         });
     </script>
 </body>
