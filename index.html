@@ -26,7 +26,51 @@
         html {
             scroll-padding-top: 180px; 
         }
-        body { background-color: #f8fafc; color: #1f2937; }
+        body {
+  background-color: #f0f4f8; /* Softer than pure white */
+  color: #111827; /* Darker text (from Tailwind's gray-900) */
+}
+
+.resource-card {
+  background-color: #ffffff;
+  border-color: #d1d5db; /* Slightly darker border */
+}
+
+.filter-btn {
+  background-color: #e0e7ff; /* Better contrast bg */
+  color: #1e3a8a; /* Darker indigo text */
+  border: 1px solid #4f46e5;
+}
+
+.filter-btn:hover {
+  background-color: #c7d2fe; /* Better hover contrast */
+}
+
+.filter-btn.active {
+  background-color: #4f46e5;
+  color: #ffffff;
+}
+
+#search-input {
+  background-color: #ffffff;
+  border-color: #cbd5e1; /* More defined border */
+  color: #111827;
+}
+
+#search-input::placeholder {
+  color: #6b7280;
+}
+
+.social-share-btn,
+.copy-link-btn {
+  background-color: #e0e7ff;
+  color: #1e3a8a;
+}
+
+.social-share-btn:hover,
+.copy-link-btn:hover {
+  background-color: #c7d2fe;
+}
         html.dark body { background-color: #030712; color: #f9fafb; }
         html.dark .resource-card { background-color: #1f2937; border-color: #374151; }
         html.dark #resources > section:nth-of-type(even) { background-color: #111827; }
@@ -63,8 +107,16 @@
         .skeleton-card { background-color: #e5e7eb; border-radius: 0.75rem; height: 140px; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         html.dark .skeleton-card { background-color: #374151; }
     </style>
+
+<script>
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark');
+  }
+</script>
+
 </head>
-<body class="bg-slate-50 text-gray-800 transition-colors duration-300">
+<body class="bg-[#f0f4f8] text-gray-900 transition-colors duration-300">
 
     <div class="sr-only" id="announcer" aria-live="polite" aria-atomic="true"></div>
 
