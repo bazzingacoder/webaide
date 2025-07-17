@@ -106,7 +106,30 @@
         @keyframes pulse { 50% { opacity: .5; } }
         .skeleton-card { background-color: #e5e7eb; border-radius: 0.75rem; height: 140px; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         html.dark .skeleton-card { background-color: #374151; }
-    </style>
+    
+/* === Final Dark Mode Contrast Fixes === */
+.dark .text-2xl.font-bold {
+  color: #818cf8 !important; /* High contrast indigo for dark background */
+}
+
+.dark .text-gray-300 {
+  color: #d1d5db !important; /* Lighter gray for better contrast on black */
+}
+
+
+/* === FINAL BULLETPROOF FIXES === */
+
+/* Force correct brand color in dark mode */
+.dark a.text-2xl.font-bold {
+  color: #818cf8 !important;
+}
+
+/* Force footer color in dark mode */
+.dark p.text-gray-300 {
+  color: #d1d5db !important;
+}
+
+</style>
 
 <script>
   const savedTheme = localStorage.getItem('theme');
@@ -115,6 +138,73 @@
   }
 </script>
 
+<style id="contrast-axe-fixes">
+
+/* === Axe Contrast Fix Overrides (Light Mode) === */
+html:not(.dark) #main-heading span { color: #4338ca !important; } /* Brand accent high contrast */
+html:not(.dark) #open-feedback-modal-btn { background-color: #4338ca !important; color: #ffffff !important; font-weight: 700 !important; }
+
+/* Override grays that were failing contrast against light backgrounds */
+html:not(.dark) .text-gray-50,
+html:not(.dark) .text-gray-100,
+html:not(.dark) .text-gray-200,
+html:not(.dark) .text-gray-300,
+html:not(.dark) .text-gray-400,
+html:not(.dark) .text-gray-500,
+html:not(.dark) .text-gray-600,
+html:not(.dark) .text-gray-700 { color: #111827 !important; }
+
+/* Secondary muted text (if needed specifically inside cards) */
+html:not(.dark) .resource-card .text-gray-600,
+html:not(.dark) .resource-card .text-gray-500 { color: #1f2937 !important; }
+
+/* Improve inline label text (like "Share this resource hub") */
+html:not(.dark) .font-semibold.text-lg { color: #1f2937 !important; }
+
+/* Links */
+html:not(.dark) a.text-indigo-600,
+html:not(.dark) a.dark\:text-indigo-400,
+html:not(.dark) a[class*="text-indigo"] { color: #1e3a8a !important; text-decoration-thickness: 2px; }
+
+/* Hover/focus state - slightly darker */
+html:not(.dark) a.text-indigo-600:hover,
+html:not(.dark) a[class*="text-indigo"]:hover { color: #1b3279 !important; text-decoration: underline; }
+
+/* Filter buttons already recolored in earlier patch, reinforce */
+html:not(.dark) .filter-btn { background-color: #e0e7ff !important; color: #1e3a8a !important; border-color: #4f46e5 !important; }
+html:not(.dark) .filter-btn.active { background-color: #4f46e5 !important; color: #ffffff !important; }
+
+/* Social share buttons */
+html:not(.dark) .social-share-btn,
+html:not(.dark) .copy-link-btn { background-color: #e0e7ff !important; color: #1e3a8a !important; }
+
+/* Paragraph in hero */
+html:not(.dark) p.text-xl { color: #1f2937 !important; }
+
+
+/* === Final Dark Mode Contrast Fixes === */
+.dark .text-2xl.font-bold {
+  color: #818cf8 !important; /* High contrast indigo for dark background */
+}
+
+.dark .text-gray-300 {
+  color: #d1d5db !important; /* Lighter gray for better contrast on black */
+}
+
+
+/* === FINAL BULLETPROOF FIXES === */
+
+/* Force correct brand color in dark mode */
+.dark a.text-2xl.font-bold {
+  color: #818cf8 !important;
+}
+
+/* Force footer color in dark mode */
+.dark p.text-gray-300 {
+  color: #d1d5db !important;
+}
+
+</style>
 </head>
 <body class="bg-[#f0f4f8] text-gray-900 transition-colors duration-300">
 
@@ -125,7 +215,8 @@
 
     <header class="p-6 bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50 transition-colors duration-300">
         <nav class="container mx-auto flex justify-between items-center" aria-label="Main Navigation">
-            <a href="#" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">Webaide</a>
+            <a href="#" class="text-2xl font-bold" style="color: #818cf8;">Webaide</a>
+
             <div class="flex items-center gap-4">
                 <button id="open-feedback-modal-btn" class="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition duration-300">Suggest / Feedback</button>
                 <button id="theme-toggle" aria-label="Activate light mode" class="w-10 h-10 p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
@@ -265,7 +356,8 @@
     </a>
 
     <footer class="bg-gray-800 dark:bg-black p-6 text-center mt-12 transition-colors duration-300">
-        <p class="mb-4 text-gray-300 dark:text-gray-400">© 2025 Webaide. All Rights Reserved.</p>
+        <p class="mb-4" style="color: #d1d5db;">© 2025 Webaide. All Rights Reserved.</p>
+
         <section id="follow-links" class="mt-4 hidden">
             <h2 class="font-bold text-lg mb-2">Follow Me</h2>
             <div class="flex justify-center items-center gap-4">
