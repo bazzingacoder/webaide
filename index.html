@@ -781,17 +781,46 @@ html:not(.dark) p.text-xl { color: #1f2937 !important; }
 
             function handleMenuAction(menuItem) {
                 const card = menuItem.closest('.resource-card');
+                const button = card.querySelector('.card-menu-btn');
+                const menu = menuItem.parentElement;
+
                 const titleElement = card.querySelector('h3 a');
                 const data = allResourceData.find(d => d['Resource Text'] === titleElement.textContent);
                 if (!data) return;
+
                 const textToShare = `${data['Resource Text']}\n\n${data.Description}\n\n${data.URL}\n\nFind more resources at ${window.location.href}`;
-                switch (menuItem.dataset.action) {
-                    case 'share-twitter': window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(textToShare)}`, '_blank'); break;
-                    case 'share-facebook': navigator.clipboard.writeText(textToShare).then(() => { alert("Resource details copied to clipboard! Facebook does not support pre-filled text, but you can paste the details into your post."); window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(data.URL)}`, '_blank'); }); break;
-                    case 'share-linkedin': navigator.clipboard.writeText(textToShare).then(() => { alert("Resource details copied to clipboard! LinkedIn does not support pre-filled text, but you can paste the details into your post."); window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(data.URL)}`, '_blank'); }); break;
-                    case 'copy': navigator.clipboard.writeText(textToShare).then(() => { const copyTextSpan = menuItem.querySelector('.copy-text'); const originalText = copyTextSpan.textContent; copyTextSpan.textContent = 'Copied!'; document.getElementById('announcer').textContent = `Copied ${data['Resource Text']} to clipboard.`; setTimeout(() => { copyTextSpan.textContent = originalText; }, 2000); }); break;
+
+                const action = menuItem.dataset.action;
+
+                // Close the menu for all share actions
+                if (action.startsWith('share-')) {
+                    closeMenu(menu, button);
+                    button.focus();
                 }
-                closeMenu(menuItem.parentElement, menuItem.closest('.resource-card').querySelector('.card-menu-btn'));
+
+                switch (action) {
+                    case 'share-twitter':
+                        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(textToShare)}`, '_blank');
+                        break;
+                    case 'share-facebook':
+                        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(data.URL)}`, '_blank');
+                        break;
+                    case 'share-linkedin':
+                        const linkedInShareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(data.URL)}&title=${encodeURIComponent(data['Resource Text'])}`;
+                        window.open(linkedInShareUrl, '_blank');
+                        break;
+                    case 'copy':
+                        navigator.clipboard.writeText(textToShare).then(() => {
+                            const copyTextSpan = menuItem.querySelector('.copy-text');
+                            const originalText = copyTextSpan.textContent;
+                            copyTextSpan.textContent = 'Copied!';
+                            document.getElementById('announcer').textContent = `Copied ${data['Resource Text']} to clipboard.`;
+                            setTimeout(() => {
+                                copyTextSpan.textContent = originalText;
+                            }, 2000);
+                        });
+                        break;
+                }
             }
 
             // --- Initial Page Setup ---
