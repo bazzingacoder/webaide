@@ -205,6 +205,32 @@ html:not(.dark) p.text-xl { color: #1f2937 !important; }
 }
 
 </style>
+<style id="search-input-style">
+
+/* === Search Input Refinement === */
+#search-input {
+  background-color: #f9fafb;
+  border: 1px solid #cbd5e1;
+  color: #1f2937;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  max-width: 320px;
+}
+
+#search-input::placeholder {
+  color: #6b7280;
+}
+
+#search-input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+</style>
 </head>
 <body class="bg-[#f0f4f8] text-gray-900 transition-colors duration-300">
 
