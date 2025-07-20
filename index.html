@@ -22,55 +22,75 @@
       gtag('config', 'G-YOUR_TRACKING_ID');
     </script>
     
-    <style>
+    <style type="text/css">
+        /* ==== BASE STYLES & LAYOUT ==== */
         html {
             scroll-padding-top: 180px; 
         }
         body {
-  background-color: #f0f4f8; /* Softer than pure white */
-  color: #111827; /* Darker text (from Tailwind's gray-900) */
-}
+          background-color: #f0f4f8; 
+          color: #111827; 
+        }
 
-.resource-card {
-  background-color: #ffffff;
-  border-color: #d1d5db; /* Slightly darker border */
-}
+        /* ==== BRAND COLORS ==== */
+        .text-brand { color: #4338ca; } /* High Contrast Brand Color */
+        .dark .text-brand { color: #818cf8; }
 
-.filter-btn {
-  background-color: #e0e7ff; /* Better contrast bg */
-  color: #1e3a8a; /* Darker indigo text */
-  border: 1px solid #4f46e5;
-}
+        /* ==== COMPONENTS ==== */
+        .resource-card {
+          position: relative;
+          background-color: #ffffff;
+          border: 1px solid #e5e7eb;
+          border-radius: 0.75rem;
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.4s ease-out, transform 0.4s ease-out, background-color 0.3s, border-color 0.3s;
+          /* FIX: Added transition-delay for staggered animation */
+          transition-delay: var(--delay, 0s);
+        }
+        .filter-btn {
+          background-color: #e0e7ff;
+          color: #1e3a8a;
+          border: 1px solid #4f46e5;
+        }
+        .social-share-btn,
+        .copy-link-btn {
+          background-color: #e0e7ff;
+          color: #1e3a8a;
+        }
+        #search-input {
+          background-color: #f9fafb;
+          border: 1px solid #cbd5e1;
+          color: #1f2937;
+          padding: 0.5rem 1rem 0.5rem 2.5rem; /* Adjusted padding for icon */
+          font-size: 1rem;
+          border-radius: 9999px; /* Re-instating rounded-full from original class */
+          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+          width: 100%;
+        }
+        #search-input::placeholder { color: #6b7280; }
+        
+        /* ==== STATES & INTERACTIONS ==== */
+        .resource-card:hover {
+          transform: translateY(-5px) scale(1.02);
+          box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+          transition: all 0.2s ease-in-out;
+        }
+        .filter-btn:hover { background-color: #c7d2fe; }
+        .filter-btn.active { background-color: #4f46e5; color: #ffffff; }
+        .social-share-btn:hover,
+        .copy-link-btn:hover { background-color: #c7d2fe; }
+        #search-input:focus {
+          outline: none;
+          border-color: #4f46e5;
+          box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
 
-.filter-btn:hover {
-  background-color: #c7d2fe; /* Better hover contrast */
-}
-
-.filter-btn.active {
-  background-color: #4f46e5;
-  color: #ffffff;
-}
-
-#search-input {
-  background-color: #ffffff;
-  border-color: #cbd5e1; /* More defined border */
-  color: #111827;
-}
-
-#search-input::placeholder {
-  color: #6b7280;
-}
-
-.social-share-btn,
-.copy-link-btn {
-  background-color: #e0e7ff;
-  color: #1e3a8a;
-}
-
-.social-share-btn:hover,
-.copy-link-btn:hover {
-  background-color: #c7d2fe;
-}
+        /* ==== DARK MODE STYLES ==== */
         html.dark body { background-color: #030712; color: #f9fafb; }
         html.dark .resource-card { background-color: #1f2937; border-color: #374151; }
         html.dark #resources > section:nth-of-type(even) { background-color: #111827; }
@@ -81,156 +101,68 @@
         html.dark #search-input::placeholder { color: #6b7280; }
         html.dark #suggestions-list { background-color: #1f2937; border-color: #374151; }
         html.dark .suggestion-item.active, html.dark .suggestion-item:hover { background-color: #374151; }
+        
+        /* ==== ACCESSIBILITY & UTILITIES ==== */
         .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: -9999; }
         .skip-link:focus { position: fixed; top: 10px; left: 10px; background-color: #4f46e5; color: #fff; padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-weight: 600; z-index: 9999; width: auto; height: auto; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+        
+        /* FIX: Replaced .hidden utility with direct CSS for flicker-free theme icon loading */
+        #theme-toggle-sun, #theme-toggle-moon { display: none; }
+        html.dark #theme-toggle-sun { display: block; }
+        html:not(.dark) #theme-toggle-moon { display: block; }
+        .hidden { display: none !important; }
+
+        /* ==== ANIMATIONS & TRANSITIONS ==== */
+        .resource-card.is-visible { opacity: 1; transform: translateY(0); }
         #search-and-filter-controls { transition: transform 0.3s ease-in-out; }
         #search-and-filter-controls.is-hidden { transform: translateY(-110%); }
-        .resource-card { position: relative; border: 1px solid #e5e7eb; border-radius: 0.75rem; padding: 1.5rem; display: flex; flex-direction: column; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease-out, transform 0.4s ease-out, background-color 0.3s, border-color 0.3s; }
-        .resource-card.is-visible { opacity: 1; transform: translateY(0); }
-        .resource-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); transition: all 0.2s ease-in-out; }
-        .card-menu-btn { position: absolute; top: 0.75rem; right: 0.75rem; width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; border-radius: 9999px; background-color: transparent; border: none; cursor: pointer; }
-        html.dark .card-menu-btn:hover, html.dark .card-menu-btn:focus-visible { background-color: #374151; }
-        .card-menu { position: absolute; top: 3.25rem; right: 0.75rem; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); border: 1px solid #e5e7eb; z-index: 20; min-width: 180px; }
-        html.dark .card-menu { background-color: #1f2937; border-color: #4b5563; }
-        .card-menu-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; font-size: 0.875rem; background: none; border: none; width: 100%; text-align: left; cursor: pointer; }
-        html.dark .card-menu-item { color: #d1d5db; }
-        .card-menu-item:hover, .card-menu-item:focus { background-color: #eef2ff; outline: none; }
-        html.dark .card-menu-item:hover, html.dark .card-menu-item:focus { background-color: #374151; }
-        .card-menu-item svg { width: 1rem; height: 1rem; }
         #back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; transition: opacity 0.3s; z-index: 100; }
-        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
-        #feedback-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 500; }
-        #feedback-modal { max-height: 90vh; overflow-y: auto; }
-        .hidden { display: none !important; }
 
         @keyframes pulse { 50% { opacity: .5; } }
         .skeleton-card { background-color: #e5e7eb; border-radius: 0.75rem; height: 140px; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         html.dark .skeleton-card { background-color: #374151; }
-    
-/* === Final Dark Mode Contrast Fixes === */
-.dark .text-2xl.font-bold {
-  color: #818cf8 !important; /* High contrast indigo for dark background */
-}
+        
+        /* ==== CARD MENU ==== */
+        .card-menu-btn { position: absolute; top: 0.75rem; right: 0.75rem; width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; border-radius: 9999px; background-color: transparent; border: none; cursor: pointer; }
+        html.dark .card-menu-btn:hover, html.dark .card-menu-btn:focus-visible { background-color: #374151; }
+        .card-menu { position: absolute; top: 3.25rem; right: 0.75rem; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); border: 1px solid #e5e7eb; z-index: 20; min-width: 180px; background-color: #ffffff; }
+        html.dark .card-menu { background-color: #1f2937; border-color: #4b5563; }
+        .card-menu-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; font-size: 0.875rem; background: none; border: none; width: 100%; text-align: left; cursor: pointer; color: #111827; }
+        html.dark .card-menu-item { color: #d1d5db; }
+        .card-menu-item:hover, .card-menu-item:focus { background-color: #eef2ff; outline: none; }
+        html.dark .card-menu-item:hover, html.dark .card-menu-item:focus { background-color: #374151; }
+        .card-menu-item svg { width: 1rem; height: 1rem; }
+        
+        /* ==== MODAL STYLES ==== */
+        #feedback-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 500; }
+        #feedback-modal { max-height: 90vh; overflow-y: auto; }
 
-.dark .text-gray-300 {
-  color: #d1d5db !important; /* Lighter gray for better contrast on black */
-}
+        /* ==== AXE CONTRAST OVERRIDES & FIXES ==== */
+        html:not(.dark) #open-feedback-modal-btn { background-color: #4338ca !important; color: #ffffff !important; font-weight: 700 !important; }
+        html:not(.dark) .text-gray-50, html:not(.dark) .text-gray-100, html:not(.dark) .text-gray-200, html:not(.dark) .text-gray-300, html:not(.dark) .text-gray-400, html:not(.dark) .text-gray-500, html:not(.dark) .text-gray-600, html:not(.dark) .text-gray-700 { color: #111827 !important; }
+        html:not(.dark) .resource-card .text-gray-600, html:not(.dark) .resource-card .text-gray-500 { color: #1f2937 !important; }
+        html:not(.dark) .font-semibold.text-lg { color: #1f2937 !important; }
+        html:not(.dark) a.text-indigo-600, html:not(.dark) a.dark\:text-indigo-400, html:not(.dark) a[class*="text-indigo"] { color: #1e3a8a !important; text-decoration-thickness: 2px; }
+        html:not(.dark) a.text-indigo-600:hover, html:not(.dark) a[class*="text-indigo"]:hover { color: #1b3279 !important; text-decoration: underline; }
+        html:not(.dark) .filter-btn { background-color: #e0e7ff !important; color: #1e3a8a !important; border-color: #4f46e5 !important; }
+        html:not(.dark) .filter-btn.active { background-color: #4f46e5 !important; color: #ffffff !important; }
+        html:not(.dark) .social-share-btn, html:not(.dark) .copy-link-btn { background-color: #e0e7ff !important; color: #1e3a8a !important; }
+        html:not(.dark) p.text-xl { color: #1f2937 !important; }
+        .dark .text-2xl.font-bold { color: #818cf8 !important; }
+        .dark .text-gray-300, .dark p.text-gray-300 { color: #d1d5db !important; }
+        .dark a.text-2xl.font-bold { color: #818cf8 !important; }
 
-
-/* === FINAL BULLETPROOF FIXES === */
-
-/* Force correct brand color in dark mode */
-.dark a.text-2xl.font-bold {
-  color: #818cf8 !important;
-}
-
-/* Force footer color in dark mode */
-.dark p.text-gray-300 {
-  color: #d1d5db !important;
-}
-
-</style>
+    </style>
 
 <script>
+  // Load theme from localStorage before page renders to prevent flash of wrong theme.
   const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
+  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.add('dark');
   }
 </script>
 
-<style id="contrast-axe-fixes">
-
-/* === Axe Contrast Fix Overrides (Light Mode) === */
-html:not(.dark) #main-heading span { color: #4338ca !important; } /* Brand accent high contrast */
-html:not(.dark) #open-feedback-modal-btn { background-color: #4338ca !important; color: #ffffff !important; font-weight: 700 !important; }
-
-/* Override grays that were failing contrast against light backgrounds */
-html:not(.dark) .text-gray-50,
-html:not(.dark) .text-gray-100,
-html:not(.dark) .text-gray-200,
-html:not(.dark) .text-gray-300,
-html:not(.dark) .text-gray-400,
-html:not(.dark) .text-gray-500,
-html:not(.dark) .text-gray-600,
-html:not(.dark) .text-gray-700 { color: #111827 !important; }
-
-/* Secondary muted text (if needed specifically inside cards) */
-html:not(.dark) .resource-card .text-gray-600,
-html:not(.dark) .resource-card .text-gray-500 { color: #1f2937 !important; }
-
-/* Improve inline label text (like "Share this resource hub") */
-html:not(.dark) .font-semibold.text-lg { color: #1f2937 !important; }
-
-/* Links */
-html:not(.dark) a.text-indigo-600,
-html:not(.dark) a.dark\:text-indigo-400,
-html:not(.dark) a[class*="text-indigo"] { color: #1e3a8a !important; text-decoration-thickness: 2px; }
-
-/* Hover/focus state - slightly darker */
-html:not(.dark) a.text-indigo-600:hover,
-html:not(.dark) a[class*="text-indigo"]:hover { color: #1b3279 !important; text-decoration: underline; }
-
-/* Filter buttons already recolored in earlier patch, reinforce */
-html:not(.dark) .filter-btn { background-color: #e0e7ff !important; color: #1e3a8a !important; border-color: #4f46e5 !important; }
-html:not(.dark) .filter-btn.active { background-color: #4f46e5 !important; color: #ffffff !important; }
-
-/* Social share buttons */
-html:not(.dark) .social-share-btn,
-html:not(.dark) .copy-link-btn { background-color: #e0e7ff !important; color: #1e3a8a !important; }
-
-/* Paragraph in hero */
-html:not(.dark) p.text-xl { color: #1f2937 !important; }
-
-
-/* === Final Dark Mode Contrast Fixes === */
-.dark .text-2xl.font-bold {
-  color: #818cf8 !important; /* High contrast indigo for dark background */
-}
-
-.dark .text-gray-300 {
-  color: #d1d5db !important; /* Lighter gray for better contrast on black */
-}
-
-
-/* === FINAL BULLETPROOF FIXES === */
-
-/* Force correct brand color in dark mode */
-.dark a.text-2xl.font-bold {
-  color: #818cf8 !important;
-}
-
-/* Force footer color in dark mode */
-.dark p.text-gray-300 {
-  color: #d1d5db !important;
-}
-
-</style>
-<style id="search-input-style">
-
-/* === Search Input Refinement === */
-#search-input {
-  background-color: #f9fafb;
-  border: 1px solid #cbd5e1;
-  color: #1f2937;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  width: 100%;
-  max-width: 320px;
-}
-
-#search-input::placeholder {
-  color: #6b7280;
-}
-
-#search-input:focus {
-  outline: none;
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-}
-
-</style>
 </head>
 <body class="bg-[#f0f4f8] text-gray-900 transition-colors duration-300">
 
@@ -241,8 +173,7 @@ html:not(.dark) p.text-xl { color: #1f2937 !important; }
 
     <header class="p-6 bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50 transition-colors duration-300">
         <nav class="container mx-auto flex justify-between items-center" aria-label="Main Navigation">
-            <a href="#" class="text-2xl font-bold" style="color: #818cf8;">Webaide</a>
-
+            <a href="#" class="text-2xl font-bold text-brand">Webaide</a>
             <div class="flex items-center gap-4">
                 <button id="open-feedback-modal-btn" class="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition duration-300">Suggest / Feedback</button>
                 <button id="theme-toggle" aria-label="Activate light mode" class="w-10 h-10 p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
@@ -255,16 +186,16 @@ html:not(.dark) p.text-xl { color: #1f2937 !important; }
 
     <main id="main-content" class="container mx-auto p-6 lg:p-8 outline-none">
         <section class="text-center my-12 md:my-16">
-            <h1 id="main-heading" tabindex="-1" class="text-5xl md:text-6xl font-extrabold leading-tight mb-2 text-gray-900 dark:text-gray-100 outline-none">Welcome to <span class="text-indigo-600 dark:text-indigo-400">Webaide</span></h1>
+            <h1 id="main-heading" tabindex="-1" class="text-5xl md:text-6xl font-extrabold leading-tight mb-2 text-gray-900 dark:text-gray-100 outline-none">Welcome to <span class="text-brand">Webaide</span></h1>
             <p class="text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto mb-8">The Accessibility Info & Development Ecosystem,<br/>"Your toolkit for building accessible digital experiences."</p>
             
             <div id="social-share-container" class="mt-8">
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Share this resource hub:</p>
                 <div class="flex justify-center items-center gap-4">
-                    <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on X"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
-                    <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on Facebook"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
-                    <a id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg></a>
-                    <button id="copy-link-btn" class="copy-link-btn bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 border-indigo-200 dark:border-gray-600 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Copy page link"><svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span id="copy-link-text">Copy Link</span></button>
+                    <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn p-3 rounded-full bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on X"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+                    <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn p-3 rounded-full bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on Facebook"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
+                    <a id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn p-3 rounded-full bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg></a>
+                    <button id="copy-link-btn" class="copy-link-btn flex items-center py-2 px-4 rounded-full bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 border-indigo-200 dark:border-gray-600 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Copy page link"><svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span id="copy-link-text">Copy Link</span></button>
                 </div>
             </div>
         </section>
@@ -398,21 +329,15 @@ html:not(.dark) p.text-xl { color: #1f2937 !important; }
         document.addEventListener('DOMContentLoaded', async () => {
             
             const themeToggleBtn = document.getElementById('theme-toggle');
-            const sunIcon = document.getElementById('theme-toggle-sun');
-            const moonIcon = document.getElementById('theme-toggle-moon');
             const htmlEl = document.documentElement;
 
             function applyTheme(theme) {
                 if (theme === 'dark') {
                     htmlEl.classList.add('dark');
-                    sunIcon.classList.remove('hidden');
-                    moonIcon.classList.add('hidden');
                     themeToggleBtn.setAttribute('aria-label', 'Activate light mode');
                     localStorage.setItem('theme', 'dark');
                 } else {
                     htmlEl.classList.remove('dark');
-                    sunIcon.classList.add('hidden');
-                    moonIcon.classList.remove('hidden');
                     themeToggleBtn.setAttribute('aria-label', 'Activate dark mode');
                     localStorage.setItem('theme', 'light');
                 }
@@ -422,21 +347,16 @@ html:not(.dark) p.text-xl { color: #1f2937 !important; }
                 const currentTheme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
                 applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
             }
-
-            function loadInitialTheme() {
-                const savedTheme = localStorage.getItem('theme');
-                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                
-                if (savedTheme) {
-                    applyTheme(savedTheme);
-                } else {
-                    applyTheme(systemPrefersDark ? 'dark' : 'light');
-                }
+            
+            // This function runs after the initial theme is set by the script in the <head>
+            function initializeTheme() {
+                const isDark = htmlEl.classList.contains('dark');
+                // Set the correct aria-label on initial load
+                themeToggleBtn.setAttribute('aria-label', isDark ? 'Activate light mode' : 'Activate dark mode');
+                themeToggleBtn.addEventListener('click', toggleTheme);
             }
 
-            themeToggleBtn.addEventListener('click', toggleTheme);
-            loadInitialTheme();
-
+            initializeTheme();
             
             const skeletonLoader = document.getElementById('skeleton-loader');
 
@@ -607,19 +527,27 @@ html:not(.dark) p.text-xl { color: #1f2937 !important; }
 
             function renderCards(dataToRender) {
                 resourcesContainer.querySelectorAll('.grid').forEach(grid => grid.innerHTML = '');
-                dataToRender.forEach((item, index) => {
+                dataToRender.forEach((item) => {
                     const parentSection = Array.from(document.querySelectorAll('#resources section')).find(s => s.querySelector('h2 > span').textContent === item.Category);
                     if (parentSection) {
                         const grid = parentSection.querySelector('.grid');
                         const card = document.createElement('div');
                         card.className = 'resource-card';
                         let descriptionHTML = item.Description ? `<p class="text-gray-600 dark:text-gray-400">${item.Description}</p>` : '';
-                        const menuId = `menu-for-item-${index}`;
+                        const menuId = `menu-for-item-${item.URL.replace(/[^a-zA-Z0-9]/g, "")}`;
                         card.innerHTML = `<h3 class="text-gray-900 dark:text-gray-100"><a href="${item.URL}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">${item['Resource Text']}</a></h3> ${descriptionHTML} <button class="card-menu-btn text-gray-500 dark:text-gray-400" aria-haspopup="true" aria-expanded="false" aria-controls="${menuId}" aria-label="Options for ${item['Resource Text']}"><svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01"></path></svg></button><div id="${menuId}" class="card-menu hidden" role="menu" aria-label="Share options for ${item['Resource Text']}"><a href="#" class="card-menu-item" role="menuitem" data-action="share-twitter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>Share on X</a><a href="#" class="card-menu-item" role="menuitem" data-action="share-facebook"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg>Share on Facebook</a><a href="#" class="card-menu-item" role="menuitem" data-action="share-linkedin"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg>Share on LinkedIn</a><button class="card-menu-item" role="menuitem" data-action="copy"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span class="copy-text">Copy Resource</span></button></div>`;
                         grid.appendChild(card);
                     }
                 });
-                requestAnimationFrame(() => { document.querySelectorAll('.resource-card').forEach(card => card.classList.add('is-visible')); });
+
+                // FIX: Implemented staggered card animation
+                requestAnimationFrame(() => {
+                    const renderedCards = resourcesContainer.querySelectorAll('.resource-card');
+                    renderedCards.forEach((card, index) => {
+                        card.style.setProperty('--delay', `${index * 0.05}s`);
+                        card.classList.add('is-visible');
+                    });
+                });
             }
             
             function createFilterButtons() {
@@ -856,6 +784,9 @@ html:not(.dark) p.text-xl { color: #1f2937 !important; }
             filterAndSearch();
 
             // Skip Link Logic
+            const skipToSearch = document.getElementById('skip-to-search');
+            const skipToMain = document.getElementById('skip-to-main');
+            
             skipToSearch.addEventListener('click', (e) => {
                 e.preventDefault();
                 document.getElementById('search-input').focus();
