@@ -175,7 +175,7 @@
 
   /* Resource Cards */
   .resource-card {
-    @apply relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-6 flex flex-col shadow-md opacity-0;
+    @apply relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-6 flex shadow-md opacity-0;
     transition: opacity 0.4s ease-out, transform 0.4s ease-out, box-shadow 0.2s ease-in-out;
     transition-delay: var(--delay, 0s);
     transform: translateY(20px);
@@ -267,11 +267,20 @@
 }
 
 .hidden {
-  @apply !hidden;
+  display: none !important;
 }
 
-html.dark #theme-toggle-sun { @apply !block; }
-html:not(.dark) #theme-toggle-moon { @apply !block; }
+/* Theme Toggle Icon Visibility */
+#theme-toggle-sun, #theme-toggle-moon {
+    display: none !important;
+}
+html.dark #theme-toggle-sun {
+    display: block !important;
+}
+html:not(.dark) #theme-toggle-moon {
+    display: block !important;
+}
+
 
 /*================================================================*/
 /* PAGE-SPECIFIC & COMPLEX STYLES                                 */
@@ -344,4 +353,27 @@ html.dark #search-and-filter-controls.is-glassy {
 }
 #resources > section > h2 svg {
   @apply w-8 h-8 text-brand-secondary;
+}
+
+/*================================================================*/
+/* ACCESSIBILITY CONTRAST OVERRIDES                               */
+/*================================================================*/
+html:not(.dark) #open-feedback-modal-btn {
+    background-color: #4338ca !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+html:not(.dark) a {
+    color: #1e3a8a !important; /* A darker, more accessible indigo */
+    text-decoration-thickness: 2px;
+}
+
+html:not(.dark) a:hover {
+    color: #1b3279 !important;
+    text-decoration: underline;
+}
+
+html:not(.dark) .resource-card h3 a {
+    color: #4338ca !important;
 }
