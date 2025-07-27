@@ -21,15 +21,50 @@ document.addEventListener('DOMContentLoaded', async () => {
     const feedbackFields = document.getElementById('feedback-fields');
     const resourceFields = document.getElementById('resource-fields');
     const resourceCategorySelect = document.getElementById('resource-category');
+    const noResultsMessage = document.getElementById('no-results-message');
     
     //================================================================
     // STATE VARIABLES
     //================================================================
     let allResourceData = [];
     let elementToFocusOnClose = null;
-    const activeCategories = new Set();
+    let favoriteResources = new Set();
+    const activeFilters = {
+        categories: new Set(),
+        showFavorites: false
+    };
     let activeSuggestionIndex = -1;
     let lastScrollY = window.scrollY;
+
+    //================================================================
+    // FAVORITES MANAGEMENT
+    //================================================================
+    function loadFavorites() {
+        const storedFavorites = localStorage.getItem('webaide_favorites');
+        if (storedFavorites) {
+            favoriteResources = new Set(JSON.parse(storedFavorites));
+        }
+    }
+
+    function saveFavorites() {
+        localStorage.setItem('webaide_favorites', JSON.stringify([...favoriteResources]));
+    }
+    
+    function toggleFavorite(resourceURL, button) {
+        if (favoriteResources.has(resourceURL)) {
+            favoriteResources.delete(resourceURL);
+            button.classList.remove('active');
+            button.setAttribute('aria-pressed', 'false');
+            announcer.textContent = `${button.dataset.title} removed from favorites.`;
+        } else {
+            favoriteResources.add(resourceURL);
+            button.classList.add('active');
+            button.setAttribute('aria-pressed', 'true');
+            announcer.textContent = `${button.dataset.title} added to favorites.`;
+        }
+        saveFavorites();
+        updateFavoritesButton();
+    }
 
     //================================================================
     // THEME MANAGEMENT
@@ -81,7 +116,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         const searchTerm = searchInput.value.trim();
 
         if (searchTerm) params.set('search', searchTerm);
-        if (activeCategories.size > 0) params.set('categories', [...activeCategories].join(','));
+        if (activeFilters.categories.size > 0) params.set('categories', [...activeFilters.categories].join(','));
+        if (activeFilters.showFavorites) params.set('favorites', 'true');
 
         const queryString = params.toString();
         const newUrl = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
@@ -92,29 +128,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         const params = new URLSearchParams(window.location.search);
         const searchTerm = params.get('search');
         const categoriesParam = params.get('categories');
+        const favoritesParam = params.get('favorites');
 
         if (searchTerm) searchInput.value = searchTerm;
+        if (favoritesParam === 'true') {
+            activeFilters.showFavorites = true;
+        }
+
         if (categoriesParam) {
             const categories = categoriesParam.split(',');
-            categories.forEach(cat => activeCategories.add(cat));
-            
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                if (activeCategories.has(btn.dataset.category)) {
-                    btn.classList.add('active');
-                    btn.setAttribute('aria-pressed', 'true');
-                } else {
-                    btn.classList.remove('active');
-                    btn.setAttribute('aria-pressed', 'false');
-                }
-            });
-            if (activeCategories.size > 0) {
-                const allBtn = filterContainer.querySelector('[data-category="All"]');
-                if (allBtn) {
-                    allBtn.classList.remove('active');
-                    allBtn.setAttribute('aria-pressed', 'false');
-                }
-            }
+            categories.forEach(cat => activeFilters.categories.add(cat));
         }
+        updateActiveFilterButtons();
     }
             
     //================================================================
@@ -150,11 +175,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    function showModal() {
+    function showModal(context = {}) {
+        const { type = 'general', resourceTitle = '' } = context;
+        const modalTitle = document.getElementById('feedback-modal-title');
+        const contextInput = document.getElementById('feedback-context');
+
+        if (type === 'report-issue') {
+            modalTitle.textContent = `Report an Issue / Suggest Edit`;
+            document.getElementById('type-feedback').checked = true;
+            document.getElementById('type-feedback').dispatchEvent(new Event('change'));
+            contextInput.value = `Issue with resource: ${resourceTitle}`;
+        } else {
+            modalTitle.textContent = 'Submit Feedback or Suggest a Resource';
+            contextInput.value = 'General Feedback';
+        }
+        
         elementToFocusOnClose = document.activeElement;
         modalOverlay.classList.remove('hidden');
         modalOverlay.classList.add('flex');
-        // Delay focus to allow for transition
         setTimeout(() => document.getElementById('submitter-name').focus(), 100);
     }
 
@@ -212,6 +250,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function renderCards(dataToRender) {
         resourcesContainer.querySelectorAll('.grid').forEach(grid => grid.innerHTML = '');
+        
+        if (dataToRender.length === 0) {
+            noResultsMessage.classList.remove('hidden');
+        } else {
+            noResultsMessage.classList.add('hidden');
+        }
+        
         dataToRender.forEach((item) => {
             const parentSection = Array.from(document.querySelectorAll('#resources section')).find(s => s.querySelector('h2 > span').textContent === item.Category);
             if (parentSection) {
@@ -220,22 +265,32 @@ document.addEventListener('DOMContentLoaded', async () => {
                 card.className = 'resource-card';
                 let descriptionHTML = item.Description ? `<p>${item.Description}</p>` : '';
                 const menuId = `menu-for-item-${item.URL.replace(/[^a-zA-Z0-9]/g, "")}`;
+                const isFavorite = favoriteResources.has(item.URL);
+
                 card.innerHTML = `
-                    <div class="relative flex-grow">
+                    <div class="card-actions">
+                        <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-url="${item.URL}" data-title="${item['Resource Text']}" aria-pressed="${isFavorite}" aria-label="Add to favorites">
+                            <svg class="w-6 h-6 star-outline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                            <svg class="w-6 h-6 star-fill" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        </button>
+                        <div class="relative">
+                            <button class="card-menu-btn text-slate-500 dark:text-slate-400" aria-haspopup="true" aria-expanded="false" aria-controls="${menuId}" aria-label="Options">
+                                <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01"></path></svg>
+                            </button>
+                            <div id="${menuId}" class="card-menu hidden" role="menu" aria-label="Share options for ${item['Resource Text']}">
+                                <button class="card-menu-item" role="menuitem" data-action="share-twitter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>Share on X</button>
+                                <button class="card-menu-item" role="menuitem" data-action="share-facebook"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg>Share on Facebook</button>
+                                <button class="card-menu-item" role="menuitem" data-action="share-linkedin"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg>Share on LinkedIn</button>
+                                <button class="card-menu-item" role="menuitem" data-action="copy"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span class="copy-text">Copy Link</span></button>
+                                <button class="card-menu-item" role="menuitem" data-action="report-issue"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Report Issue</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-grow">
                         <h3><a href="${item.URL}" target="_blank" rel="noopener noreferrer">${item['Resource Text']}</a></h3>
                         ${descriptionHTML}
                     </div>
-                    <div class="relative">
-                        <button class="card-menu-btn text-slate-500 dark:text-slate-400" aria-haspopup="true" aria-expanded="false" aria-controls="${menuId}" aria-label="Options for ${item['Resource Text']}">
-                            <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01"></path></svg>
-                        </button>
-                        <div id="${menuId}" class="card-menu hidden" role="menu" aria-label="Share options for ${item['Resource Text']}">
-                            <button class="card-menu-item" role="menuitem" data-action="share-twitter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>Share on X</button>
-                            <button class="card-menu-item" role="menuitem" data-action="share-facebook"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg>Share on Facebook</button>
-                            <button class="card-menu-item" role="menuitem" data-action="share-linkedin"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg>Share on LinkedIn</button>
-                            <button class="card-menu-item" role="menuitem" data-action="copy"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span class="copy-text">Copy Link</span></button>
-                        </div>
-                    </div>`;
+                    `;
                 grid.appendChild(card);
             }
         });
@@ -253,6 +308,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         const allCategories = [...new Set(allResourceData.map(item => item.Category))];
         const categoryCounts = allResourceData.reduce((acc, item) => { acc[item.Category] = (acc[item.Category] || 0) + 1; return acc; }, {});
         
+        const favoritesBtn = document.createElement('button');
+        favoritesBtn.className = 'filter-btn hidden';
+        favoritesBtn.innerHTML = `★ Favorites <span id="favorites-count"></span>`;
+        favoritesBtn.dataset.category = 'Favorites';
+        favoritesBtn.setAttribute('aria-pressed', 'false');
+        filterContainer.appendChild(favoritesBtn);
+        
         const allBtn = document.createElement('button');
         allBtn.className = 'filter-btn active';
         allBtn.textContent = `All (${allResourceData.length})`;
@@ -268,23 +330,54 @@ document.addEventListener('DOMContentLoaded', async () => {
             btn.dataset.category = category;
             filterContainer.appendChild(btn);
         });
+        updateFavoritesButton();
+    }
+    
+    function updateFavoritesButton() {
+        const favoritesBtn = filterContainer.querySelector('[data-category="Favorites"]');
+        if (!favoritesBtn) return;
+        
+        const count = favoriteResources.size;
+        const countSpan = favoritesBtn.querySelector('#favorites-count');
+        
+        if (count > 0) {
+            favoritesBtn.classList.remove('hidden');
+            countSpan.textContent = `(${count})`;
+        } else {
+            favoritesBtn.classList.add('hidden');
+            if (activeFilters.showFavorites) {
+                activeFilters.showFavorites = false;
+                filterAndSearch();
+            }
+        }
+        favoritesBtn.classList.toggle('active', activeFilters.showFavorites);
+        favoritesBtn.setAttribute('aria-pressed', activeFilters.showFavorites);
     }
 
     function filterAndSearch() {
         const searchTerm = searchInput.value.toLowerCase().trim();
-        const categoryFilteredData = activeCategories.size === 0 ? allResourceData : allResourceData.filter(item => activeCategories.has(item.Category));
-        const finalData = searchTerm ? categoryFilteredData.filter(item => 
-            item['Resource Text'].toLowerCase().includes(searchTerm) || 
-            (item.Description && item.Description.toLowerCase().includes(searchTerm)) || 
-            item.Category.toLowerCase().includes(searchTerm)
-        ) : categoryFilteredData;
-        
-        renderCards(finalData);
-        document.querySelectorAll('#resources > section').forEach(section => {
-            section.style.display = section.querySelector('.grid')?.hasChildNodes() ? 'block' : 'none';
-        });
+        let filteredData = allResourceData;
 
-        announcer.textContent = `${finalData.length} results found.`;
+        // Filter by favorites
+        if (activeFilters.showFavorites) {
+            filteredData = filteredData.filter(item => favoriteResources.has(item.URL));
+        }
+
+        // Filter by categories
+        if (activeFilters.categories.size > 0) {
+            filteredData = filteredData.filter(item => activeFilters.categories.has(item.Category));
+        }
+
+        // Filter by search term
+        if (searchTerm) {
+            filteredData = filteredData.filter(item => 
+                item['Resource Text'].toLowerCase().includes(searchTerm) || 
+                (item.Description && item.Description.toLowerCase().includes(searchTerm)) || 
+                item.Category.toLowerCase().includes(searchTerm)
+            );
+        }
+        
+        renderCards(filteredData);
         updateURL();
     }
 
@@ -298,7 +391,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.addEventListener('click', handleDocumentClick);
         window.addEventListener('scroll', handleScroll);
 
-        // CORRECTED: Added focus management to the back-to-top button
         backToTopButton.addEventListener('click', (e) => {
             e.preventDefault();
             document.getElementById('main-heading').focus({preventScroll: true});
@@ -310,34 +402,43 @@ document.addEventListener('DOMContentLoaded', async () => {
         setupGlobalShare();
     }
 
+    function updateActiveFilterButtons() {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            const category = btn.dataset.category;
+            let isActive = false;
+            if (category === 'All') {
+                isActive = !activeFilters.showFavorites && activeFilters.categories.size === 0;
+            } else if (category === 'Favorites') {
+                isActive = activeFilters.showFavorites;
+            } else {
+                isActive = activeFilters.categories.has(category);
+            }
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-pressed', isActive);
+        });
+    }
+
     function handleFilterClick(e) {
         const targetButton = e.target.closest('.filter-btn');
         if (!targetButton) return;
 
         const category = targetButton.dataset.category;
-        const allBtn = filterContainer.querySelector('[data-category="All"]');
         
         if (category === 'All') {
-            activeCategories.clear();
-            allBtn.classList.add('active');
-            allBtn.setAttribute('aria-pressed', 'true');
-            filterContainer.querySelectorAll('.filter-btn:not([data-category="All"])').forEach(btn => {
-                btn.classList.remove('active');
-                btn.setAttribute('aria-pressed', 'false');
-            });
+            activeFilters.categories.clear();
+            activeFilters.showFavorites = false;
+        } else if (category === 'Favorites') {
+            activeFilters.showFavorites = true;
+            activeFilters.categories.clear();
         } else {
-            const isPressed = targetButton.classList.toggle('active');
-            targetButton.setAttribute('aria-pressed', isPressed);
-            if (isPressed) { 
-                activeCategories.add(category);
+            activeFilters.showFavorites = false;
+            if (activeFilters.categories.has(category)) {
+                activeFilters.categories.delete(category);
             } else {
-                activeCategories.delete(category);
+                activeFilters.categories.add(category);
             }
-            
-            const anyActive = activeCategories.size > 0;
-            allBtn.classList.toggle('active', !anyActive);
-            allBtn.setAttribute('aria-pressed', !anyActive);
         }
+        updateActiveFilterButtons();
         filterAndSearch();
     }
 
@@ -451,9 +552,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             suggestionsList.classList.add('hidden');
             searchInput.setAttribute('aria-expanded', 'false');
         }
-        if (!e.target.closest('.resource-card')) {
+        const card = e.target.closest('.resource-card');
+        if (!card) {
              document.querySelectorAll('.card-menu').forEach(menu => {
-                const button = menu.closest('.relative').querySelector('.card-menu-btn');
+                const button = menu.parentElement.querySelector('.card-menu-btn');
                 if(button && button.getAttribute('aria-expanded') === 'true') {
                     closeMenu(menu, button);
                 }
@@ -484,10 +586,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Card Menu Logic
     function handleResourceCardClick(e) {
+        const favoriteButton = e.target.closest('.favorite-btn');
+        if (favoriteButton) {
+            toggleFavorite(favoriteButton.dataset.url, favoriteButton);
+            return;
+        }
+        
         const menuButton = e.target.closest('.card-menu-btn');
-        if (menuButton) toggleMenu(menuButton);
+        if (menuButton) {
+            toggleMenu(menuButton);
+            return;
+        }
+        
         const menuItem = e.target.closest('.card-menu-item');
-        if(menuItem) handleMenuAction(menuItem);
+        if(menuItem) {
+            handleMenuAction(menuItem);
+            return;
+        }
     }
     
     function handleResourceCardKeydown(e) {
@@ -500,7 +615,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (e.key === 'Escape') { 
             const openMenu = document.querySelector('.card-menu:not(.hidden)'); 
             if (openMenu) { 
-                const button = openMenu.closest('.relative').querySelector('.card-menu-btn'); 
+                const button = openMenu.parentElement.querySelector('.card-menu-btn'); 
                 closeMenu(openMenu, button); 
                 button.focus(); 
             }
@@ -524,7 +639,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Close all other menus
         document.querySelectorAll('.card-menu').forEach(m => {
             if (m !== menu) {
-                const b = m.closest('.relative').querySelector('.card-menu-btn');
+                const b = m.parentElement.querySelector('.card-menu-btn');
                 if(b) closeMenu(m,b);
             }
         });
@@ -534,10 +649,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     function openMenu(menu, button) {
         menu.classList.remove('hidden');
         button.setAttribute('aria-expanded', 'true');
-        // Focus first item in the menu
         const firstItem = menu.querySelector('.card-menu-item');
         if(firstItem) firstItem.focus();
     }
+
     function closeMenu(menu, button) {
         menu.classList.add('hidden');
         button.setAttribute('aria-expanded', 'false');
@@ -546,39 +661,44 @@ document.addEventListener('DOMContentLoaded', async () => {
     function handleMenuAction(menuItem) {
         const card = menuItem.closest('.resource-card');
         const button = card.querySelector('.card-menu-btn');
-        const menu = menuItem.parentElement;
+        const menu = menuItem.closest('.card-menu');
 
         const titleElement = card.querySelector('h3 a');
         const data = allResourceData.find(d => d['Resource Text'] === titleElement.textContent);
         if (!data) return;
 
-        const textToShare = `${data['Resource Text']}\n\n${data.Description || ''}\n\n${data.URL}\n\nFind more resources at ${window.location.href}`;
         const action = menuItem.dataset.action;
-
+        
         closeMenu(menu, button);
         button.focus();
 
         switch (action) {
+            case 'report-issue':
+                showModal({ type: 'report-issue', resourceTitle: data['Resource Text'] });
+                break;
             case 'share-twitter':
-                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(textToShare)}`, '_blank');
-                break;
             case 'share-facebook':
-                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(data.URL)}`, '_blank');
-                break;
             case 'share-linkedin':
-                window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(data.URL)}&title=${encodeURIComponent(data['Resource Text'])}`, '_blank');
-                break;
             case 'copy':
-                navigator.clipboard.writeText(textToShare).then(() => {
-                    const copyTextSpan = menuItem.querySelector('.copy-text');
-                    if (!copyTextSpan) return;
-                    const originalText = copyTextSpan.textContent;
-                    copyTextSpan.textContent = 'Copied!';
-                    announcer.textContent = `Copied ${data['Resource Text']} to clipboard.`;
-                    setTimeout(() => {
-                        copyTextSpan.textContent = originalText;
-                    }, 2000);
-                });
+                const textToShare = `${data['Resource Text']}\n\n${data.Description || ''}\n\n${data.URL}\n\nFind more resources at ${window.location.href}`;
+                if (action === 'share-twitter') {
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(textToShare)}`, '_blank');
+                } else if (action === 'share-facebook') {
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(data.URL)}`, '_blank');
+                } else if (action === 'share-linkedin') {
+                    window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(data.URL)}&title=${encodeURIComponent(data['Resource Text'])}`, '_blank');
+                } else if (action === 'copy') {
+                    navigator.clipboard.writeText(textToShare).then(() => {
+                        const copyTextSpan = menuItem.querySelector('.copy-text');
+                        if (!copyTextSpan) return;
+                        const originalText = copyTextSpan.textContent;
+                        copyTextSpan.textContent = 'Copied!';
+                        announcer.textContent = `Copied ${data['Resource Text']} to clipboard.`;
+                        setTimeout(() => {
+                            copyTextSpan.textContent = originalText;
+                        }, 2000);
+                    });
+                }
                 break;
         }
     }
@@ -601,6 +721,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     //================================================================
     async function init() {
         initializeTheme();
+        loadFavorites();
         await fetchResources();
         if (allResourceData.length > 0) {
             createSections();
