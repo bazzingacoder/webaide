@@ -1,147 +1,878 @@
 [
-    {"Category":"Accessibility Standards","Resource Text":"HTML: The Living Standard","URL":"https://html.spec.whatwg.org/","Description":"Defines HTML specifications including semantic elements and ARIA for accessibility, ensuring browser compatibility and supporting WCAG guidelines for inclusive web content."},
-    {"Category":"Accessibility Standards","Resource Text":"WCAG","URL":"https://www.w3.org/TR/WCAG/","Description":"Provides guidelines for accessible web content addressing vision, hearing, mobility, and cognitive impairments. Version 2.2 includes 13 guidelines under perceivable, operable, understandable, and robust principles."},
-    {"Category":"Accessibility Standards","Resource Text":"WCAG Quick Reference","URL":"https://www.w3.org/WAI/WCAG21/quickref/","Description":"Offers a customizable guide to WCAG 2.1 success criteria and techniques, supporting developers with filters for roles and technologies."},
-    {"Category":"Accessibility Standards","Resource Text":"Understanding WCAG 2.2","URL":"https://www.w3.org/WAI/WCAG22/Understanding/","Description":"Explains WCAG 2.2 guidelines and success criteria with examples, aiding developers and auditors in creating accessible web content for diverse disabilities."},
-    {"Category":"Accessibility Standards","Resource Text":"Techniques for WCAG 2.2","URL":"https://www.w3.org/WAI/WCAG22/Techniques/","Description":"Provides examples for meeting success criteria, including HTML, ARIA, and CSS guidance to support developers in creating accessible web content."},
-    {"Category":"Accessibility Standards","Resource Text":"ARIA","URL":"https://www.w3.org/TR/wai-aria/","Description":"Defines WAI-ARIA 1.2 roles, states, and properties to enhance web accessibility and support dynamic content for assistive technologies."},
-    {"Category":"Accessibility Standards","Resource Text":"ARIA Authoring Practices Guide (APG)","URL":"https://www.w3.org/WAI/ARIA/apg/","Description":"Offers patterns and code for creating accessible components, helping developers build interactive web elements usable by people with disabilities."},
-    {"Category":"Accessibility Standards","Resource Text":"ARIA in HTML","URL":"https://www.w3.org/TR/html-aria/","Description":"Specifies valid ARIA attributes for HTML elements, ensuring compatibility with assistive technologies and supporting WCAG-compliant development."},
-    {"Category":"Accessibility Standards","Resource Text":"Using ARIA","URL":"https://www.w3.org/TR/using-aria/","Description":"Guides developers on applying ARIA roles and properties to ensure accessible web content by enhancing compatibility with assistive technologies and WCAG."},
-    {"Category":"Accessibility Standards","Resource Text":"HTML Accessibility API Mappings (AAM)","URL":"https://www.w3.org/TR/html-aam/","Description":"Defines how HTML is exposed to accessibility APIs, ensuring consistent interpretation for screen readers and supporting users with disabilities."},
-    {"Category":"Accessibility Standards","Resource Text":"Accessible Name and Description Computation","URL":"https://w3c.github.io/html-aam/#accessible-name-and-description-computation","Description":"Outlines how assistive technologies derive names and descriptions for web elements, ensuring consistent and accessible labeling."},
-    {"Category":"Accessibility Standards","Resource Text":"Home · alphagov/wcag-primer Wiki · GitHub","URL":"https://github.com/alphagov/wcag-primer/wiki","Description":"Introduces WCAG guidelines and success criteria, providing practical tips for developers to create inclusive digital experiences."},
-    {"Category":"Accessibility Standards","Resource Text":"Mobile Accessibility Guidelines - Accessibility for Products - BBC","URL":"https://www.bbc.co.uk/accessibility/forproducts/guides/mobile/","Description":"Covers WCAG 2.1 for mobile apps and sites, ensuring touch, keyboard, and screen reader compatibility for users with disabilities."},
-    {"Category":"Useful tools, resources and references","Resource Text":"HTML5 Accessibility","URL":"http://www.html5accessibility.com/","Description":"Tests which newish HTML5 features are accessible and supported by major browsers."},
-    {"Category":"Useful tools, resources and references","Resource Text":"a11ysupport.io","URL":"https://a11ysupport.io","Description":"Documents ARIA attribute support across various screen readers."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Who Can Use","URL":"https://www.whocanuse.com/?b=040876&c=fd4949&f=20&s=","Description":"Brings attention and understanding to how color contrast can affect different people with visual impairments."},
-    {"Category":"Useful tools, resources and references","Resource Text":"WCAG 2.2 map by theme - AAA version | Andrew Hick","URL":"https://andrewhick.com/accessibility/wcag-map-aaa/","Description":"Organizes WCAG 2.2 success criteria by theme at the AAA level, helping developers implement accessibility requirements for inclusive web content."},
-    {"Category":"Useful tools, resources and references","Resource Text":"WCAG in Plain English - AAArdvark","URL":"https://aaardvarkaccessibility.com/wcag-plain-english/","Description":"Simplifies WCAG 2.1 into non-technical language, helping non-experts create accessible websites for diverse users."},
-    {"Category":"Useful tools, resources and references","Resource Text":"This is WCAG 2.1","URL":"https://thisiswcag.com","Description":"Offers a concise overview of WCAG 2.1 guidelines, providing digestible explanations for developers to ensure accessible web content."},
-    {"Category":"Useful tools, resources and references","Resource Text":"WCAG 2.1 Map","URL":"https://intopia.digital/articles/intopia-launches-wcag-2-1-map/","Description":"Visually organizes WCAG 2.1 success criteria by theme, aiding developers in navigating and applying accessibility guidelines effectively."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Inclusive Design Principles","URL":"https://inclusivedesignprinciples.info","Description":"Offers seven guidelines for accessible web design, ensuring usability for diverse audiences and aligning with WCAG standards."},
-    {"Category":"Useful tools, resources and references","Resource Text":"ADA & WCAG Compliance Standards Guide for Mobile Apps","URL":"https://www.accessibility.works/blog/ada-wcag-compliance-standards-guide-mobile-apps/","Description":"Outlines mobile app compliance with ADA and WCAG standards, covering touch navigation and screen reader support for accessibility."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Screen Readers support for text level HTML semantics - TPGi","URL":"https://www.tpgi.com/screen-readers-support-for-text-level-html-semantics/","Description":"Details screen reader support for text-level HTML semantics, providing compatibility data to ensure accessible content for assistive technology users."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Homepage - Access Guide","URL":"https://www.accessguide.io/","Description":"Offers accessibility resources and tutorials, supporting developers in implementing WCAG-compliant web content for inclusive experiences."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Web Accessibility Annotation Kit | Figma Community","URL":"https://www.figma.com/community/file/1311421011482282592/web-accessibility-annotation-kit","Description":"Provides templates for accessible design in Figma, helping designers integrate WCAG compliance into their workflows."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Browse with assistive technology videos - TetraLogical","URL":"https://tetralogical.com/blog/2021/12/24/Browse-with-assistive-technology-videos/","Description":"Shows assistive technology navigation in action, offering insights for developers to test and improve accessibility per WCAG guidelines."},
-    {"Category":"Useful tools, resources and references","Resource Text":"The Ultimate Mobile Accessibility Resource Guide - DEV Community","URL":"https://dev.to/steady5063/the-ultimate-mobile-accessibility-resource-guide-53gh","Description":"Compiles tools and best practices for mobile accessibility, helping developers apply WCAG 2.1 to mobile apps for inclusivity."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Making Web More Accessible: a11y Testing Tools and Techniques with Playwright","URL":"https://ray.run/blog/accessibility-testing-with-playwright","Description":"Explains how to use Playwright for accessibility testing, covering automated tools to identify WCAG violations for inclusive web content."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Mobile Accessibility: How WCAG 2.0 and Other W3C/WAI Guidelines Apply to Mobile","URL":"https://www.w3.org/TR/mobile-accessibility-mapping/","Description":"Maps WCAG 2.0 to mobile contexts, guiding developers to ensure accessibility for mobile apps and websites."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Trusted tester Dashboard (section 508)","URL":"https://training.section508testing.net/my/#courses","Description":"Offers Section 508 and WCAG 2.1 training, providing tools for evaluating web and software accessibility compliance."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Home - Orange digital accessibility guidelines","URL":"https://a11y-guidelines.orange.com/en/","Description":"Provides WCAG 2.1 recommendations and guidance for developers in creating accessible web and mobile content."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Test Automation for Accessibility","URL":"https://testautomationu.applitools.com/accessibility-testing-tutorial/","Description":"Covers automated accessibility testing, helping developers identify WCAG violations using various tools for inclusive web content."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Making Sense Of WAI-ARIA: A Comprehensive Guide — Smashing Magazine","URL":"https://www.smashingmagazine.com/2022/09/wai-aria-guide/","Description":"Explains WAI-ARIA roles, states, and properties, offering examples for developers to enhance accessibility per WCAG."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Learn Accessibility","URL":"https://web.dev/learn/accessibility/","Description":"Covers WCAG and ARIA, providing developers with techniques to create inclusive web content for all users."},
-    {"Category":"Useful tools, resources and references","Resource Text":"A Designer’s Guide to Documenting Accessibility & User Interactions by Stéphanie Walter","URL":"https://stephaniewalter.design/blog/a-designers-guide-to-documenting-accessibility-user-interactions/","Description":"Offers designers tips for documenting accessibility, integrating WCAG and ARIA into design workflows for inclusivity."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Home - The A11Y Project","URL":"https://www.a11yproject.com/","Description":"Provides accessibility guides and tools to help developers implement WCAG-compliant web content for inclusive experiences."},
-    {"Category":"Useful tools, resources and references","Resource Text":"WAI-ARIA basics - Learn web development | MDN","URL":"https://developer.mozilla.org/en-US/docs/Learn/Accessibility/WAI-ARIA_basics","Description":"Introduces ARIA roles and properties, guiding developers in enhancing web accessibility with assistive technologies per WCAG."},
-    {"Category":"Useful tools, resources and references","Resource Text":"VPAT - Information Technology Industry Council","URL":"https://www.itic.org/policy/accessibility/vpat","Description":"Provides the VPAT template for documenting product accessibility conformance, aligned with WCAG and Section 508."},
-    {"Category":"Useful tools, resources and references","Resource Text":"A Definitive Guide On How To Perform A Web Accessibility Audit • DigitalA11Y","URL":"https://www.digitala11y.com/a-definitive-guide-on-how-to-perform-a-web-accessibility-audit/","Description":"Details the steps for a web accessibility audit, covering WCAG 2.1 testing and reporting for inclusive web experiences."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Accessibility for designers: where do I start? by Stéphanie Walter - UX Researcher & Designer.","URL":"https://stephaniewalter.design/blog/accessibility-resources-tools-articles-books-for-designer/","Description":"Introduces designers to accessibility resources and covers WCAG basics for creating inclusive digital products."},
-    {"Category":"Useful tools, resources and references","Resource Text":"SwiftUI accessibility code samples | Appt","URL":"https://appt.org/en/docs/swiftui/samples","Description":"Provides accessible iOS app code samples for SwiftUI, including VoiceOver support and WCAG-aligned techniques for developers."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Jetpack Compose accessibility code samples | Appt","URL":"https://appt.org/en/docs/jetpack-compose/samples","Description":"Offers accessible Android app code samples for Jetpack Compose, including TalkBack support and WCAG-aligned techniques."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Designing for mobile accessibility","URL":"https://learn.intopia.digital/courses/designing-for-mobile-accessibility","Description":"Teaches WCAG 2.1 for mobile design, covering touch and screen reader compatibility for inclusive mobile experiences."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Android accessibility: roles and TalkBack - TetraLogical","URL":"https://tetralogical.com/blog/2022/07/07/android-accessibility-roles-and-talkback/","Description":"Explains Android accessibility roles and TalkBack, guiding developers in creating accessible apps per WCAG standards."},
-    {"Category":"Useful tools, resources and references","Resource Text":"Guidance on Applying WCAG 2.2 to Mobile Applications (WCAG2Mobile)","URL":"https://www.w3.org/TR/wcag2mobile-22/","Description":"Applies WCAG 2.2 guidelines specifically to mobile apps, guiding developers in ensuring accessibility for users with disabilities."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"NVDA User guide","URL":"https://www.nvaccess.org/files/nvda/documentation/userGuide.html","Description":"Covers setup and commands for the NVDA screen reader, helping users with visual impairments navigate web and desktop content."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"Browse mode","URL":"https://www.nvaccess.org/files/nvda/documentation/userGuide.html?#BrowseMode","Description":"Explains web navigation with keyboard shortcuts in NVDA, aiding users with visual impairments in accessing HTML content."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"JAWS documentation","URL":"https://www.freedomscientific.com/Products/software/JAWS/","Description":"Covers setup and navigation for the JAWS screen reader, enabling users with visual impairments to access web content."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"JAWS Hotkeys","URL":"https://www.freedomscientific.com/training/jaws/hotkeys/#wb","Description":"Lists keyboard shortcuts for JAWS screen reader navigation to effectively support users with visual impairments."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"Complete guide to Narrator","URL":"https://support.microsoft.com/en-us/windows/complete-guide-to-narrator-e4397a0d-ef4f-b386-d8ae-c172f109bdb1","Description":"Covers setup and commands for Microsoft's Narrator, helping users with visual impairments access web and system content."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"Narrator keyboard commands and touch gestures","URL":"https://support.microsoft.com/en-us/windows/appendix-b-narrator-keyboard-commands-and-touch-gestures-8bdab3f4-b3e9-4554-7f28-8b15bd37410a#WindowsVersion=Windows_11","Description":"Lists keyboard shortcuts for Windows 11 Narrator, aiding users with visual impairments in navigating web content."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"VoiceOver Guide","URL":"https://help.apple.com/iphone/11/#/iph3e2e415f","Description":"Covers setup and gestures for VoiceOver on iPhone, helping users with visual impairments navigate iOS apps."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"Use VoiceOver to browse web pages on Mac","URL":"https://support.apple.com/en-lb/guide/voiceover/vo27974/10/mac/13.0","Description":"Explains web navigation using VoiceOver on Mac, helping users with visual impairments access content effectively."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"Apple VoiceOver Command charts","URL":"https://help.apple.com/voiceover/command-charts/","Description":"Lists keyboard shortcuts and commands for VoiceOver on macOS and iOS to aid users with visual impairments in navigation."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"Talkback user guides","URL":"https://support.google.com/accessibility/android/topic/10601774?hl=en&ref_topic=3529932","Description":"Covers setup and gestures for TalkBack on Android, helping users with visual impairments navigate apps."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"Turn on and practice VoiceOver on iPhone","URL":"https://support.apple.com/en-lb/guide/iphone/iph3e2e415f/16.0/ios/16.0","Description":"Covers iPhone setup for VoiceOver and helps users with visual impairments learn navigation techniques."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"VoiceOver Keyboard Shortcuts on a Mac","URL":"https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts","Description":"Lists keyboard commands for navigating web content with VoiceOver on a Mac."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"VoiceOver Gestures on iOS","URL":"https://dequeuniversity.com/screenreaders/voiceover-ios-shortcuts","Description":"Lists touch commands and gestures for navigating apps with VoiceOver on iOS."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"NVDA Keyboard Shortcuts","URL":"https://dequeuniversity.com/screenreaders/nvda-keyboard-shortcuts","Description":"Lists commands for screen reader navigation with NVDA to help users access content."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"Talkback Gestures on Android","URL":"https://dequeuniversity.com/screenreaders/talkback-shortcuts","Description":"Lists touch commands and gestures for navigating apps with TalkBack on Android."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"JAWS Keyboard Shortcuts","URL":"https://dequeuniversity.com/screenreaders/jaws-keyboard-shortcuts","Description":"Lists keyboard commands for screen reader navigation with JAWS."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"Narrator Keyboard Shortcuts","URL":"https://dequeuniversity.com/screenreaders/narrator-keyboard-shortcuts","Description":"Lists Windows commands for navigating web content with Narrator."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"Desktop Screen Readers Forms Guide","URL":"https://dequeuniversity.com/screenreaders/forms-guide","Description":"Explains how screen readers handle forms and provides WCAG-aligned best practices for developers."},
-    {"Category":"Guides & Cheat Sheets","Resource Text":"Desktop Screen Readers Survival Guide","URL":"https://dequeuniversity.com/screenreaders/survival-guide","Description":"Offers essential tips and commands for using screen readers, helping developers test for accessibility per WCAG."},
-    {"Category":"Checklists","Resource Text":"Custom Control Accessible Development Checklist","URL":"https://www.w3.org/TR/using-aria/#ariachecklist","Description":"Guides developers in creating accessible custom controls, ensuring WCAG and assistive technology compatibility."},
-    {"Category":"Checklists","Resource Text":"Deque’s Web Accessibility Checklist","URL":"https://dequeuniversity.com/checklists/web/","Description":"includes checklists for components, forms, images, links, multimedia, etc. VERY useful."},
-    {"Category":"Checklists","Resource Text":"The Must-Have WCAG 2.1 Checklist","URL":"https://kma.global/wp-content/uploads/2019/07/WCAG_2.1_Checklist.pdf","Description":"Summarizes WCAG 2.1 success criteria to guide developers in ensuring accessible web content."},
-    {"Category":"Checklists","Resource Text":"The A11y project’s WCAG Checklist","URL":"https://www.a11yproject.com/checklist/","Description":"Summarizes WCAG 2.1 criteria to help developers verify accessibility compliance."},
-    {"Category":"Checklists","Resource Text":"WebAIM’s WCAG 2 Checklist","URL":"https://webaim.org/standards/wcag/checklist","Description":"Summarizes WCAG criteria to guide developers in ensuring accessible web content."},
-    {"Category":"Checklists","Resource Text":"Accessibility Not-Checklist","URL":"https://not-checklist.intopia.digital","Description":"Highlights common accessibility mistakes to avoid, complementing WCAG for inclusive design."},
-    {"Category":"Checklists","Resource Text":"Your Web Accessibility Checklist - DEV Community","URL":"https://dev.to/thawkin3/your-web-accessibility-checklist-37jh","Description":"Provides actionable WCAG 2.1 compliance steps to help developers create accessible web content."},
-    {"Category":"Checklists","Resource Text":"Web Accessibility Checklist","URL":"https://webaccessibilitychecklist.com/?fbclid=IwAR2vHvdjECaOh2dK0gNnBh29JuxDn0XTCKtFM-6DMfCL4cF67cFB5dyUQOY","Description":"Offers WCAG 2.1 compliance steps that guide developers in creating inclusive content."},
-    {"Category":"Auditing and Testing tools","Resource Text":"A comprehensive list of Web Accessibility Evaluation Tools","URL":"https://www.w3.org/WAI/ER/tools/","Description":"Compiles WCAG testing resources to help developers and auditors identify accessibility issues."},
-    {"Category":"Auditing and Testing tools","Resource Text":"Color Contrast Analyzer (CCA)","URL":"https://www.tpgi.com/color-contrast-checker/","Description":"Evaluates color contrast for WCAG 2.1 compliance, ensuring readability for visually impaired users."},
-    {"Category":"Auditing and Testing tools","Resource Text":"Accessibility audit bookmarklets","URL":"https://a11y-tools.com/bookmarklets/","Description":"Provides JavaScript bookmarklets for in-browser WCAG testing to help developers identify accessibility issues."},
-    {"Category":"Auditing and Testing tools","Resource Text":"Windows 11 Virtual Machines","URL":"https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/","Description":"Supports accessibility testing by providing virtual environments for screen reader and WCAG evaluations."},
-    {"Category":"Auditing and Testing tools","Resource Text":"WCAG Conformance Evaluation Methodology (WCAG-EM)","URL":"https://www.w3.org/TR/WCAG-EM/","Description":"Outlines a methodology for WCAG compliance evaluation, guiding auditors in assessing accessibility."},
-    {"Category":"Auditing and Testing tools","Resource Text":"WCAG-EM Report Tool","URL":"https://www.w3.org/WAI/eval/report-tool/","Description":"Generates accessibility reports, supporting auditors in documenting WCAG compliance."},
-    {"Category":"Auditing and Testing tools","Resource Text":"Eleventy WCAG Reporter","URL":"https://github.com/hidde/eleventy-wcag-reporter/","Description":"Creates issue-focused accessibility reports, helping developers prioritize WCAG fixes."},
-    {"Category":"Auditing and Testing tools","Resource Text":"Nu HTML Checker","URL":"https://validator.nu/","Description":"Validates HTML for potential accessibility issues, ensuring semantic markup aligns with WCAG."},
-    {"Category":"Auditing and Testing tools","Resource Text":"The W3C Markup validator","URL":"https://validator.w3.org","Description":"Checks HTML for accessibility compliance and supports WCAG-aligned semantic markup."},
-    {"Category":"Auditing and Testing tools","Resource Text":"JavaScript Bookmarklets for Accessibility Testing","URL":"https://pauljadam.com/bookmarklets.html","Description":"Tests WCAG compliance for issues like missing alt text directly in the browser."},
-    {"Category":"Auditing and Testing tools","Resource Text":"ARC Toolkit","URL":"https://www.tpgi.com/arc-platform/arc-toolkit/","Description":"A Chrome extension from TPGi that tests for WCAG 2.1 compliance and identifies contrast and ARIA errors."},
-    {"Category":"Auditing and Testing tools","Resource Text":"WAVE browser extension","URL":"https://wave.webaim.org/extension/","Description":"Evaluates WCAG 2.1 compliance within the browser and highlights errors for developers to fix."},
-    {"Category":"Auditing and Testing tools","Resource Text":"Web Developer Extension","URL":"https://chrispederick.com/work/web-developer/","Description":"Offers a suite of accessibility testing tools that check for WCAG compliance for contrast and structure."},
-    {"Category":"Auditing and Testing tools","Resource Text":"h123 HTML5 Outliner","URL":"https://hinderlingvolkart.github.io/h123/","Description":"A bookmarklet that generates document outlines to ensure semantic structure for WCAG compliance."},
-    {"Category":"Auditing and Testing tools","Resource Text":"Accessibility Insights for Web","URL":"https://accessibilityinsights.io","Description":"Tests WCAG 2.1 compliance using automated and guided accessibility checks."},
-    {"Category":"Auditing and Testing tools","Resource Text":"A11Y inspect","URL":"https://www.barrierbreak.com/a11yinspect/","Description":"Audits web accessibility and evaluates WCAG 2.1 compliance with detailed reports."},
-    {"Category":"Auditing and Testing tools","Resource Text":"Target size bookmarklet","URL":"https://cdpn.io/pen/debug/YzdwWZw","Description":"Checks touch target sizes for WCAG 2.1 to ensure accessibility for motor-impaired users."},
-    {"Category":"Auditing and Testing tools","Resource Text":"About the bookmarklet","URL":"https://html5accessibility.com/stuff/2023/08/28/quick-and-very-dirty-target-size-checker/","Description":"Explains WCAG 2.1 touch target testing and guides developers in ensuring motor accessibility."},
-    {"Category":"Auditing and Testing tools","Resource Text":"Fake Filler","URL":"https://chrome.google.com/webstore/detail/fake-filler/bnjjngeaknajbdcgpfkgnonkmififhfo","Description":"A Chrome extension that populates forms with dummy data to help developers test form accessibility."},
-    {"Category":"Auditing and Testing tools","Resource Text":"VoiceOver Helper","URL":"https://joelanman.github.io/voiceover-helper/","Description":"A bookmarklet for Safari that shows a quick guide to using VoiceOver, aiding developers in accessibility testing."},
-    {"Category":"Auditing and Testing tools","Resource Text":"Autocomplete accessibility bookmarklet - Rachele DiTullio","URL":"https://racheleditullio.com/blog/2023/11/autocomplete-accessibility-bookmarklet/","Description":"Checks form autocomplete attributes for WCAG 2.1 compliance, ensuring accessible form interactions."},
-    {"Category":"Auditing and Testing tools","Resource Text":"browser stack accessibility toolkit a comprehensive test platform browserstack","URL":"https://www.browserstack.com/docs/accessibility/overview/launch-browser-extension","Description":"Tests WCAG 2.1 across various browsers and provides automated checks for accessible web content."},
-    {"Category":"Auditing and Testing tools","Resource Text":"assistive labs - an online tool which lets u access to multiple accessibility test environments","URL":"https://assistivlabs.com/","Description":"Offers accessibility testing across different environments, supporting WCAG 2.1 evaluations with assistive technologies."},
-    {"Category":"License/Certificates","Resource Text":"Certified Professional in Accessibility Core Competencies (CPACC)","URL":"https://www.accessibilityassociation.org/s/certified-professional","Description":"Certifies foundational knowledge in accessibility, validating a professional's ability to promote inclusive digital environments."},
-    {"Category":"License/Certificates","Resource Text":"Web accessibility specialist (WAS)","URL":"https://www.accessibilityassociation.org/s/wascertification","Description":"Validates technical expertise in web accessibility, focusing on WCAG and ARIA for designing accessible content."},
-    {"Category":"License/Certificates","Resource Text":"Certified Professional in Web Accessibility (CPWA)","URL":"https://www.accessibilityassociation.org/s/certified-professional-web-accessibility","Description":"Combines CPACC and WAS certifications to validate advanced web accessibility expertise for inclusive design."},
-    {"Category":"License/Certificates","Resource Text":"Accessible Document Specialist (ADS)","URL":"https://www.accessibilityassociation.org/s/accessible-document-specialist","Description":"Certifies expertise in creating accessible documents, aligning with WCAG and PDF/UA standards."},
-    {"Category":"License/Certificates","Resource Text":"Trusted Tester Certification for web (section 508)","URL":"https://training.section508testing.net/","Description":"Trains and certifies individuals in Section 508 and WCAG 2.1 testing to ensure accurate accessibility evaluations."},
-    {"Category":"License/Certificates","Resource Text":"NVDA certified expert","URL":"https://www.nvaccess.org/product/nvda-expert-certification/","Description":"Validates proficiency in the NVDA screen reader, supporting accessibility testing and user assistance."},
-    {"Category":"License/Certificates","Resource Text":"Jaws certified individual","URL":"http://hosted.onlinetesting.net/FreedomScientific2/login.pl/JAWSCertification","Description":"Validates expertise in the JAWS screen reader, supporting accessibility testing for web content."},
-    {"Category":"License/Certificates","Resource Text":"W3C Accessibility Certification Exam","URL":"https://campus.w3schools.com/en-in/products/accessibility-certificate","Description":"Tests knowledge of WCAG, validating a professional's ability to create accessible content."},
-    {"Category":"License/Certificates","Resource Text":"Wix Accessibility Specialist Certification","URL":"https://www.wix.com/learn/certification/accessibility","Description":"Validates expertise in building accessible Wix websites with a focus on WCAG 2.1 compliance."},
-    {"Category":"Other","Resource Text":"Build a Better Mobile Input","URL":"https://better-mobile-inputs.netlify.app/","Description":"Shows the effect of HTML input attributes on mobile keyboards to help optimize accessibility and usability."},
-    {"Category":"Other","Resource Text":"Estimate how many people using your website might be disabled","URL":"https://how-many.herokuapp.com","Description":"Estimates the number of users with disabilities on a website to help developers prioritize accessibility improvements."},
-    {"Category":"Other","Resource Text":"Prompting GitHub Copilot Chat to become your personal AI assistant for accessibility - The GitHub Blog","URL":"https://github.blog/2023-10-09-prompting-github-copilot-chat-to-become-your-personal-ai-assistant-for-accessibility/","Description":"Explains how to use Copilot Chat for accessibility, providing prompts for generating WCAG-compliant code."},
-    {"Category":"Other","Resource Text":"ISO 639-1 Language Codes","URL":"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes","Description":"Provides a list of standardized language codes, aiding developers in implementing accessible multilingual content."},
-    {"Category":"Other","Resource Text":"Simple Web Accessibility Guidelines","URL":"https://jfhector.github.io/accessibility-guidelines/index.html","Description":"Offers a concise WCAG overview and provides practical steps for creating accessible web content."},
-    {"Category":"Other","Resource Text":"Accessibility Statement Generator","URL":"https://www.accessibilitystatementgenerator.com/","Description":"Creates WCAG-compliant accessibility statements, helping organizations document their website's accessibility features."},
-    {"Category":"Other","Resource Text":"The W3C Accessibility statement generator","URL":"https://www.w3.org/WAI/planning/statements/generator/#create","Description":"Creates customizable, WCAG-compliant accessibility statements to document a website's conformance."},
-    {"Category":"Other must read resources from web accessibility initiative","Resource Text":"Introduction to Web Accessibility | Web Accessibility Initiative (WAI) | W3C","URL":"https://www.w3.org/WAI/fundamentals/accessibility-intro/","Description":"Explains WCAG principles and guides the creation of inclusive content for users with disabilities."},
-    {"Category":"Other must read resources from web accessibility initiative","Resource Text":"Essential Components of Web Accessibility | Web Accessibility Initiative (WAI) | W3C","URL":"https://www.w3.org/WAI/fundamentals/components/","Description":"Explains accessibility interactions, aligning with WCAG, ATAG, and UAAG for inclusive design."},
-    {"Category":"Other must read resources from web accessibility initiative","Resource Text":"Older Users and Web Accessibility: Meeting the Needs of Ageing Web Users | Web Accessibility Initiative (WAI) | W3C","URL":"https://www.w3.org/WAI/older-users/","Description":"Addresses accessibility for aging users, aligning with WCAG for inclusive design."},
-    {"Category":"Other must read resources from web accessibility initiative","Resource Text":"How People with Disabilities Use the Web | Web Accessibility Initiative (WAI) | W3C","URL":"https://www.w3.org/WAI/people-use-web/","Description":"Describes the user experiences of people with disabilities to inform developers on applying WCAG for inclusivity."},
-    {"Category":"Other must read resources from web accessibility initiative","Resource Text":"Web Accessibility Perspectives Videos: Explore the Impact and Benefits for Everyone | Web Accessibility Initiative (WAI) | W3C","URL":"https://www.w3.org/WAI/perspective-videos/","Description":"Showcases the benefits of accessibility and illustrates WCAG principles through real-world scenarios."},
-    {"Category":"Other must read resources from web accessibility initiative","Resource Text":"Mobile Accessibility at W3C | Web Accessibility Initiative (WAI) | W3C","URL":"https://www.w3.org/WAI/standards-guidelines/mobile/","Description":"Details WCAG for mobile devices, guiding developers in ensuring accessible mobile content."},
-    {"Category":"Other must read resources from web accessibility initiative","Resource Text":"Designing for Web Accessibility – Tips for Getting Started | Web Accessibility Initiative (WAI) | W3C","URL":"https://www.w3.org/WAI/tips/designing/","Description":"Offers WCAG-compliant design tips to help designers create inclusive web interfaces."},
-    {"Category":"Other must read resources from web accessibility initiative","Resource Text":"Writing for Web Accessibility – Tips for Getting Started | Web Accessibility Initiative (WAI) | W3C","URL":"https://www.w3.org/WAI/tips/writing/","Description":"Provides WCAG-compliant content tips, guiding writers in creating accessible text."},
-    {"Category":"Other must read resources from web accessibility initiative","Resource Text":"Developing for Web Accessibility – Tips for Getting Started","URL":"https://www.w3.org/WAI/tips/developing/","Description":"Offers WCAG coding tips, guiding developers in creating accessible web content."},
-    {"Category":"Other must read resources from web accessibility initiative","Resource Text":"Handouts and Recordings - Web Accessibility Group","URL":"https://www.amacusg.gatech.edu/wag/Handouts_and_Recordings","Description":"Provides WCAG and accessibility resources, including webinars and guides for developers."},
-    {"Category":"Other must read resources from web accessibility initiative","Resource Text":"Guidance on Applying WCAG 2 to Non-Web Information and Communications Technologies (WCAG2ICT)","URL":"https://www.w3.org/TR/wcag2ict-22/","Description":"Applies WCAG to non-web ICT, helping developers ensure accessibility in software and documents."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Scott O'Hara's Blog","URL":"https://www.scottohara.me/","Description":"Offers accessibility articles and code, covering WCAG and ARIA for inclusive digital experiences."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Smashing Magazine","URL":"https://www.smashingmagazine.com/","Description":"Publishes accessibility and design articles, providing WCAG-aligned guidance for inclusive digital experiences."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Adrian Roselli's Blog","URL":"https://adrianroselli.com/","Description":"Offers accessibility insights, covering WCAG and ARIA with practical advice for developers."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Eric Bailey's Website","URL":"https://ericwbailey.website/published/","Description":"Focuses on inclusive design and provides WCAG-aligned articles for accessible web content."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Eric Eggert blog","URL":"https://yatil.net/blog","Description":"Offers accessibility articles, covering WCAG and ARIA with insights for inclusive design."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"getstark.co blog","URL":"https://www.getstark.co/blog/","Description":"Provides accessibility articles and tools with WCAG-aligned guidance for inclusive digital products."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"TPGI blog","URL":"https://www.tpgi.com/blog/","Description":"Covers the business and technical aspects of accessibility, providing WCAG and ARIA insights for developers."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Blog - TetraLogical","URL":"https://tetralogical.com/blog/","Description":"Offers web and mobile accessibility articles, covering WCAG and ARIA with practical tips."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"The UX Research and Design Blog by Stéphanie Walter.","URL":"https://stephaniewalter.design/blog/","Description":"Provides UX and accessibility insights with WCAG-compliant design tips for inclusivity."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Blog - The A11Y Collective","URL":"https://www.a11y-collective.com/blog/","Description":"Shares accessibility tips and provides WCAG-aligned guidance for developers and designers."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Axess Lab Articles","URL":"https://axesslab.com/articles/","Description":"Focuses on accessibility, covering WCAG and practical implementation for inclusive experiences."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Articles - Max Design","URL":"https://adamsilver.io/blog/","Description":"Covers accessibility and UX, providing WCAG-aligned tips for developers."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Law Office of Lainey Feingold","URL":"https://www.lflegal.com/","Description":"Explores the legal landscape of accessibility, covering WCAG and ADA compliance for organizations."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"tempertemper.","URL":"https://www.tempertemper.net/","Description":"Provides bite-sized accessibility explainers, covering WCAG and tips for inclusive design."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Karl Groves - Web Accessibility blog","URL":"https://karlgroves.com/","Description":"Offers accessibility insights with a focus on WCAG and testing for inclusive digital experiences."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"marcus.io blog","URL":"https://marcus.io/blog","Description":"Covers accessibility and development, offering WCAG-aligned tips and code for developers."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Articles – A List Apart","URL":"https://alistapart.com/articles/","Description":"Explores accessibility and design, providing WCAG-aligned insights for inclusive experiences."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Blog - Manuel Matuzovic","URL":"https://www.matuzo.at/blog","Description":"Offers accessibility articles, covering WCAG and ARIA with code for inclusive design."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Accessibility 101 playlist on Microsoft youtube channel","URL":"https://www.youtube.com/playlist?list=PLtSVUgxIo6KqzQV1ktaMji4Nxjmju8wGS","Description":"Offers accessibility videos covering WCAG principles for inclusive design."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"MSFTEnable - a youtube channel by Microsoft accessibility","URL":"https://www.youtube.com/@MSFTEnable/videos","Description":"Shares accessibility videos covering WCAG and inclusive design by Microsoft."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Apple Support accessibility videos","URL":"https://www.youtube.com/@applesupport","Description":"Includes accessibility feature videos, covering VoiceOver for developers and users."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"Deque Systems webinars","URL":"https://www.deque.com/youtube","Description":"Covers web accessibility, providing WCAG and ARIA guidance for inclusive solutions."},
-    {"Category":"blogs / people / other resources to follow","Resource Text":"PDF accessibility videos","URL":"https://www.youtube.com/playlist?list=PLW_yI7b4f35_Y8eS5g7AagCLeP5yJtJjL","Description":"Offers PDF accessibility videos, covering WCAG and PDF/UA for accessible documents."}
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "HTML: The Living Standard",
+        "URL": "https://html.spec.whatwg.org/",
+        "Description": "Defines HTML specifications including semantic elements and ARIA for accessibility, ensuring browser compatibility and supporting WCAG guidelines for inclusive web content."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "WCAG",
+        "URL": "https://www.w3.org/TR/WCAG/",
+        "Description": "Provides guidelines for accessible web content addressing vision, hearing, mobility, and cognitive impairments. Version 2.2 includes 13 guidelines under perceivable, operable, understandable, and robust principles."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "WCAG Quick Reference",
+        "URL": "https://www.w3.org/WAI/WCAG21/quickref/",
+        "Description": "Offers a customizable guide to WCAG 2.1 success criteria and techniques, supporting developers with filters for roles and technologies."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "Understanding WCAG 2.2",
+        "URL": "https://www.w3.org/WAI/WCAG22/Understanding/",
+        "Description": "Explains WCAG 2.2 guidelines and success criteria with examples, aiding developers and auditors in creating accessible web content for diverse disabilities."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "Techniques for WCAG 2.2",
+        "URL": "https://www.w3.org/WAI/WCAG22/Techniques/",
+        "Description": "Provides examples for meeting success criteria, including HTML, ARIA, and CSS guidance to support developers in creating accessible web content."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "ARIA",
+        "URL": "https://www.w3.org/TR/wai-aria/",
+        "Description": "Defines WAI-ARIA 1.2 roles, states, and properties to enhance web accessibility and support dynamic content for assistive technologies."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "ARIA Authoring Practices Guide (APG)",
+        "URL": "https://www.w3.org/WAI/ARIA/apg/",
+        "Description": "Offers patterns and code for creating accessible components, helping developers build interactive web elements usable by people with disabilities."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "ARIA in HTML",
+        "URL": "https://www.w3.org/TR/html-aria/",
+        "Description": "Specifies valid ARIA attributes for HTML elements, ensuring compatibility with assistive technologies and supporting WCAG-compliant development."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "Using ARIA",
+        "URL": "https://www.w3.org/TR/using-aria/",
+        "Description": "Guides developers on applying ARIA roles and properties to ensure accessible web content by enhancing compatibility with assistive technologies and WCAG."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "HTML Accessibility API Mappings (AAM)",
+        "URL": "https://www.w3.org/TR/html-aam/",
+        "Description": "Defines how HTML is exposed to accessibility APIs, ensuring consistent interpretation for screen readers and supporting users with disabilities."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "Accessible Name and Description Computation",
+        "URL": "https://w3c.github.io/html-aam/#accessible-name-and-description-computation",
+        "Description": "Outlines how assistive technologies derive names and descriptions for web elements, ensuring consistent and accessible labeling."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "Home · alphagov/wcag-primer Wiki · GitHub",
+        "URL": "https://github.com/alphagov/wcag-primer/wiki",
+        "Description": "Introduces WCAG guidelines and success criteria, providing practical tips for developers to create inclusive digital experiences."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "Mobile Accessibility Guidelines - Accessibility for Products - BBC",
+        "URL": "https://www.bbc.co.uk/accessibility/forproducts/guides/mobile/",
+        "Description": "Covers WCAG 2.1 for mobile apps and sites, ensuring touch, keyboard, and screen reader compatibility for users with disabilities."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "HTML5 Accessibility",
+        "URL": "http://www.html5accessibility.com/",
+        "Description": "Tests which newish HTML5 features are accessible and supported by major browsers."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "a11ysupport.io",
+        "URL": "https://a11ysupport.io",
+        "Description": "Documents ARIA attribute support across various screen readers."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Who Can Use",
+        "URL": "https://www.whocanuse.com/?b=040876&c=fd4949&f=20&s=",
+        "Description": "Brings attention and understanding to how color contrast can affect different people with visual impairments."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "WCAG 2.2 map by theme - AAA version | Andrew Hick",
+        "URL": "https://andrewhick.com/accessibility/wcag-map-aaa/",
+        "Description": "Organizes WCAG 2.2 success criteria by theme at the AAA level, helping developers implement accessibility requirements for inclusive web content."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "WCAG in Plain English - AAArdvark",
+        "URL": "https://aaardvarkaccessibility.com/wcag-plain-english/",
+        "Description": "Simplifies WCAG 2.1 into non-technical language, helping non-experts create accessible websites for diverse users."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "This is WCAG 2.1",
+        "URL": "https://thisiswcag.com",
+        "Description": "Offers a concise overview of WCAG 2.1 guidelines, providing digestible explanations for developers to ensure accessible web content."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "WCAG 2.1 Map",
+        "URL": "https://intopia.digital/articles/intopia-launches-wcag-2-1-map/",
+        "Description": "Visually organizes WCAG 2.1 success criteria by theme, aiding developers in navigating and applying accessibility guidelines effectively."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Inclusive Design Principles",
+        "URL": "https://inclusivedesignprinciples.info",
+        "Description": "Offers seven guidelines for accessible web design, ensuring usability for diverse audiences and aligning with WCAG standards."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "ADA & WCAG Compliance Standards Guide for Mobile Apps",
+        "URL": "https://www.accessibility.works/blog/ada-wcag-compliance-standards-guide-mobile-apps/",
+        "Description": "Outlines mobile app compliance with ADA and WCAG standards, covering touch navigation and screen reader support for accessibility."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Screen Readers support for text level HTML semantics - TPGi",
+        "URL": "https://www.tpgi.com/screen-readers-support-for-text-level-html-semantics/",
+        "Description": "Details screen reader support for text-level HTML semantics, providing compatibility data to ensure accessible content for assistive technology users."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Homepage - Access Guide",
+        "URL": "https://www.accessguide.io/",
+        "Description": "Offers accessibility resources and tutorials, supporting developers in implementing WCAG-compliant web content for inclusive experiences."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Web Accessibility Annotation Kit | Figma Community",
+        "URL": "https://www.figma.com/community/file/1311421011482282592/web-accessibility-annotation-kit",
+        "Description": "Provides templates for accessible design in Figma, helping designers integrate WCAG compliance into their workflows."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Browse with assistive technology videos - TetraLogical",
+        "URL": "https://tetralogical.com/blog/2021/12/24/Browse-with-assistive-technology-videos/",
+        "Description": "Shows assistive technology navigation in action, offering insights for developers to test and improve accessibility per WCAG guidelines."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "The Ultimate Mobile Accessibility Resource Guide - DEV Community",
+        "URL": "https://dev.to/steady5063/the-ultimate-mobile-accessibility-resource-guide-53gh",
+        "Description": "Compiles tools and best practices for mobile accessibility, helping developers apply WCAG 2.1 to mobile apps for inclusivity."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Making Web More Accessible: a11y Testing Tools and Techniques with Playwright",
+        "URL": "https://ray.run/blog/accessibility-testing-with-playwright",
+        "Description": "Explains how to use Playwright for accessibility testing, covering automated tools to identify WCAG violations for inclusive web content."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Mobile Accessibility: How WCAG 2.0 and Other W3C/WAI Guidelines Apply to Mobile",
+        "URL": "https://www.w3.org/TR/mobile-accessibility-mapping/",
+        "Description": "Maps WCAG 2.0 to mobile contexts, guiding developers to ensure accessibility for mobile apps and websites."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Trusted tester Dashboard (section 508)",
+        "URL": "https://training.section508testing.net/my/#courses",
+        "Description": "Offers Section 508 and WCAG 2.1 training, providing tools for evaluating web and software accessibility compliance."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Home - Orange digital accessibility guidelines",
+        "URL": "https://a11y-guidelines.orange.com/en/",
+        "Description": "Provides WCAG 2.1 recommendations and guidance for developers in creating accessible web and mobile content."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Test Automation for Accessibility",
+        "URL": "https://testautomationu.applitools.com/accessibility-testing-tutorial/",
+        "Description": "Covers automated accessibility testing, helping developers identify WCAG violations using various tools for inclusive web content."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Making Sense Of WAI-ARIA: A Comprehensive Guide — Smashing Magazine",
+        "URL": "https://www.smashingmagazine.com/2022/09/wai-aria-guide/",
+        "Description": "Explains WAI-ARIA roles, states, and properties, offering examples for developers to enhance accessibility per WCAG."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Learn Accessibility",
+        "URL": "https://web.dev/learn/accessibility/",
+        "Description": "Covers WCAG and ARIA, providing developers with techniques to create inclusive web content for all users."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "A Designer’s Guide to Documenting Accessibility & User Interactions by Stéphanie Walter",
+        "URL": "https://stephaniewalter.design/blog/a-designers-guide-to-documenting-accessibility-user-interactions/",
+        "Description": "Offers designers tips for documenting accessibility, integrating WCAG and ARIA into design workflows for inclusivity."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Home - The A11Y Project",
+        "URL": "https://www.a11yproject.com/",
+        "Description": "Provides accessibility guides and tools to help developers implement WCAG-compliant web content for inclusive experiences."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "WAI-ARIA basics - Learn web development | MDN",
+        "URL": "https://developer.mozilla.org/en-US/docs/Learn/Accessibility/WAI-ARIA_basics",
+        "Description": "Introduces ARIA roles and properties, guiding developers in enhancing web accessibility with assistive technologies per WCAG."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "VPAT - Information Technology Industry Council",
+        "URL": "https://www.itic.org/policy/accessibility/vpat",
+        "Description": "Provides the VPAT template for documenting product accessibility conformance, aligned with WCAG and Section 508."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "A Definitive Guide On How To Perform A Web Accessibility Audit • DigitalA11Y",
+        "URL": "https://www.digitala11y.com/a-definitive-guide-on-how-to-perform-a-web-accessibility-audit/",
+        "Description": "Details the steps for a web accessibility audit, covering WCAG 2.1 testing and reporting for inclusive web experiences."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Accessibility for designers: where do I start? by Stéphanie Walter - UX Researcher & Designer.",
+        "URL": "https://stephaniewalter.design/blog/accessibility-resources-tools-articles-books-for-designer/",
+        "Description": "Introduces designers to accessibility resources and covers WCAG basics for creating inclusive digital products."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "SwiftUI accessibility code samples | Appt",
+        "URL": "https://appt.org/en/docs/swiftui/samples",
+        "Description": "Provides accessible iOS app code samples for SwiftUI, including VoiceOver support and WCAG-aligned techniques for developers."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Jetpack Compose accessibility code samples | Appt",
+        "URL": "https://appt.org/en/docs/jetpack-compose/samples",
+        "Description": "Offers accessible Android app code samples for Jetpack Compose, including TalkBack support and WCAG-aligned techniques."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Designing for mobile accessibility",
+        "URL": "https://learn.intopia.digital/courses/designing-for-mobile-accessibility",
+        "Description": "Teaches WCAG 2.1 for mobile design, covering touch and screen reader compatibility for inclusive mobile experiences."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Android accessibility: roles and TalkBack - TetraLogical",
+        "URL": "https://tetralogical.com/blog/2022/07/07/android-accessibility-roles-and-talkback/",
+        "Description": "Explains Android accessibility roles and TalkBack, guiding developers in creating accessible apps per WCAG standards."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Guidance on Applying WCAG 2.2 to Mobile Applications (WCAG2Mobile)",
+        "URL": "https://www.w3.org/TR/wcag2mobile-22/",
+        "Description": "Applies WCAG 2.2 guidelines specifically to mobile apps, guiding developers in ensuring accessibility for users with disabilities."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "NVDA User guide",
+        "URL": "https://www.nvaccess.org/files/nvda/documentation/userGuide.html",
+        "Description": "Covers setup and commands for the NVDA screen reader, helping users with visual impairments navigate web and desktop content."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Browse mode",
+        "URL": "https://www.nvaccess.org/files/nvda/documentation/userGuide.html?#BrowseMode",
+        "Description": "Explains web navigation with keyboard shortcuts in NVDA, aiding users with visual impairments in accessing HTML content."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "JAWS documentation",
+        "URL": "https://www.freedomscientific.com/Products/software/JAWS/",
+        "Description": "Covers setup and navigation for the JAWS screen reader, enabling users with visual impairments to access web content."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "JAWS Hotkeys",
+        "URL": "https://www.freedomscientific.com/training/jaws/hotkeys/#wb",
+        "Description": "Lists keyboard shortcuts for JAWS screen reader navigation to effectively support users with visual impairments."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Complete guide to Narrator",
+        "URL": "https://support.microsoft.com/en-us/windows/complete-guide-to-narrator-e4397a0d-ef4f-b386-d8ae-c172f109bdb1",
+        "Description": "Covers setup and commands for Microsoft's Narrator, helping users with visual impairments access web and system content."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Narrator keyboard commands and touch gestures",
+        "URL": "https://support.microsoft.com/en-us/windows/appendix-b-narrator-keyboard-commands-and-touch-gestures-8bdab3f4-b3e9-4554-7f28-8b15bd37410a#WindowsVersion=Windows_11",
+        "Description": "Lists keyboard shortcuts for Windows 11 Narrator, aiding users with visual impairments in navigating web content."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "VoiceOver Guide",
+        "URL": "https://help.apple.com/iphone/11/#/iph3e2e415f",
+        "Description": "Covers setup and gestures for VoiceOver on iPhone, helping users with visual impairments navigate iOS apps."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Use VoiceOver to browse web pages on Mac",
+        "URL": "https://support.apple.com/en-lb/guide/voiceover/vo27974/10/mac/13.0",
+        "Description": "Explains web navigation using VoiceOver on Mac, helping users with visual impairments access content effectively."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Apple VoiceOver Command charts",
+        "URL": "https://help.apple.com/voiceover/command-charts/",
+        "Description": "Lists keyboard shortcuts and commands for VoiceOver on macOS and iOS to aid users with visual impairments in navigation."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Talkback user guides",
+        "URL": "https://support.google.com/accessibility/android/topic/10601774?hl=en&ref_topic=3529932",
+        "Description": "Covers setup and gestures for TalkBack on Android, helping users with visual impairments navigate apps."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Turn on and practice VoiceOver on iPhone",
+        "URL": "https://support.apple.com/en-lb/guide/iphone/iph3e2e415f/16.0/ios/16.0",
+        "Description": "Covers iPhone setup for VoiceOver and helps users with visual impairments learn navigation techniques."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "VoiceOver Keyboard Shortcuts on a Mac",
+        "URL": "https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts",
+        "Description": "Lists keyboard commands for navigating web content with VoiceOver on a Mac."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "VoiceOver Gestures on iOS",
+        "URL": "https://dequeuniversity.com/screenreaders/voiceover-ios-shortcuts",
+        "Description": "Lists touch commands and gestures for navigating apps with VoiceOver on iOS."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "NVDA Keyboard Shortcuts",
+        "URL": "https://dequeuniversity.com/screenreaders/nvda-keyboard-shortcuts",
+        "Description": "Lists commands for screen reader navigation with NVDA to help users access content."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Talkback Gestures on Android",
+        "URL": "https://dequeuniversity.com/screenreaders/talkback-shortcuts",
+        "Description": "Lists touch commands and gestures for navigating apps with TalkBack on Android."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "JAWS Keyboard Shortcuts",
+        "URL": "https://dequeuniversity.com/screenreaders/jaws-keyboard-shortcuts",
+        "Description": "Lists keyboard commands for screen reader navigation with JAWS."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Narrator Keyboard Shortcuts",
+        "URL": "https://dequeuniversity.com/screenreaders/narrator-keyboard-shortcuts",
+        "Description": "Lists Windows commands for navigating web content with Narrator."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Desktop Screen Readers Forms Guide",
+        "URL": "https://dequeuniversity.com/screenreaders/forms-guide",
+        "Description": "Explains how screen readers handle forms and provides WCAG-aligned best practices for developers."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Desktop Screen Readers Survival Guide",
+        "URL": "https://dequeuniversity.com/screenreaders/survival-guide",
+        "Description": "Offers essential tips and commands for using screen readers, helping developers test for accessibility per WCAG."
+    },
+    {
+        "Category": "Checklists",
+        "Resource Text": "Custom Control Accessible Development Checklist",
+        "URL": "https://www.w3.org/TR/using-aria/#ariachecklist",
+        "Description": "Guides developers in creating accessible custom controls, ensuring WCAG and assistive technology compatibility."
+    },
+    {
+        "Category": "Checklists",
+        "Resource Text": "Deque’s Web Accessibility Checklist",
+        "URL": "https://dequeuniversity.com/checklists/web/",
+        "Description": "includes checklists for components, forms, images, links, multimedia, etc. VERY useful."
+    },
+    {
+        "Category": "Checklists",
+        "Resource Text": "The Must-Have WCAG 2.1 Checklist",
+        "URL": "https://kma.global/wp-content/uploads/2019/07/WCAG_2.1_Checklist.pdf",
+        "Description": "Summarizes WCAG 2.1 success criteria to guide developers in ensuring accessible web content."
+    },
+    {
+        "Category": "Checklists",
+        "Resource Text": "The A11y project’s WCAG Checklist",
+        "URL": "https://www.a11yproject.com/checklist/",
+        "Description": "Summarizes WCAG 2.1 criteria to help developers verify accessibility compliance."
+    },
+    {
+        "Category": "Checklists",
+        "Resource Text": "WebAIM’s WCAG 2 Checklist",
+        "URL": "https://webaim.org/standards/wcag/checklist",
+        "Description": "Summarizes WCAG criteria to guide developers in ensuring accessible web content."
+    },
+    {
+        "Category": "Checklists",
+        "Resource Text": "Accessibility Not-Checklist",
+        "URL": "https://not-checklist.intopia.digital",
+        "Description": "Highlights common accessibility mistakes to avoid, complementing WCAG for inclusive design."
+    },
+    {
+        "Category": "Checklists",
+        "Resource Text": "Your Web Accessibility Checklist - DEV Community",
+        "URL": "https://dev.to/thawkin3/your-web-accessibility-checklist-37jh",
+        "Description": "Provides actionable WCAG 2.1 compliance steps to help developers create accessible web content."
+    },
+    {
+        "Category": "Checklists",
+        "Resource Text": "Web Accessibility Checklist",
+        "URL": "https://webaccessibilitychecklist.com/?fbclid=IwAR2vHvdjECaOh2dK0gNnBh29JuxDn0XTCKtFM-6DMfCL4cF67cFB5dyUQOY",
+        "Description": "Offers WCAG 2.1 compliance steps that guide developers in creating inclusive content."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "A comprehensive list of Web Accessibility Evaluation Tools",
+        "URL": "https://www.w3.org/WAI/ER/tools/",
+        "Description": "Compiles WCAG testing resources to help developers and auditors identify accessibility issues."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "Color Contrast Analyzer (CCA)",
+        "URL": "https://www.tpgi.com/color-contrast-checker/",
+        "Description": "Evaluates color contrast for WCAG 2.1 compliance, ensuring readability for visually impaired users."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "Accessibility audit bookmarklets",
+        "URL": "https://a11y-tools.com/bookmarklets/",
+        "Description": "Provides JavaScript bookmarklets for in-browser WCAG testing to help developers identify accessibility issues."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "Windows 11 Virtual Machines",
+        "URL": "https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/",
+        "Description": "Supports accessibility testing by providing virtual environments for screen reader and WCAG evaluations."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "WCAG Conformance Evaluation Methodology (WCAG-EM)",
+        "URL": "https://www.w3.org/TR/WCAG-EM/",
+        "Description": "Outlines a methodology for WCAG compliance evaluation, guiding auditors in assessing accessibility."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "WCAG-EM Report Tool",
+        "URL": "https://www.w3.org/WAI/eval/report-tool/",
+        "Description": "Generates accessibility reports, supporting auditors in documenting WCAG compliance."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "Eleventy WCAG Reporter",
+        "URL": "https://github.com/hidde/eleventy-wcag-reporter/",
+        "Description": "Creates issue-focused accessibility reports, helping developers prioritize WCAG fixes."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "Nu HTML Checker",
+        "URL": "https://validator.nu/",
+        "Description": "Validates HTML for potential accessibility issues, ensuring semantic markup aligns with WCAG."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "The W3C Markup validator",
+        "URL": "https://validator.w3.org",
+        "Description": "Checks HTML for accessibility compliance and supports WCAG-aligned semantic markup."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "JavaScript Bookmarklets for Accessibility Testing",
+        "URL": "https://pauljadam.com/bookmarklets.html",
+        "Description": "Tests WCAG compliance for issues like missing alt text directly in the browser."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "ARC Toolkit",
+        "URL": "https://www.tpgi.com/arc-platform/arc-toolkit/",
+        "Description": "A Chrome extension from TPGi that tests for WCAG 2.1 compliance and identifies contrast and ARIA errors."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "WAVE browser extension",
+        "URL": "https://wave.webaim.org/extension/",
+        "Description": "Evaluates WCAG 2.1 compliance within the browser and highlights errors for developers to fix."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "Web Developer Extension",
+        "URL": "https://chrispederick.com/work/web-developer/",
+        "Description": "Offers a suite of accessibility testing tools that check for WCAG compliance for contrast and structure."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "h123 HTML5 Outliner",
+        "URL": "https://hinderlingvolkart.github.io/h123/",
+        "Description": "A bookmarklet that generates document outlines to ensure semantic structure for WCAG compliance."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "Accessibility Insights for Web",
+        "URL": "https://accessibilityinsights.io",
+        "Description": "Tests WCAG 2.1 compliance using automated and guided accessibility checks."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "A11Y inspect",
+        "URL": "https://www.barrierbreak.com/a11yinspect/",
+        "Description": "Audits web accessibility and evaluates WCAG 2.1 compliance with detailed reports."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "Target size bookmarklet",
+        "URL": "https://cdpn.io/pen/debug/YzdwWZw",
+        "Description": "Checks touch target sizes for WCAG 2.1 to ensure accessibility for motor-impaired users."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "About the bookmarklet",
+        "URL": "https://html5accessibility.com/stuff/2023/08/28/quick-and-very-dirty-target-size-checker/",
+        "Description": "Explains WCAG 2.1 touch target testing and guides developers in ensuring motor accessibility."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "Fake Filler",
+        "URL": "https://chrome.google.com/webstore/detail/fake-filler/bnjjngeaknajbdcgpfkgnonkmififhfo",
+        "Description": "A Chrome extension that populates forms with dummy data to help developers test form accessibility."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "VoiceOver Helper",
+        "URL": "https://joelanman.github.io/voiceover-helper/",
+        "Description": "A bookmarklet for Safari that shows a quick guide to using VoiceOver, aiding developers in accessibility testing."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "Autocomplete accessibility bookmarklet - Rachele DiTullio",
+        "URL": "https://racheleditullio.com/blog/2023/11/autocomplete-accessibility-bookmarklet/",
+        "Description": "Checks form autocomplete attributes for WCAG 2.1 compliance, ensuring accessible form interactions."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "browser stack accessibility toolkit a comprehensive test platform browserstack",
+        "URL": "https://www.browserstack.com/docs/accessibility/overview/launch-browser-extension",
+        "Description": "Tests WCAG 2.1 across various browsers and provides automated checks for accessible web content."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "assistive labs - an online tool which lets u access to multiple accessibility test environments",
+        "URL": "https://assistivlabs.com/",
+        "Description": "Offers accessibility testing across different environments, supporting WCAG 2.1 evaluations with assistive technologies."
+    },
+    {
+        "Category": "License/Certificates",
+        "Resource Text": "Certified Professional in Accessibility Core Competencies (CPACC)",
+        "URL": "https://www.accessibilityassociation.org/s/certified-professional",
+        "Description": "Certifies foundational knowledge in accessibility, validating a professional's ability to promote inclusive digital environments."
+    },
+    {
+        "Category": "License/Certificates",
+        "Resource Text": "Web accessibility specialist (WAS)",
+        "URL": "https://www.accessibilityassociation.org/s/wascertification",
+        "Description": "Validates technical expertise in web accessibility, focusing on WCAG and ARIA for designing accessible content."
+    },
+    {
+        "Category": "License/Certificates",
+        "Resource Text": "Certified Professional in Web Accessibility (CPWA)",
+        "URL": "https://www.accessibilityassociation.org/s/certified-professional-web-accessibility",
+        "Description": "Combines CPACC and WAS certifications to validate advanced web accessibility expertise for inclusive design."
+    },
+    {
+        "Category": "License/Certificates",
+        "Resource Text": "Accessible Document Specialist (ADS)",
+        "URL": "https://www.accessibilityassociation.org/s/accessible-document-specialist",
+        "Description": "Certifies expertise in creating accessible documents, aligning with WCAG and PDF/UA standards."
+    },
+    {
+        "Category": "License/Certificates",
+        "Resource Text": "Trusted Tester Certification for web (section 508)",
+        "URL": "https://training.section508testing.net/",
+        "Description": "Trains and certifies individuals in Section 508 and WCAG 2.1 testing to ensure accurate accessibility evaluations."
+    },
+    {
+        "Category": "License/Certificates",
+        "Resource Text": "NVDA certified expert",
+        "URL": "https://www.nvaccess.org/product/nvda-expert-certification/",
+        "Description": "Validates proficiency in the NVDA screen reader, supporting accessibility testing and user assistance."
+    },
+    {
+        "Category": "License/Certificates",
+        "Resource Text": "Jaws certified individual",
+        "URL": "http://hosted.onlinetesting.net/FreedomScientific2/login.pl/JAWSCertification",
+        "Description": "Validates expertise in the JAWS screen reader, supporting accessibility testing for web content."
+    },
+    {
+        "Category": "License/Certificates",
+        "Resource Text": "W3C Accessibility Certification Exam",
+        "URL": "https://campus.w3schools.com/en-in/products/accessibility-certificate",
+        "Description": "Tests knowledge of WCAG, validating a professional's ability to create accessible content."
+    },
+    {
+        "Category": "License/Certificates",
+        "Resource Text": "Wix Accessibility Specialist Certification",
+        "URL": "https://www.wix.com/learn/certification/accessibility",
+        "Description": "Validates expertise in building accessible Wix websites with a focus on WCAG 2.1 compliance."
+    },
+    {
+        "Category": "Other",
+        "Resource Text": "Build a Better Mobile Input",
+        "URL": "https://better-mobile-inputs.netlify.app/",
+        "Description": "Shows the effect of HTML input attributes on mobile keyboards to help optimize accessibility and usability."
+    },
+    {
+        "Category": "Other",
+        "Resource Text": "Estimate how many people using your website might be disabled",
+        "URL": "https://how-many.herokuapp.com",
+        "Description": "Estimates the number of users with disabilities on a website to help developers prioritize accessibility improvements."
+    },
+    {
+        "Category": "Other",
+        "Resource Text": "Prompting GitHub Copilot Chat to become your personal AI assistant for accessibility - The GitHub Blog",
+        "URL": "https://github.blog/2023-10-09-prompting-github-copilot-chat-to-become-your-personal-ai-assistant-for-accessibility/",
+        "Description": "Explains how to use Copilot Chat for accessibility, providing prompts for generating WCAG-compliant code."
+    },
+    {
+        "Category": "Other",
+        "Resource Text": "ISO 639-1 Language Codes",
+        "URL": "https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes",
+        "Description": "Provides a list of standardized language codes, aiding developers in implementing accessible multilingual content."
+    },
+    {
+        "Category": "Other",
+        "Resource Text": "Simple Web Accessibility Guidelines",
+        "URL": "https://jfhector.github.io/accessibility-guidelines/index.html",
+        "Description": "Offers a concise WCAG overview and provides practical steps for creating accessible web content."
+    },
+    {
+        "Category": "Other",
+        "Resource Text": "Accessibility Statement Generator",
+        "URL": "https://www.accessibilitystatementgenerator.com/",
+        "Description": "Creates WCAG-compliant accessibility statements, helping organizations document their website's accessibility features."
+    },
+    {
+        "Category": "Other",
+        "Resource Text": "The W3C Accessibility statement generator",
+        "URL": "https://www.w3.org/WAI/planning/statements/generator/#create",
+        "Description": "Creates customizable, WCAG-compliant accessibility statements to document a website's conformance."
+    },
+    {
+        "Category": "Other must read resources from web accessibility initiative",
+        "Resource Text": "Introduction to Web Accessibility | Web Accessibility Initiative (WAI) | W3C",
+        "URL": "https://www.w3.org/WAI/fundamentals/accessibility-intro/",
+        "Description": "Explains WCAG principles and guides the creation of inclusive content for users with disabilities."
+    },
+    {
+        "Category": "Other must read resources from web accessibility initiative",
+        "Resource Text": "Essential Components of Web Accessibility | Web Accessibility Initiative (WAI) | W3C",
+        "URL": "https://www.w3.org/WAI/fundamentals/components/",
+        "Description": "Explains accessibility interactions, aligning with WCAG, ATAG, and UAAG for inclusive design."
+    },
+    {
+        "Category": "Other must read resources from web accessibility initiative",
+        "Resource Text": "Older Users and Web Accessibility: Meeting the Needs of Ageing Web Users | Web Accessibility Initiative (WAI) | W3C",
+        "URL": "https://www.w3.org/WAI/older-users/",
+        "Description": "Addresses accessibility for aging users, aligning with WCAG for inclusive design."
+    },
+    {
+        "Category": "Other must read resources from web accessibility initiative",
+        "Resource Text": "How People with Disabilities Use the Web | Web Accessibility Initiative (WAI) | W3C",
+        "URL": "https://www.w3.org/WAI/people-use-web/",
+        "Description": "Describes the user experiences of people with disabilities to inform developers on applying WCAG for inclusivity."
+    },
+    {
+        "Category": "Other must read resources from web accessibility initiative",
+        "Resource Text": "Web Accessibility Perspectives Videos: Explore the Impact and Benefits for Everyone | Web Accessibility Initiative (WAI) | W3C",
+        "URL": "https://www.w3.org/WAI/perspective-videos/",
+        "Description": "Showcases the benefits of accessibility and illustrates WCAG principles through real-world scenarios."
+    },
+    {
+        "Category": "Other must read resources from web accessibility initiative",
+        "Resource Text": "Mobile Accessibility at W3C | Web Accessibility Initiative (WAI) | W3C",
+        "URL": "https://www.w3.org/WAI/standards-guidelines/mobile/",
+        "Description": "Details WCAG for mobile devices, guiding developers in ensuring accessible mobile content."
+    },
+    {
+        "Category": "Other must read resources from web accessibility initiative",
+        "Resource Text": "Designing for Web Accessibility – Tips for Getting Started | Web Accessibility Initiative (WAI) | W3C",
+        "URL": "https://www.w3.org/WAI/tips/designing/",
+        "Description": "Offers WCAG-compliant design tips to help designers create inclusive web interfaces."
+    },
+    {
+        "Category": "Other must read resources from web accessibility initiative",
+        "Resource Text": "Writing for Web Accessibility – Tips for Getting Started | Web Accessibility Initiative (WAI) | W3C",
+        "URL": "https://www.w3.org/WAI/tips/writing/",
+        "Description": "Provides WCAG-compliant content tips, guiding writers in creating accessible text."
+    },
+    {
+        "Category": "Other must read resources from web accessibility initiative",
+        "Resource Text": "Developing for Web Accessibility – Tips for Getting Started",
+        "URL": "https://www.w3.org/WAI/tips/developing/",
+        "Description": "Offers WCAG coding tips, guiding developers in creating accessible web content."
+    },
+    {
+        "Category": "Other must read resources from web accessibility initiative",
+        "Resource Text": "Handouts and Recordings - Web Accessibility Group",
+        "URL": "https://www.amacusg.gatech.edu/wag/Handouts_and_Recordings",
+        "Description": "Provides WCAG and accessibility resources, including webinars and guides for developers."
+    },
+    {
+        "Category": "Other must read resources from web accessibility initiative",
+        "Resource Text": "Guidance on Applying WCAG 2 to Non-Web Information and Communications Technologies (WCAG2ICT)",
+        "URL": "https://www.w3.org/TR/wcag2ict-22/",
+        "Description": "Applies WCAG to non-web ICT, helping developers ensure accessibility in software and documents."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Scott O'Hara's Blog",
+        "URL": "https://www.scottohara.me/",
+        "Description": "Offers accessibility articles and code, covering WCAG and ARIA for inclusive digital experiences."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Smashing Magazine",
+        "URL": "https://www.smashingmagazine.com/",
+        "Description": "Publishes accessibility and design articles, providing WCAG-aligned guidance for inclusive digital experiences."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Adrian Roselli's Blog",
+        "URL": "https://adrianroselli.com/",
+        "Description": "Offers accessibility insights, covering WCAG and ARIA with practical advice for developers."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Eric Bailey's Website",
+        "URL": "https://ericwbailey.website/published/",
+        "Description": "Focuses on inclusive design and provides WCAG-aligned articles for accessible web content."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Eric Eggert blog",
+        "URL": "https://yatil.net/blog",
+        "Description": "Offers accessibility articles, covering WCAG and ARIA with insights for inclusive design."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "getstark.co blog",
+        "URL": "https://www.getstark.co/blog/",
+        "Description": "Provides accessibility articles and tools with WCAG-aligned guidance for inclusive digital products."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "TPGI blog",
+        "URL": "https://www.tpgi.com/blog/",
+        "Description": "Covers the business and technical aspects of accessibility, providing WCAG and ARIA insights for developers."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Blog - TetraLogical",
+        "URL": "https://tetralogical.com/blog/",
+        "Description": "Offers web and mobile accessibility articles, covering WCAG and ARIA with practical tips."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "The UX Research and Design Blog by Stéphanie Walter.",
+        "URL": "https://stephaniewalter.design/blog/",
+        "Description": "Provides UX and accessibility insights with WCAG-compliant design tips for inclusivity."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Blog - The A11Y Collective",
+        "URL": "https://www.a11y-collective.com/blog/",
+        "Description": "Shares accessibility tips and provides WCAG-aligned guidance for developers and designers."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Axess Lab Articles",
+        "URL": "https://axesslab.com/articles/",
+        "Description": "Focuses on accessibility, covering WCAG and practical implementation for inclusive experiences."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Articles - Max Design",
+        "URL": "https://adamsilver.io/blog/",
+        "Description": "Covers accessibility and UX, providing WCAG-aligned tips for developers."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Law Office of Lainey Feingold",
+        "URL": "https://www.lflegal.com/",
+        "Description": "Explores the legal landscape of accessibility, covering WCAG and ADA compliance for organizations."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "tempertemper.",
+        "URL": "https://www.tempertemper.net/",
+        "Description": "Provides bite-sized accessibility explainers, covering WCAG and tips for inclusive design."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Karl Groves - Web Accessibility blog",
+        "URL": "https://karlgroves.com/",
+        "Description": "Offers accessibility insights with a focus on WCAG and testing for inclusive digital experiences."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "marcus.io blog",
+        "URL": "https://marcus.io/blog",
+        "Description": "Covers accessibility and development, offering WCAG-aligned tips and code for developers."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Articles – A List Apart",
+        "URL": "https://alistapart.com/articles/",
+        "Description": "Explores accessibility and design, providing WCAG-aligned insights for inclusive experiences."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Blog - Manuel Matuzovic",
+        "URL": "https://www.matuzo.at/blog",
+        "Description": "Offers accessibility articles, covering WCAG and ARIA with code for inclusive design."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Accessibility 101 playlist on Microsoft youtube channel",
+        "URL": "https://www.youtube.com/playlist?list=PLtSVUgxIo6KqzQV1ktaMji4Nxjmju8wGS",
+        "Description": "Offers accessibility videos covering WCAG principles for inclusive design."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "MSFTEnable - a youtube channel by Microsoft accessibility",
+        "URL": "https://www.youtube.com/@MSFTEnable/videos",
+        "Description": "Shares accessibility videos covering WCAG and inclusive design by Microsoft."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Apple Support accessibility videos",
+        "URL": "https://www.youtube.com/@applesupport",
+        "Description": "Includes accessibility feature videos, covering VoiceOver for developers and users."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "Deque Systems webinars",
+        "URL": "https://www.deque.com/youtube",
+        "Description": "Covers web accessibility, providing WCAG and ARIA guidance for inclusive solutions."
+    },
+    {
+        "Category": "blogs / people / other resources to follow",
+        "Resource Text": "PDF accessibility videos",
+        "URL": "https://www.youtube.com/playlist?list=PLW_yI7b4f35_Y8eS5g7AagCLeP5yJtJjL",
+        "Description": "Offers PDF accessibility videos, covering WCAG and PDF/UA for accessible documents."
+    },
+    {
+        "Category": "Accessibility Standards",
+        "Resource Text": "TEST",
+        "URL": "https://www.google.com/",
+        "Description": "SOME RANDOM RESOURCE"
+    }
 ]
