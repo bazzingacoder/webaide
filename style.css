@@ -192,7 +192,7 @@
       @apply text-brand-primary font-semibold text-lg hover:underline;
   }
    .resource-card p {
-      @apply text-slate-600 dark:text-slate-400 text-sm mt-2 flex-grow;
+      @apply text-slate-600 dark:text-slate-400 text-sm mt-2;
   }
   
   /* Card Menu & Favorite Button */

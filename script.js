@@ -176,7 +176,44 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
             });
         });
+
+        const feedbackForm = document.getElementById('feedback-form');
+        feedbackForm.addEventListener('submit', handleFormSubmit);
     }
+
+    async function handleFormSubmit(event) {
+        const form = event.target;
+        const formData = new FormData(form);
+        const submissionType = formData.get('submission-type');
+
+        // ONLY intercept the submission if it's a new resource.
+        // For "feedback", we do nothing and let the form submit normally to Netlify.
+        if (submissionType === 'resource') {
+            event.preventDefault(); // Stop the standard Netlify submission
+
+            const announcer = document.getElementById('announcer');
+
+            try {
+                const response = await fetch('/.netlify/functions/submit-resource', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString(),
+                });
+
+                if (response.ok) {
+                    announcer.textContent = 'Resource submission successful! A pull request will be created for review.';
+                    form.reset();
+                    hideModal();
+                } else {
+                    throw new Error('Function submission failed.');
+                }
+            } catch (error) {
+                console.error('Submission error:', error);
+                announcer.textContent = 'Sorry, there was an error submitting the resource. Please try again.';
+            }
+        }
+    }
+
 
     function showModal(context = {}) {
         const { type = 'general', resourceTitle = '' } = context;
@@ -270,8 +307,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const menuId = `menu-for-item-${item.URL.replace(/[^a-zA-Z0-9]/g, "")}`;
                 const isFavorite = favoriteResources.has(item.URL);
                 const favoriteLabel = isFavorite ? `Remove ${item['Resource Text']} from favorites` : `Add ${item['Resource Text']} to favorites`;
-
-                // CORRECTED: Unique aria-label for each button
+                
                 card.innerHTML = `
                     <div class="card-actions">
                         <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-url="${item.URL}" data-title="${item['Resource Text']}" aria-pressed="${isFavorite}" aria-label="${favoriteLabel}">
@@ -291,7 +327,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </div>
                         </div>
                     </div>
-                    <div class="flex-grow">
+                    <div class="flex-grow pr-24">
                         <h3><a href="${item.URL}" target="_blank" rel="noopener noreferrer">${item['Resource Text']}</a></h3>
                         ${descriptionHTML}
                     </div>
@@ -448,7 +484,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function showSuggestions() {
-        const query = searchInput.value.toLowerCase();
+        const query = searchInput.value.toLowerCase().trim();
         suggestionsList.innerHTML = '';
         if (query.length < 2) {
             suggestionsList.classList.add('hidden');
