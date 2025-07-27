@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webaide: Accessibility Info & Development Ecosystem</title>
+    
     <meta property="og:title" content="Webaide: Accessibility Info & Development Ecosystem">
     <meta property="og:description" content="Your central hub for Accessibility Info & a complete Development Ecosystem of tools, guides, and standards.">
     <meta property="og:type" content="website">
@@ -12,205 +13,84 @@
     <meta name="twitter:description" content="Your central hub for Accessibility Info & a complete Development Ecosystem of tools, guides, and standards.">
     <meta name="google-site-verification" content="DQ1JY69d6M8pRf4rs-7FakiRcgmaeb0O6PwxfN6IZ8s" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_TRACKING_ID"></script>
+    <link rel="stylesheet" href="style.css">
+
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-YOUR_TRACKING_ID');
+      // Load theme from localStorage before page renders to prevent flash of wrong theme.
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
     </script>
-    
-    <style type="text/css">
-        /* ==== BASE STYLES & LAYOUT ==== */
-        html {
-            scroll-padding-top: 180px; 
-        }
-        body {
-          background-color: #f0f4f8; 
-          color: #111827; 
-        }
-
-        /* ==== BRAND COLORS ==== */
-        .text-brand { color: #4338ca; } /* High Contrast Brand Color */
-        .dark .text-brand { color: #818cf8; }
-
-        /* ==== COMPONENTS ==== */
-        .resource-card {
-          position: relative;
-          background-color: #ffffff;
-          border: 1px solid #e5e7eb;
-          border-radius: 0.75rem;
-          padding: 1.5rem;
-          display: flex;
-          flex-direction: column;
-          box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.4s ease-out, transform 0.4s ease-out, background-color 0.3s, border-color 0.3s;
-          /* FIX: Added transition-delay for staggered animation */
-          transition-delay: var(--delay, 0s);
-        }
-        .filter-btn {
-          background-color: #e0e7ff;
-          color: #1e3a8a;
-          border: 1px solid #4f46e5;
-        }
-        .social-share-btn,
-        .copy-link-btn {
-          background-color: #e0e7ff;
-          color: #1e3a8a;
-        }
-        #search-input {
-          background-color: #f9fafb;
-          border: 1px solid #cbd5e1;
-          color: #1f2937;
-          padding: 0.5rem 1rem 0.5rem 2.5rem; /* Adjusted padding for icon */
-          font-size: 1rem;
-          border-radius: 9999px; /* Re-instating rounded-full from original class */
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
-          width: 100%;
-        }
-        #search-input::placeholder { color: #6b7280; }
-        
-        /* ==== STATES & INTERACTIONS ==== */
-        .resource-card:hover {
-          transform: translateY(-5px) scale(1.02);
-          box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-          transition: all 0.2s ease-in-out;
-        }
-        .filter-btn:hover { background-color: #c7d2fe; }
-        .filter-btn.active { background-color: #4f46e5; color: #ffffff; }
-        .social-share-btn:hover,
-        .copy-link-btn:hover { background-color: #c7d2fe; }
-        #search-input:focus {
-          outline: none;
-          border-color: #4f46e5;
-          box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-        }
-
-        /* ==== DARK MODE STYLES ==== */
-        html.dark body { background-color: #030712; color: #f9fafb; }
-        html.dark .resource-card { background-color: #1f2937; border-color: #374151; }
-        html.dark #resources > section:nth-of-type(even) { background-color: #111827; }
-        html.dark .filter-btn { background-color: #1f2937; color: #a5b4fc; border-color: #4f46e5; }
-        html.dark .filter-btn:hover { background-color: #374151; }
-        html.dark .filter-btn.active { background-color: #4f46e5; color: #fff; }
-        html.dark #search-input { background-color: #1f2937; border-color: #4b5563; color: #f9fafb; }
-        html.dark #search-input::placeholder { color: #6b7280; }
-        html.dark #suggestions-list { background-color: #1f2937; border-color: #374151; }
-        html.dark .suggestion-item.active, html.dark .suggestion-item:hover { background-color: #374151; }
-        
-        /* ==== ACCESSIBILITY & UTILITIES ==== */
-        .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: -9999; }
-        .skip-link:focus { position: fixed; top: 10px; left: 10px; background-color: #4f46e5; color: #fff; padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-weight: 600; z-index: 9999; width: auto; height: auto; }
-        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
-        
-        /* FIX: Replaced .hidden utility with direct CSS for flicker-free theme icon loading */
-        #theme-toggle-sun, #theme-toggle-moon { display: none; }
-        html.dark #theme-toggle-sun { display: block; }
-        html:not(.dark) #theme-toggle-moon { display: block; }
-        .hidden { display: none !important; }
-
-        /* ==== ANIMATIONS & TRANSITIONS ==== */
-        .resource-card.is-visible { opacity: 1; transform: translateY(0); }
-        #search-and-filter-controls { transition: transform 0.3s ease-in-out; }
-        #search-and-filter-controls.is-hidden { transform: translateY(-110%); }
-        #back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; transition: opacity 0.3s; z-index: 100; }
-
-        @keyframes pulse { 50% { opacity: .5; } }
-        .skeleton-card { background-color: #e5e7eb; border-radius: 0.75rem; height: 140px; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-        html.dark .skeleton-card { background-color: #374151; }
-        
-        /* ==== CARD MENU ==== */
-        .card-menu-btn { position: absolute; top: 0.75rem; right: 0.75rem; width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; border-radius: 9999px; background-color: transparent; border: none; cursor: pointer; }
-        html.dark .card-menu-btn:hover, html.dark .card-menu-btn:focus-visible { background-color: #374151; }
-        .card-menu { position: absolute; top: 3.25rem; right: 0.75rem; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); border: 1px solid #e5e7eb; z-index: 20; min-width: 180px; background-color: #ffffff; }
-        html.dark .card-menu { background-color: #1f2937; border-color: #4b5563; }
-        .card-menu-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; font-size: 0.875rem; background: none; border: none; width: 100%; text-align: left; cursor: pointer; color: #111827; }
-        html.dark .card-menu-item { color: #d1d5db; }
-        .card-menu-item:hover, .card-menu-item:focus { background-color: #eef2ff; outline: none; }
-        html.dark .card-menu-item:hover, html.dark .card-menu-item:focus { background-color: #374151; }
-        .card-menu-item svg { width: 1rem; height: 1rem; }
-        
-        /* ==== MODAL STYLES ==== */
-        #feedback-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 500; }
-        #feedback-modal { max-height: 90vh; overflow-y: auto; }
-
-        /* ==== AXE CONTRAST OVERRIDES & FIXES ==== */
-        html:not(.dark) #open-feedback-modal-btn { background-color: #4338ca !important; color: #ffffff !important; font-weight: 700 !important; }
-        html:not(.dark) .text-gray-50, html:not(.dark) .text-gray-100, html:not(.dark) .text-gray-200, html:not(.dark) .text-gray-300, html:not(.dark) .text-gray-400, html:not(.dark) .text-gray-500, html:not(.dark) .text-gray-600, html:not(.dark) .text-gray-700 { color: #111827 !important; }
-        html:not(.dark) .resource-card .text-gray-600, html:not(.dark) .resource-card .text-gray-500 { color: #1f2937 !important; }
-        html:not(.dark) .font-semibold.text-lg { color: #1f2937 !important; }
-        html:not(.dark) a.text-indigo-600, html:not(.dark) a.dark\:text-indigo-400, html:not(.dark) a[class*="text-indigo"] { color: #1e3a8a !important; text-decoration-thickness: 2px; }
-        html:not(.dark) a.text-indigo-600:hover, html:not(.dark) a[class*="text-indigo"]:hover { color: #1b3279 !important; text-decoration: underline; }
-        html:not(.dark) .filter-btn { background-color: #e0e7ff !important; color: #1e3a8a !important; border-color: #4f46e5 !important; }
-        html:not(.dark) .filter-btn.active { background-color: #4f46e5 !important; color: #ffffff !important; }
-        html:not(.dark) .social-share-btn, html:not(.dark) .copy-link-btn { background-color: #e0e7ff !important; color: #1e3a8a !important; }
-        html:not(.dark) p.text-xl { color: #1f2937 !important; }
-        .dark .text-2xl.font-bold { color: #818cf8 !important; }
-        .dark .text-gray-300, .dark p.text-gray-300 { color: #d1d5db !important; }
-        .dark a.text-2xl.font-bold { color: #818cf8 !important; }
-
-    </style>
-
-<script>
-  // Load theme from localStorage before page renders to prevent flash of wrong theme.
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark');
-  }
-</script>
-
 </head>
-<body class="bg-[#f0f4f8] text-gray-900 transition-colors duration-300">
+<body>
 
     <div class="sr-only" id="announcer" aria-live="polite" aria-atomic="true"></div>
 
     <a href="#search-input" id="skip-to-search" class="skip-link">Skip to search</a>
-    <a href="#main-heading" id="skip-to-main" class="skip-link">Skip to main content</a>
+    <a href="#main-content" id="skip-to-main" class="skip-link">Skip to main content</a>
 
-    <header class="p-6 bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50 transition-colors duration-300">
-        <nav class="container mx-auto flex justify-between items-center" aria-label="Main Navigation">
-            <a href="#" class="text-2xl font-bold text-brand">Webaide</a>
+    <header class="sticky top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto flex justify-between items-center p-4" aria-label="Main Navigation">
+            <a href="#" class="flex items-center" aria-label="Webaide Home">
+                <svg class="webaide-logo" baseProfile="tiny" version="1.2" xmlns="http://www.w3.org/2000/svg">
+                  <text x="0" y="35" class="logo-web-text">Web</text>
+                  <text x="80" y="35" class="logo-aide-text">AIDE</text>
+                
+                  <circle cx="215" cy="20" r="18" class="logo-icon-circle"/>
+                
+                  <g class="logo-icon-figure">
+                      <circle cx="215" cy="14" r="4"/>
+                      <line x1="215" y1="18" x2="215" y2="28" />
+                      <line x1="205" y1="22" x2="225" y2="22" />
+                      <line x1="215" y1="28" x2="210" y2="35" />
+                      <line x1="215" y1="28" x2="220" y2="35" />
+                  </g>
+                </svg>
+            </a>
             <div class="flex items-center gap-4">
-                <button id="open-feedback-modal-btn" class="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition duration-300">Suggest / Feedback</button>
-                <button id="theme-toggle" aria-label="Activate light mode" class="w-10 h-10 p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
-                    <svg id="theme-toggle-sun" class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <svg id="theme-toggle-moon" class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                <button id="open-feedback-modal-btn" class="btn btn-primary">Suggest / Feedback</button>
+                <button id="theme-toggle" aria-label="Activate light mode" class="w-10 h-10 p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-300">
+                    <svg id="theme-toggle-sun" class="w-full h-full hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="theme-toggle-moon" class="w-full h-full hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
             </div>
         </nav>
     </header>
 
     <main id="main-content" class="container mx-auto p-6 lg:p-8 outline-none">
-        <section class="text-center my-12 md:my-16">
-            <h1 id="main-heading" tabindex="-1" class="text-5xl md:text-6xl font-extrabold leading-tight mb-2 text-gray-900 dark:text-gray-100 outline-none">Welcome to <span class="text-brand">Webaide</span></h1>
-            <p class="text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto mb-8">The Accessibility Info & Development Ecosystem,<br/>"Your toolkit for building accessible digital experiences."</p>
+        <section class="text-center my-16 md:my-24 hero-section">
+            <h1 id="main-heading" tabindex="-1" class="text-5xl md:text-7xl font-heading font-extrabold leading-tight mb-4 text-slate-800 dark:text-white outline-none">Welcome to <span class="text-brand-primary">Webaide</span></h1>
+            <p class="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-10 font-medium">The Accessibility Info & Development Ecosystem.<br/>Your complete toolkit for building accessible digital experiences.</p>
             
-            <div id="social-share-container" class="mt-8">
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Share this resource hub:</p>
+            <div id="social-share-container">
+                <p class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-4">Share this resource hub:</p>
                 <div class="flex justify-center items-center gap-4">
-                    <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn p-3 rounded-full bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on X"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
-                    <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn p-3 rounded-full bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on Facebook"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
-                    <a id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn p-3 rounded-full bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Share this page on LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg></a>
-                    <button id="copy-link-btn" class="copy-link-btn flex items-center py-2 px-4 rounded-full bg-indigo-100 dark:bg-gray-700 text-indigo-600 dark:text-indigo-300 border-indigo-200 dark:border-gray-600 hover:bg-indigo-200 dark:hover:bg-gray-600" aria-label="Copy page link"><svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span id="copy-link-text">Copy Link</span></button>
+                    <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on X"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+                    <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on Facebook"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
+                    <a id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg></a>
+                    <button id="copy-link-btn" class="copy-link-btn" aria-label="Copy page link"><svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span id="copy-link-text">Copy Link</span></button>
                 </div>
             </div>
         </section>
 
-        <search id="search-and-filter-controls" class="mb-12 sticky top-[88px] z-40 bg-slate-50/80 dark:bg-gray-900/80 backdrop-blur-sm -mx-6 px-6 py-4" role="search">
+        <search id="search-and-filter-controls" class="sticky top-[72px] z-40 -mx-6 px-6 py-4" role="search">
             <div class="max-w-4xl mx-auto">
                 <div class="flex flex-col md:flex-row gap-4">
                     <div id="search-container" class="relative flex-grow">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <input type="text" id="search-input" placeholder="Search for any resource..." class="w-full p-4 pl-10 border-2 rounded-full text-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="suggestions-list">
-                         <ul id="suggestions-list" role="listbox" aria-label="Search suggestions" class="hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md mt-1 shadow-lg z-10"></ul>
+                        <input type="text" id="search-input" placeholder="Search for any resource..." role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="suggestions-list">
+                         <ul id="suggestions-list" role="listbox" aria-label="Search suggestions" class="hidden"></ul>
                     </div>
                     <div id="filter-container" class="flex flex-wrap justify-center items-center gap-2" role="group" aria-label="Resource Categories"></div>
                 </div>
@@ -218,7 +98,7 @@
             </div>
         </search>
         
-        <div id="resources">
+        <div id="resources" class="mt-12">
             <div id="skeleton-loader">
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <div class="skeleton-card"></div>
@@ -234,13 +114,13 @@
         </div>
     </main>
 
-    <div id="feedback-modal-overlay" class="hidden fixed inset-0 items-center justify-center p-4 bg-black/60">
-        <div id="feedback-modal" class="relative bg-white dark:bg-gray-800 w-full max-w-2xl p-8 rounded-2xl shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="feedback-modal-title">
-            <button id="close-feedback-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 dark:hover:text-white transition">
+    <div id="feedback-modal-overlay" class="fixed inset-0 items-center justify-center p-4 bg-black/60 hidden">
+        <div id="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedback-modal-title">
+            <button id="close-feedback-modal-btn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 dark:hover:text-white transition">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 <span class="sr-only">Close dialog</span>
             </button>
-            <h2 id="feedback-modal-title" class="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">Submit Feedback or Suggest a Resource</h2>
+            <h2 id="feedback-modal-title" class="text-2xl font-bold mb-6 text-slate-900 dark:text-slate-100">Submit Feedback or Suggest a Resource</h2>
             
             <form name="feedback" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value="feedback" />
@@ -250,553 +130,73 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label for="submitter-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name <span class="text-red-500">*</span></label>
-                        <input type="text" id="submitter-name" name="name" required class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100">
+                        <label for="submitter-name" class="form-label">Name <span class="text-red-500">*</span></label>
+                        <input type="text" id="submitter-name" name="name" required class="form-input">
                     </div>
                     <div>
-                        <label for="submitter-email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email (Optional)</label>
-                        <input type="email" id="submitter-email" name="email" class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100">
+                        <label for="submitter-email" class="form-label">Email (Optional)</label>
+                        <input type="email" id="submitter-email" name="email" class="form-input">
                     </div>
                 </div>
 
                 <fieldset class="mb-6">
-                    <legend class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">What would you like to submit? <span class="text-red-500">*</span></legend>
+                    <legend class="form-label mb-2">What would you like to submit? <span class="text-red-500">*</span></legend>
                     <div class="flex items-center gap-6">
                         <div class="flex items-center">
-                            <input type="radio" id="type-feedback" name="submission-type" value="feedback" required class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                            <label for="type-feedback" class="ml-2 block text-sm text-gray-900 dark:text-gray-200">Feedback</label>
+                            <input type="radio" id="type-feedback" name="submission-type" value="feedback" required class="form-radio">
+                            <label for="type-feedback" class="ml-2 block text-sm text-slate-900 dark:text-slate-200">Feedback</label>
                         </div>
                         <div class="flex items-center">
-                            <input type="radio" id="type-resource" name="submission-type" value="resource" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                            <label for="type-resource" class="ml-2 block text-sm text-gray-900 dark:text-gray-200">Resource to Feature</label>
+                            <input type="radio" id="type-resource" name="submission-type" value="resource" class="form-radio">
+                            <label for="type-resource" class="ml-2 block text-sm text-slate-900 dark:text-slate-200">Resource to Feature</label>
                         </div>
                     </div>
                 </fieldset>
                 
                 <div id="feedback-fields" class="hidden space-y-4">
                     <div>
-                        <label for="feedback-text" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Feedback <span class="text-red-500">*</span></label>
-                        <textarea id="feedback-text" name="feedback-text" rows="5" class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100"></textarea>
+                        <label for="feedback-text" class="form-label">Your Feedback <span class="text-red-500">*</span></label>
+                        <textarea id="feedback-text" name="feedback-text" rows="5" class="form-input"></textarea>
                     </div>
                 </div>
 
                 <div id="resource-fields" class="hidden space-y-4">
                     <div>
-                        <label for="resource-title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Resource Title <span class="text-red-500">*</span></label>
-                        <input type="text" id="resource-title" name="resource-title" required class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100">
+                        <label for="resource-title" class="form-label">Resource Title <span class="text-red-500">*</span></label>
+                        <input type="text" id="resource-title" name="resource-title" required class="form-input">
                     </div>
                     <div>
-                        <label for="resource-category" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category <span class="text-red-500">*</span></label>
-                        <select id="resource-category" name="resource-category" required class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100">
+                        <label for="resource-category" class="form-label">Category <span class="text-red-500">*</span></label>
+                        <select id="resource-category" name="resource-category" required class="form-input">
                             <option value="">Select a category...</option>
                         </select>
                     </div>
                     <div>
-                        <label for="resource-description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description (Optional)</label>
-                        <textarea id="resource-description" name="resource-description" rows="3" class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100"></textarea>
+                        <label for="resource-description" class="form-label">Description (Optional)</label>
+                        <textarea id="resource-description" name="resource-description" rows="3" class="form-input"></textarea>
                     </div>
                     <div>
-                        <label for="resource-url" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">URL <span class="text-red-500">*</span></label>
-                        <input type="url" id="resource-url" name="resource-url" placeholder="https://example.com" required class="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-gray-100">
+                        <label for="resource-url" class="form-label">URL <span class="text-red-500">*</span></label>
+                        <input type="url" id="resource-url" name="resource-url" placeholder="https://example.com" required class="form-input">
                     </div>
                 </div>
 
                 <div class="mt-8 text-right">
-                    <button type="submit" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition duration-300 disabled:bg-gray-400">Submit</button>
+                    <button type="submit" class="btn btn-primary disabled:bg-slate-400">Submit</button>
                 </div>
             </form>
         </div>
     </div>
     
-    <a aria-label="Back to top" href="#" id="back-to-top" class="bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition">
+    <a aria-label="Back to top" href="#" id="back-to-top" class="bg-brand-primary text-white p-3 rounded-full shadow-lg hover:bg-brand-primary-dark transition">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
     </a>
 
-    <footer class="bg-gray-800 dark:bg-black p-6 text-center mt-12 transition-colors duration-300">
-        <p class="mb-4" style="color: #d1d5db;">© 2025 Webaide. All Rights Reserved.</p>
-
-        <section id="follow-links" class="mt-4 hidden">
-            <h2 class="font-bold text-lg mb-2">Follow Me</h2>
-            <div class="flex justify-center items-center gap-4">
-                <a href="#" class="text-indigo-300 hover:text-white transition">X / Twitter</a>
-                <a href="#" class="text-indigo-300 hover:text-white transition">LinkedIn</a>
-                <a href="#" class="text-indigo-300 hover:text-white transition">GitHub</a>
-            </div>
-        </section>
+    <footer class="bg-slate-800 dark:bg-black p-8 text-center mt-20">
+        <p class="text-slate-300">© 2025 Webaide. All Rights Reserved.</p>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            const htmlEl = document.documentElement;
+    <script src="script.js"></script>
 
-            function applyTheme(theme) {
-                if (theme === 'dark') {
-                    htmlEl.classList.add('dark');
-                    themeToggleBtn.setAttribute('aria-label', 'Activate light mode');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    htmlEl.classList.remove('dark');
-                    themeToggleBtn.setAttribute('aria-label', 'Activate dark mode');
-                    localStorage.setItem('theme', 'light');
-                }
-            }
-
-            function toggleTheme() {
-                const currentTheme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
-                applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
-            }
-            
-            // This function runs after the initial theme is set by the script in the <head>
-            function initializeTheme() {
-                const isDark = htmlEl.classList.contains('dark');
-                // Set the correct aria-label on initial load
-                themeToggleBtn.setAttribute('aria-label', isDark ? 'Activate light mode' : 'Activate dark mode');
-                themeToggleBtn.addEventListener('click', toggleTheme);
-            }
-
-            initializeTheme();
-            
-            const skeletonLoader = document.getElementById('skeleton-loader');
-
-            let allResourceData = [];
-            try {
-                const response = await fetch('resources.json');
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                allResourceData = await response.json();
-                
-                skeletonLoader.classList.add('hidden');
-
-            } catch (error) {
-                console.error("Could not fetch resources:", error);
-                
-                skeletonLoader.classList.add('hidden');
-                document.getElementById('resources').innerHTML = `<p class="text-center text-red-500 dark:text-red-400">Could not load resources. Please try again later.</p>`;
-                return;
-            }
-            
-            const resourcesContainer = document.getElementById('resources');
-            const searchInput = document.getElementById('search-input');
-            const suggestionsList = document.getElementById('suggestions-list');
-            const announcer = document.getElementById('search-results-announcer');
-            const backToTopButton = document.getElementById('back-to-top');
-            const filterContainer = document.getElementById('filter-container');
-            const searchControls = document.getElementById('search-and-filter-controls');
-            const modalOverlay = document.getElementById('feedback-modal-overlay');
-            const modalWindow = document.getElementById('feedback-modal');
-            const openModalBtn = document.getElementById('open-feedback-modal-btn');
-            const closeModalBtn = document.getElementById('close-feedback-modal-btn');
-            const submissionTypeRadios = document.querySelectorAll('input[name="submission-type"]');
-            const feedbackFields = document.getElementById('feedback-fields');
-            const resourceFields = document.getElementById('resource-fields');
-            const resourceCategorySelect = document.getElementById('resource-category');
-            
-            let elementToFocusOnClose = null;
-            const allCategories = [...new Set(allResourceData.map(item => item.Category))];
-            const activeCategories = new Set();
-            let activeSuggestionIndex = -1;
-            let lastScrollY = window.scrollY;
-
-            function updateURL() {
-                const params = new URLSearchParams();
-                const searchTerm = searchInput.value.trim();
-
-                if (searchTerm) params.set('search', searchTerm);
-                if (activeCategories.size > 0) params.set('categories', [...activeCategories].join(','));
-
-                const queryString = params.toString();
-                const newUrl = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
-                history.pushState({ path: newUrl }, '', newUrl);
-            }
-
-            function applyStateFromURL() {
-                const params = new URLSearchParams(window.location.search);
-                const searchTerm = params.get('search');
-                const categoriesParam = params.get('categories');
-
-                if (searchTerm) searchInput.value = searchTerm;
-                if (categoriesParam) {
-                    const categories = categoriesParam.split(',');
-                    categories.forEach(cat => activeCategories.add(cat));
-                    
-                    document.querySelectorAll('.filter-btn').forEach(btn => {
-                        if (activeCategories.has(btn.dataset.category)) {
-                            btn.classList.add('active');
-                            btn.setAttribute('aria-pressed', 'true');
-                        } else {
-                            btn.classList.remove('active');
-                            btn.setAttribute('aria-pressed', 'false');
-                        }
-                    });
-                    if (activeCategories.size > 0) {
-                        const allBtn = filterContainer.querySelector('[data-category="All"]');
-                        if (allBtn) {
-                            allBtn.classList.remove('active');
-                            allBtn.setAttribute('aria-pressed', 'false');
-                        }
-                    }
-                }
-            }
-            
-            allCategories.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category;
-                option.textContent = category;
-                resourceCategorySelect.appendChild(option);
-            });
-
-            function showModal() {
-                elementToFocusOnClose = document.activeElement;
-                modalOverlay.classList.remove('hidden');
-                modalOverlay.classList.add('flex');
-                document.getElementById('submitter-name').focus();
-            }
-
-            function hideModal() {
-                modalOverlay.classList.add('hidden');
-                modalOverlay.classList.remove('flex');
-                if (elementToFocusOnClose) elementToFocusOnClose.focus();
-            }
-            
-            openModalBtn.addEventListener('click', showModal);
-            closeModalBtn.addEventListener('click', hideModal);
-            modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) hideModal(); });
-            modalOverlay.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') hideModal();
-                if (e.key === 'Tab') {
-                    const focusableElements = Array.from(modalWindow.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')).filter(el => !el.closest('.hidden'));
-                    const firstElement = focusableElements[0];
-                    const lastElement = focusableElements[focusableElements.length - 1];
-                    if (e.shiftKey) {
-                        if (document.activeElement === firstElement) { lastElement.focus(); e.preventDefault(); }
-                    } else {
-                        if (document.activeElement === lastElement) { firstElement.focus(); e.preventDefault(); }
-                    }
-                }
-            });
-
-            submissionTypeRadios.forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    const selectedValue = e.target.value;
-                    const feedbackTextarea = feedbackFields.querySelector('textarea');
-                    const resourceInputs = resourceFields.querySelectorAll('input, select, textarea');
-                    if (selectedValue === 'feedback') {
-                        feedbackFields.classList.remove('hidden');
-                        resourceFields.classList.add('hidden');
-                        feedbackTextarea.required = true;
-                        resourceFields.querySelectorAll('input, select, textarea').forEach(input => input.required = false);
-                    } else if (selectedValue === 'resource') {
-                        feedbackFields.classList.add('hidden');
-                        resourceFields.classList.remove('hidden');
-                        feedbackTextarea.required = false;
-                        resourceFields.querySelectorAll('input, select').forEach(input => input.required = true);
-                        resourceFields.querySelector('textarea').required = false; 
-                    }
-                });
-            });
-
-            function createSections() {
-                const categoryIconMap = {
-                    "Accessibility Standards": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A11.953 11.953 0 0 1 12 16.5c-2.998 0-5.74-1.1-7.843-2.918m15.686-5.418A8.959 8.959 0 0 0 21 12c0 .778-.099 1.533-.284 2.253m0 0a8.997 8.997 0 0 1-7.843 4.582M12 16.5a8.997 8.997 0 0 0-7.843-4.582m7.843 0a11.953 11.953 0 0 0 7.843-2.918m-15.686 0A11.953 11.953 0 0 0 12 10.5c2.998 0 5.74 1.1 7.843 2.918" /></svg>`,
-                    "Useful tools, resources and references": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h12M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-12a2.25 2.25 0 0 1-2.25-2.25V3.75m16.5 0v16.5h-16.5V3.75m16.5 0L12 14.25 3.75 3.75" /></svg>`,
-                    "Guides & Cheat Sheets": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>`,
-                    "Checklists": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.4-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.4-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.4 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.4.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" /></svg>`,
-                    "Auditing and Testing tools": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>`,
-                    "License/Certificates": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>`,
-                    "Other": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>`,
-                    "Other must read resources from web accessibility initiative": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" /></svg>`,
-                    "blogs / people / other resources to follow": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.952a4.5 4.5 0 0 1-9 0m9 0a4.5 4.5 0 0 0-9 0m9 0h.008c.341 0 .62.279.62.62v.008a.62.62 0 0 1-.62.62h-.008a.62.62 0 0 1-.62-.62v-.008c0-.341.279-.62.62-.62Z" /></svg>`
-                };
-
-                allCategories.forEach(category => {
-                    const section = document.createElement('section');
-                    const title = document.createElement('h2');
-                    title.className = 'text-3xl font-bold mb-8 border-l-4 border-indigo-500 dark:border-indigo-400 pl-4 flex items-center gap-3';
-                    
-                    const iconSVG = categoryIconMap[category] || '';
-                    title.innerHTML = `${iconSVG}<span>${category}</span>`;
-
-                    const grid = document.createElement('div');
-                    grid.className = 'grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6';
-                    section.appendChild(title);
-                    section.appendChild(grid);
-                    resourcesContainer.appendChild(section);
-                });
-            }
-
-            function renderCards(dataToRender) {
-                resourcesContainer.querySelectorAll('.grid').forEach(grid => grid.innerHTML = '');
-                dataToRender.forEach((item) => {
-                    const parentSection = Array.from(document.querySelectorAll('#resources section')).find(s => s.querySelector('h2 > span').textContent === item.Category);
-                    if (parentSection) {
-                        const grid = parentSection.querySelector('.grid');
-                        const card = document.createElement('div');
-                        card.className = 'resource-card';
-                        let descriptionHTML = item.Description ? `<p class="text-gray-600 dark:text-gray-400">${item.Description}</p>` : '';
-                        const menuId = `menu-for-item-${item.URL.replace(/[^a-zA-Z0-9]/g, "")}`;
-                        card.innerHTML = `<h3 class="text-gray-900 dark:text-gray-100"><a href="${item.URL}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">${item['Resource Text']}</a></h3> ${descriptionHTML} <button class="card-menu-btn text-gray-500 dark:text-gray-400" aria-haspopup="true" aria-expanded="false" aria-controls="${menuId}" aria-label="Options for ${item['Resource Text']}"><svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01"></path></svg></button><div id="${menuId}" class="card-menu hidden" role="menu" aria-label="Share options for ${item['Resource Text']}"><a href="#" class="card-menu-item" role="menuitem" data-action="share-twitter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>Share on X</a><a href="#" class="card-menu-item" role="menuitem" data-action="share-facebook"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg>Share on Facebook</a><a href="#" class="card-menu-item" role="menuitem" data-action="share-linkedin"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg>Share on LinkedIn</a><button class="card-menu-item" role="menuitem" data-action="copy"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span class="copy-text">Copy Resource</span></button></div>`;
-                        grid.appendChild(card);
-                    }
-                });
-
-                // FIX: Implemented staggered card animation
-                requestAnimationFrame(() => {
-                    const renderedCards = resourcesContainer.querySelectorAll('.resource-card');
-                    renderedCards.forEach((card, index) => {
-                        card.style.setProperty('--delay', `${index * 0.05}s`);
-                        card.classList.add('is-visible');
-                    });
-                });
-            }
-            
-            function createFilterButtons() {
-                const categoryCounts = allResourceData.reduce((acc, item) => { acc[item.Category] = (acc[item.Category] || 0) + 1; return acc; }, {});
-                const allBtn = document.createElement('button');
-                allBtn.className = 'filter-btn active';
-                allBtn.textContent = `All (${allResourceData.length})`;
-                allBtn.dataset.category = 'All';
-                allBtn.setAttribute('aria-pressed', 'true');
-                filterContainer.appendChild(allBtn);
-                allCategories.forEach(category => {
-                    const btn = document.createElement('button');
-                    btn.className = 'filter-btn';
-                    btn.setAttribute('aria-pressed', 'false');
-                    btn.textContent = `${category} (${categoryCounts[category] || 0})`;
-                    btn.dataset.category = category;
-                    filterContainer.appendChild(btn);
-                });
-            }
-
-            function filterAndSearch() {
-                const searchTerm = searchInput.value.toLowerCase().trim();
-                const categoryFilteredData = activeCategories.size === 0 ? allResourceData : allResourceData.filter(item => activeCategories.has(item.Category));
-                const finalData = searchTerm ? categoryFilteredData.filter(item => item['Resource Text'].toLowerCase().includes(searchTerm) || (item.Description && item.Description.toLowerCase().includes(searchTerm)) || item.Category.toLowerCase().includes(searchTerm)) : categoryFilteredData;
-                renderCards(finalData);
-                document.querySelectorAll('#resources > section').forEach(section => { section.style.display = section.querySelector('.grid')?.hasChildNodes() ? 'block' : 'none'; });
-                announcer.textContent = `${finalData.length} results found.`;
-                updateURL();
-            }
-            
-            filterContainer.addEventListener('click', (e) => {
-                const targetButton = e.target.closest('.filter-btn');
-                if (!targetButton) return;
-                const category = targetButton.dataset.category;
-                const allBtn = filterContainer.querySelector('[data-category="All"]');
-                if (category === 'All') {
-                    activeCategories.clear();
-                    allBtn.classList.add('active');
-                    allBtn.setAttribute('aria-pressed', 'true');
-                    filterContainer.querySelectorAll('.filter-btn').forEach(btn => { if (btn !== allBtn) { btn.classList.remove('active'); btn.setAttribute('aria-pressed', 'false'); } });
-                } else {
-                    const isPressed = targetButton.classList.toggle('active');
-                    targetButton.setAttribute('aria-pressed', isPressed);
-                    if (isPressed) { activeCategories.add(category); } else { activeCategories.delete(category); }
-                    allBtn.classList.remove('active');
-                    allBtn.setAttribute('aria-pressed', 'false');
-                    if (activeCategories.size === 0) { allBtn.classList.add('active'); allBtn.setAttribute('aria-pressed', 'true'); }
-                }
-                filterAndSearch();
-            });
-
-            function showSuggestions() {
-                const query = searchInput.value.toLowerCase();
-                suggestionsList.innerHTML = '';
-                if (query.length < 2) { suggestionsList.classList.add('hidden'); searchInput.setAttribute('aria-expanded', 'false'); return; }
-                const filteredSuggestions = allResourceData.filter(item => item['Resource Text'].toLowerCase().includes(query)).slice(0, 5);
-                if (filteredSuggestions.length > 0) {
-                    filteredSuggestions.forEach((item, index) => {
-                        const li = document.createElement('li');
-                        li.textContent = item['Resource Text'];
-                        li.className = 'suggestion-item p-2 hover:bg-indigo-100 dark:hover:bg-gray-600 cursor-pointer';
-                        li.setAttribute('role', 'option');
-                        li.id = `suggestion-${index}`;
-                        li.addEventListener('click', () => {
-                            searchInput.value = item['Resource Text'];
-                            suggestionsList.classList.add('hidden');
-                            searchInput.setAttribute('aria-expanded', 'false');
-                            filterAndSearch();
-                        });
-                        suggestionsList.appendChild(li);
-                    });
-                    suggestionsList.classList.remove('hidden');
-                    searchInput.setAttribute('aria-expanded', 'true');
-                } else {
-                    suggestionsList.classList.add('hidden');
-                    searchInput.setAttribute('aria-expanded', 'false');
-                }
-                activeSuggestionIndex = -1;
-            }
-
-            function handleKeyboardNavigation(e) {
-                const items = suggestionsList.querySelectorAll('.suggestion-item');
-                
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    if (activeSuggestionIndex > -1 && items[activeSuggestionIndex]) {
-                        items[activeSuggestionIndex].click();
-                    } else {
-                        filterAndSearch();
-                    }
-                    suggestionsList.classList.add('hidden');
-                    searchInput.setAttribute('aria-expanded', 'false');
-                    return;
-                }
-
-                if (suggestionsList.classList.contains('hidden') || items.length === 0) return;
-
-                if (e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    activeSuggestionIndex = (activeSuggestionIndex + 1) % items.length;
-                    updateSuggestionHighlight(items);
-                } else if (e.key === 'ArrowUp') {
-                    e.preventDefault();
-                    activeSuggestionIndex = (activeSuggestionIndex - 1 + items.length) % items.length;
-                    updateSuggestionHighlight(items);
-                } else if (e.key === 'Escape') {
-                    suggestionsList.classList.add('hidden');
-                    searchInput.setAttribute('aria-expanded', 'false');
-                }
-            }
-
-            function updateSuggestionHighlight(items) {
-                items.forEach(item => item.classList.remove('active', 'bg-indigo-100', 'dark:bg-gray-600'));
-                const currentActiveItem = items[activeSuggestionIndex];
-                if (currentActiveItem) { 
-                    currentActiveItem.classList.add('active', 'bg-indigo-100', 'dark:bg-gray-600'); 
-                    searchInput.setAttribute('aria-activedescendant', currentActiveItem.id); 
-                    currentActiveItem.scrollIntoView({ block: 'nearest' }); 
-                }
-            }
-
-            searchInput.addEventListener('input', showSuggestions);
-            searchInput.addEventListener('keydown', handleKeyboardNavigation);
-            document.addEventListener('click', (e) => { if (!e.target.closest('#search-container')) { suggestionsList.classList.add('hidden'); searchInput.setAttribute('aria-expanded', 'false'); } });
-            window.addEventListener('scroll', () => {
-                const currentScrollY = window.scrollY;
-                if (window.pageYOffset > 300) { backToTopButton.style.display = 'block'; } else { backToTopButton.style.display = 'none'; }
-                if (currentScrollY > lastScrollY && currentScrollY > 200) { searchControls.classList.add('is-hidden'); } else { searchControls.classList.remove('is-hidden'); }
-                lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
-            });
-            backToTopButton.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
-
-            const pageTitle = document.title;
-            const globalShareText = `Check out this awesome collection of accessibility resources: "${pageTitle}"`;
-            document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(globalShareText)}`;
-            document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
-            document.getElementById('share-linkedin').href = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(pageTitle)}`;
-            const copyLinkBtn = document.getElementById('copy-link-btn');
-            const copyLinkText = document.getElementById('copy-link-text');
-            copyLinkBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(window.location.href).then(() => { copyLinkText.textContent = 'Copied!'; copyLinkBtn.setAttribute('aria-label', 'Link copied to clipboard'); setTimeout(() => { copyLinkText.textContent = 'Copy Link'; copyLinkBtn.setAttribute('aria-label', 'Copy page link'); }, 2000);
-                }).catch(err => { console.error('Failed to copy text: ', err); });
-            });
-
-            resourcesContainer.addEventListener('keydown', (e) => {
-                const menuButton = e.target.closest('.card-menu-btn');
-                if (menuButton && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggleMenu(menuButton); }
-                const menuItem = e.target.closest('.card-menu-item');
-                if (menuItem && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); handleMenuAction(menuItem); }
-                if (e.key === 'Escape') { const openMenu = document.querySelector('.card-menu:not(.hidden)'); if (openMenu) { const button = openMenu.previousElementSibling; closeMenu(openMenu, button); button.focus(); } }
-                if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-                    const activeItem = document.activeElement.closest('.card-menu-item');
-                    if(activeItem) {
-                         e.preventDefault();
-                         const items = Array.from(activeItem.parentElement.children);
-                         const currentIndex = items.indexOf(activeItem);
-                         const nextIndex = e.key === 'ArrowDown' ? (currentIndex + 1) % items.length : (currentIndex - 1 + items.length) % items.length;
-                         items[nextIndex].focus();
-                    }
-                }
-            });
-
-            resourcesContainer.addEventListener('click', e => {
-                const menuButton = e.target.closest('.card-menu-btn');
-                if (menuButton) toggleMenu(menuButton);
-                const menuItem = e.target.closest('.card-menu-item');
-                if(menuItem) handleMenuAction(menuItem);
-            });
-            
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.resource-card')) {
-                    document.querySelectorAll('.card-menu').forEach(menu => { const button = menu.previousElementSibling; if(button) closeMenu(menu, button); });
-                }
-            });
-
-            function toggleMenu(button) {
-                const menu = button.nextElementSibling;
-                const isExpanded = button.getAttribute('aria-expanded') === 'true';
-                document.querySelectorAll('.card-menu').forEach(m => { if (m !== menu) closeMenu(m, m.previousElementSibling); });
-                if (isExpanded) closeMenu(menu, button); else openMenu(menu, button);
-            }
-
-            function openMenu(menu, button) { menu.classList.remove('hidden'); button.setAttribute('aria-expanded', 'true'); menu.firstElementChild.focus(); }
-            function closeMenu(menu, button) { menu.classList.add('hidden'); button.setAttribute('aria-expanded', 'false'); }
-
-            function handleMenuAction(menuItem) {
-                const card = menuItem.closest('.resource-card');
-                const button = card.querySelector('.card-menu-btn');
-                const menu = menuItem.parentElement;
-
-                const titleElement = card.querySelector('h3 a');
-                const data = allResourceData.find(d => d['Resource Text'] === titleElement.textContent);
-                if (!data) return;
-
-                const textToShare = `${data['Resource Text']}\n\n${data.Description}\n\n${data.URL}\n\nFind more resources at ${window.location.href}`;
-
-                const action = menuItem.dataset.action;
-
-                // Close the menu for all share actions
-                if (action.startsWith('share-')) {
-                    closeMenu(menu, button);
-                    button.focus();
-                }
-
-                switch (action) {
-                    case 'share-twitter':
-                        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(textToShare)}`, '_blank');
-                        break;
-                    case 'share-facebook':
-                        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(data.URL)}`, '_blank');
-                        break;
-                    case 'share-linkedin':
-                        const linkedInShareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(data.URL)}&title=${encodeURIComponent(data['Resource Text'])}`;
-                        window.open(linkedInShareUrl, '_blank');
-                        break;
-                    case 'copy':
-                        navigator.clipboard.writeText(textToShare).then(() => {
-                            const copyTextSpan = menuItem.querySelector('.copy-text');
-                            const originalText = copyTextSpan.textContent;
-                            copyTextSpan.textContent = 'Copied!';
-                            document.getElementById('announcer').textContent = `Copied ${data['Resource Text']} to clipboard.`;
-                            setTimeout(() => {
-                                copyTextSpan.textContent = originalText;
-                            }, 2000);
-                        });
-                        break;
-                }
-            }
-
-            // --- Initial Page Setup ---
-            createSections();
-            createFilterButtons();
-            applyStateFromURL();
-            filterAndSearch();
-
-            // Skip Link Logic
-            const skipToSearch = document.getElementById('skip-to-search');
-            const skipToMain = document.getElementById('skip-to-main');
-            
-            skipToSearch.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('search-input').focus();
-            });
-
-            skipToMain.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('main-heading').focus();
-            });
-        });
-    </script>
 </body>
 </html>
