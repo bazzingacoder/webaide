@@ -7,41 +7,27 @@
 
 
 /*================================================================*/
-/* TAILWIND LAYERS & UTILITIES                                    */
-/*================================================================*/
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/*================================================================*/
 /* THEME & DESIGN TOKENS (CSS VARIABLES)                          */
 /*================================================================*/
 @layer base {
   :root {
     /* Brand Colors */
-    --color-brand-primary: #4F46E5; /* Richer Indigo */
-    --color-brand-primary-dark: #4338CA;
-    --color-brand-secondary: #EC4899; /* Vibrant Pink/Coral Accent */
-    --color-favorite: #FBBF24; /* Amber 400 */
+    --color-brand-primary: #4F46E5; /* Indigo 600 */
+    --color-brand-primary-hover: #4338CA; /* Indigo 700 */
+    --color-brand-accent: #db2777; /* Pink 600 */
 
-    /* Logo Colors */
-    --color-logo-web: var(--color-text-light-secondary);
-    --color-logo-aide: var(--color-brand-primary);
-    --color-logo-icon-stroke: var(--color-text-light-primary);
-    --color-logo-icon-fill: var(--color-brand-primary);
+    /* Neutrals - Light Theme */
+    --color-bg-primary: #ffffff; /* White */
+    --color-bg-secondary: #f8fafc; /* Slate 50 */
+    --color-border: #e2e8f0; /* Slate 200 */
+    --color-text-primary: #1e293b; /* Slate 800 */
+    --color-text-secondary: #475569; /* Slate 600 */
+    --color-text-link: #4338CA; /* Indigo 700 */
 
-    /* Neutrals - Cool Grays (Slate) */
-    --color-bg-light: #F8FAFC; /* slate-50 */
-    --color-bg-light-alt: #F1F5F9; /* slate-100 */
-    --color-bg-dark: #0F172A; /* slate-900 */
-    --color-bg-dark-alt: #1E293B; /* slate-800 */
-    --color-border-light: #E2E8F0; /* slate-200 */
-    --color-border-dark: #334155; /* slate-700 */
-    --color-text-light-primary: #1E293B; /* slate-800 */
-    --color-text-light-secondary: #475569; /* slate-600 */
-    --color-text-dark-primary: #F1F5F9; /* slate-100 */
-    --color-text-dark-secondary: #94A3B8; /* slate-400 */
-
+    /* UI Colors */
+    --color-favorite: #f59e0b; /* Amber 500 */
+    --shadow-color: 220 40% 10%; /* For modern shadow */
+    
     /* Typography */
     --font-body: 'Inter', sans-serif;
     --font-heading: 'Poppins', sans-serif;
@@ -52,10 +38,20 @@
   }
   
   .dark {
-    --color-logo-web: var(--color-text-dark-secondary);
-    --color-logo-aide: var(--color-text-dark-primary);
-    --color-logo-icon-stroke: var(--color-text-dark-primary);
-    --color-logo-icon-fill: var(--color-text-dark-primary);
+    /* Brand Colors */
+    --color-brand-primary: #6366f1; /* Indigo 500 */
+    --color-brand-primary-hover: #818cf8; /* Indigo 400 */
+    
+    /* Neutrals - Dark Theme */
+    --color-bg-primary: #0f172a; /* Slate 900 */
+    --color-bg-secondary: #1e293b; /* Slate 800 */
+    --color-border: #334155; /* Slate 700 */
+    --color-text-primary: #e2e8f0; /* Slate 200 */
+    --color-text-secondary: #94a3b8; /* Slate 400 */
+    --color-text-link: #818cf8; /* Indigo 400 */
+    
+    /* UI Colors */
+    --shadow-color: 220 40% 2%;
   }
 }
 
@@ -68,12 +64,15 @@
   }
 
   body {
-    @apply bg-bg-light text-text-light-primary font-body;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
     transition: background-color 0.3s, color 0.3s;
   }
   
-  html.dark body {
-    @apply bg-bg-dark text-text-dark-primary;
+  a {
+    color: var(--color-text-link);
+    @apply font-medium hover:underline;
   }
   
   .font-heading {
@@ -82,10 +81,8 @@
   
   /* Section Alternating Backgrounds */
   #resources > section:nth-of-type(even) {
-     @apply bg-bg-light-alt py-12 -mx-6 px-6;
-  }
-  html.dark #resources > section:nth-of-type(even) {
-     @apply bg-bg-dark-alt;
+     background-color: var(--color-bg-secondary);
+     @apply py-12 -mx-6 px-6;
   }
 }
 
@@ -103,22 +100,22 @@
       font-family: 'Arial', sans-serif;
       font-size: 32px;
       font-weight: normal;
-      fill: var(--color-logo-web);
+      fill: var(--color-text-secondary);
   }
   .webaide-logo .logo-aide-text {
       font-family: 'Arial', sans-serif;
       font-size: 32px;
       font-weight: bold;
-      fill: var(--color-logo-aide);
+      fill: var(--color-brand-primary);
   }
   .webaide-logo .logo-icon-circle {
-      stroke: var(--color-logo-icon-stroke);
+      stroke: var(--color-text-primary);
       stroke-width: 2px;
       fill: none;
   }
   .webaide-logo .logo-icon-figure {
-      fill: var(--color-logo-icon-fill);
-      stroke: var(--color-logo-icon-fill);
+      fill: var(--color-text-primary);
+      stroke: var(--color-text-primary);
       stroke-width: 2px;
   }
 
@@ -132,7 +129,12 @@
     @apply shadow-md;
   }
   .btn-primary {
-    @apply bg-brand-primary text-white hover:bg-brand-primary-dark focus-visible:ring-brand-primary;
+    background-color: var(--color-brand-primary);
+    color: white;
+    @apply focus-visible:ring-brand-primary;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-brand-primary-hover);
   }
 
   /* Filter Buttons */
@@ -175,8 +177,14 @@
 
   /* Resource Cards */
   .resource-card {
-    @apply relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-6 flex shadow-md opacity-0;
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out, box-shadow 0.2s ease-in-out;
+    background-color: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    @apply relative rounded-xl p-6 flex flex-col;
+    box-shadow: 0 1px 2px hsl(var(--shadow-color) / 0.1),
+                0 2px 4px hsl(var(--shadow-color) / 0.1),
+                0 4px 8px hsl(var(--shadow-color) / 0.1);
+    opacity: 0;
+    transition: opacity 0.4s ease-out, transform 0.3s ease-out, box-shadow 0.3s ease-out;
     transition-delay: var(--delay, 0s);
     transform: translateY(20px);
   }
@@ -186,13 +194,20 @@
   }
   .resource-card:hover {
     transform: translateY(-5px);
-    @apply shadow-xl border-slate-300 dark:border-slate-600;
+    box-shadow: 0 2px 4px hsl(var(--shadow-color) / 0.07),
+                0 4px 8px hsl(var(--shadow-color) / 0.07),
+                0 8px 16px hsl(var(--shadow-color) / 0.07);
   }
   .resource-card h3 a {
-      @apply text-brand-primary font-semibold text-lg hover:underline;
+      color: var(--color-text-primary);
+      @apply text-lg font-semibold no-underline;
+  }
+  .resource-card h3 a:hover {
+    color: var(--color-brand-primary);
   }
    .resource-card p {
-      @apply text-slate-600 dark:text-slate-400 text-sm mt-2;
+      color: var(--color-text-secondary);
+      @apply text-sm mt-2;
   }
   
   /* Card Menu & Favorite Button */
@@ -235,8 +250,20 @@
   
   /* Search Input */
   #search-input {
-    @apply w-full text-base py-3 pl-12 pr-4 border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 rounded-full text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500;
-    @apply focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/50 transition-all duration-200;
+    @apply w-full text-base py-3 pl-12 pr-4 rounded-full transition-all duration-200 focus:outline-none;
+    
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-border);
+  }
+
+  #search-input::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  #search-input:focus {
+    border-color: var(--color-brand-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand-primary) 40%, transparent);
   }
   
   /* Search Suggestions */
@@ -270,16 +297,12 @@
   display: none !important;
 }
 
-/* Theme Toggle Icon Visibility */
-#theme-toggle-sun, #theme-toggle-moon {
-    display: none !important;
-}
-html.dark #theme-toggle-sun {
-    display: block !important;
-}
-html:not(.dark) #theme-toggle-moon {
-    display: block !important;
-}
+/* Clean Theme Toggle Icon Visibility */
+#theme-toggle-moon { display: block; }
+#theme-toggle-sun { display: none; }
+
+html.dark #theme-toggle-moon { display: none; }
+html.dark #theme-toggle-sun { display: block; }
 
 
 /*================================================================*/
@@ -349,31 +372,11 @@ html.dark #search-and-filter-controls.is-glassy {
 
 /* Section Headings */
 #resources > section > h2 {
-  @apply text-3xl font-bold mb-8 border-l-4 border-brand-primary pl-4 flex items-center gap-4 text-slate-800 dark:text-slate-100;
+  color: var(--color-text-primary);
+  border-color: var(--color-brand-primary);
+  @apply text-3xl font-bold mb-8 border-l-4 pl-4 flex items-center gap-4;
 }
 #resources > section > h2 svg {
-  @apply w-8 h-8 text-brand-secondary;
-}
-
-/*================================================================*/
-/* ACCESSIBILITY CONTRAST OVERRIDES                               */
-/*================================================================*/
-html:not(.dark) #open-feedback-modal-btn {
-    background-color: #4338ca !important;
-    color: #ffffff !important;
-    font-weight: 700 !important;
-}
-
-html:not(.dark) a {
-    color: #1e3a8a !important; /* A darker, more accessible indigo */
-    text-decoration-thickness: 2px;
-}
-
-html:not(.dark) a:hover {
-    color: #1b3279 !important;
-    text-decoration: underline;
-}
-
-html:not(.dark) .resource-card h3 a {
-    color: #4338ca !important;
+  color: var(--color-brand-accent);
+  @apply w-8 h-8;
 }
