@@ -874,5 +874,11 @@
         "Resource Text": "Steady Accessibility",
         "URL": "https://steadyaccessibility.com/",
         "Description": "Explore articles, guides, tips, and code samples covering Mobile Accessibility and Accessibility Automation. Learn how to make your apps accessible to everyone while streamlining testing with efficient and effective automation practices."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "WCAG for humans _ Andrew Hick",
+        "URL": "https://andrewhick.com/accessibility/humans/",
+        "Description": "This guide groups WCAG by 7 practical themes instead of the traditional structure of Perceivable, Operable, Understandable and Robust (POUR). Overall, it covers 55 success criteria — testable things to ensure you pass WCAG."
     }
 ]
