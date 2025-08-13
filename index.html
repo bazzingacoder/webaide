@@ -37,8 +37,8 @@
     <a href="#main-content" id="skip-to-main" class="skip-link">Skip to main content</a>
 
     <header class="sticky top-0 z-50 transition-all duration-300">
-        <nav class="container mx-auto flex justify-between items-center p-4" aria-label="Main Navigation">
-            <a href="#" class="flex items-center" aria-label="Webaide Home">
+        <nav class="container mx-auto flex flex-wrap justify-between items-center p-4" aria-label="Main Navigation">
+            <a href="#" class="flex items-center mb-4 md:mb-0" aria-label="Webaide Home">
                 <svg class="webaide-logo" baseProfile="tiny" version="1.2" xmlns="http://www.w3.org/2000/svg">
                   <text x="0" y="35" class="logo-web-text">Web</text>
                   <text x="80" y="35" class="logo-aide-text">AIDE</text>
@@ -54,8 +54,8 @@
                   </g>
                 </svg>
             </a>
-            <div class="flex items-center gap-4">
-                <button id="open-feedback-modal-btn" class="btn btn-primary">Suggest / Feedback</button>
+            <div class="flex items-center gap-2 sm:gap-4">
+                <button id="open-feedback-modal-btn" class="btn btn-primary text-sm sm:text-base">Suggest / Feedback</button>
                 <button id="theme-toggle" aria-label="Activate light mode" class="w-10 h-10 p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-300">
                     <svg id="theme-toggle-sun" class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     <svg id="theme-toggle-moon" class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
@@ -65,13 +65,13 @@
     </header>
 
     <main id="main-content" class="container mx-auto p-6 lg:p-8 outline-none">
-        <section class="text-center my-16 md:my-24 hero-section">
-            <h1 id="main-heading" tabindex="-1" class="text-5xl md:text-7xl font-heading font-extrabold leading-tight mb-4 text-slate-800 dark:text-white outline-none">Welcome to <span class="text-brand-primary">Webaide</span></h1>
-            <p class="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-10 font-medium">The Accessibility Info & Development Ecosystem.<br/>Your complete toolkit for building accessible digital experiences.</p>
+        <section class="text-center my-12 md:my-24 hero-section">
+            <h1 id="main-heading" tabindex="-1" class="text-4xl md:text-7xl font-heading font-extrabold leading-tight mb-4 text-slate-800 dark:text-white outline-none">Welcome to <span class="text-brand-primary">Webaide</span></h1>
+            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-10 font-medium">The Accessibility Info & Development Ecosystem.<br/>Your complete toolkit for building accessible digital experiences.</p>
             
             <div id="social-share-container">
-                <p class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-4">Share this resource hub:</p>
-                <div class="flex justify-center items-center gap-4">
+                <p class="text-base md:text-lg font-semibold text-slate-700 dark:text-slate-300 mb-4">Share this resource hub:</p>
+                <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-4">
                     <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on X"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
                     <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on Facebook"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
                     <a id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg></a>
