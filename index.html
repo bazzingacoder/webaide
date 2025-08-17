@@ -11,7 +11,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://webaide.in">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Webaide: Accessibility Info & Development Ecosystem">
+    <meta name="twitter:title" content="Webaide: Web Accessibility Info & Development Ecosystem">
     <meta name="twitter:description" content="Your central hub for Accessibility Info & a complete Development Ecosystem of tools, guides, and standards.">
     <meta name="google-site-verification" content="DQ1JY69d6M8pRf4rs-7FakiRcgmaeb0O6PwxfN6IZ8s" />
 
@@ -30,6 +30,104 @@
         document.documentElement.classList.add('dark');
       }
     </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Webaide",
+      "url": "https://webaide.in",
+      "description": "A comprehensive resource hub for web accessibility, providing tools, guides, and standards for developers and designers.",
+      "keywords": "Web Accessibility, a11y, WCAG, ARIA, Accessibility Testing, Inclusive Design, Section 508, Screen Readers, Accessibility Tools, Digital Accessibility",
+      "mainEntity": {
+        "@type": "ItemList",
+        "name": "Web Accessibility Resources",
+        "description": "A curated list of essential resources for building accessible digital experiences.",
+        "itemListElement": [
+          {
+            "@type": "LearningResource",
+            "position": 1,
+            "name": "WCAG",
+            "url": "https://www.w3.org/TR/WCAG/",
+            "description": "Provides guidelines for accessible web content addressing vision, hearing, mobility, and cognitive impairments.",
+            "learningResourceType": "Standard"
+          },
+          {
+            "@type": "LearningResource",
+            "position": 2,
+            "name": "ARIA Authoring Practices Guide (APG)",
+            "url": "https://www.w3.org/WAI/ARIA/apg/",
+            "description": "Offers patterns and code for creating accessible components, helping developers build interactive web elements usable by people with disabilities.",
+            "learningResourceType": "Guide"
+          },
+          {
+            "@type": "LearningResource",
+            "position": 3,
+            "name": "The A11Y Project",
+            "url": "https://www.a11yproject.com/",
+            "description": "Provides accessibility guides and tools to help developers implement WCAG-compliant web content for inclusive experiences.",
+            "learningResourceType": "Reference Website"
+          },
+          {
+            "@type": "LearningResource",
+            "position": 4,
+            "name": "Deque’s Web Accessibility Checklist",
+            "url": "https://dequeuniversity.com/checklists/web/",
+            "description": "Includes checklists for components, forms, images, links, and multimedia. VERY useful.",
+            "learningResourceType": "Checklist"
+          },
+          {
+            "@type": "LearningResource",
+            "position": 5,
+            "name": "Color Contrast Analyzer (CCA)",
+            "url": "https://www.tpgi.com/color-contrast-checker/",
+            "description": "Evaluates color contrast for WCAG 2.1 compliance, ensuring readability for visually impaired users.",
+            "learningResourceType": "Tool"
+          },
+          {
+            "@type": "LearningResource",
+            "position": 6,
+            "name": "WAVE browser extension",
+            "url": "https://wave.webaim.org/extension/",
+            "description": "Evaluates WCAG 2.1 compliance within the browser and highlights errors for developers to fix.",
+            "learningResourceType": "Tool"
+          },
+          {
+            "@type": "LearningResource",
+            "position": 7,
+            "name": "Accessibility Insights for Web",
+            "url": "https://accessibilityinsights.io",
+            "description": "Tests WCAG 2.1 compliance using automated and guided accessibility checks.",
+            "learningResourceType": "Tool"
+          },
+          {
+            "@type": "LearningResource",
+            "position": 8,
+            "name": "How People with Disabilities Use the Web",
+            "url": "https://www.w3.org/WAI/people-use-web/",
+            "description": "Describes the user experiences of people with disabilities to inform developers on applying WCAG for inclusivity.",
+            "learningResourceType": "Article"
+          },
+          {
+            "@type": "LearningResource",
+            "position": 9,
+            "name": "Learn Accessibility",
+            "url": "https://web.dev/learn/accessibility/",
+            "description": "Covers WCAG and ARIA, providing developers with techniques to create inclusive web content for all users.",
+            "learningResourceType": "Course"
+          },
+          {
+            "@type": "LearningResource",
+            "position": 10,
+            "name": "Smashing Magazine",
+            "url": "https://www.smashingmagazine.com/",
+            "description": "Publishes accessibility and design articles, providing WCAG-aligned guidance for inclusive digital experiences.",
+            "learningResourceType": "Blog"
+          }
+        ]
+      }
+    }
+    </script>
 </head>
 <body>
 
@@ -39,9 +137,9 @@
     <a href="#main-content" id="skip-to-main" class="skip-link">Skip to main content</a>
 
     <header class="sticky top-0 z-50 transition-all duration-300">
-        <nav class="container mx-auto flex flex-wrap justify-between items-center p-4" aria-label="Main Navigation">
+        <nav class="container mx-auto flex flex-wrap justify-between items-center p-4">
             <a href="#" class="flex items-center mb-4 md:mb-0" aria-label="Webaide Home">
-                <svg class="webaide-logo" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                <svg class="webaide-logo" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" role="img" alt="Webaide Logo">
                   <title>Webaide Logo</title>
                   <text x="5" y="35" font-family="Poppins, sans-serif" font-size="28" font-weight="bold" fill="#4F46E5">Web<tspan fill="#db2777">aide</tspan></text>
                   <path d="M130 20 C 140 10, 160 10, 170 20 S 190 30, 180 40 C 170 50, 150 50, 140 40 S 120 30, 130 20 Z" fill="rgba(79, 70, 229, 0.1)"/>
@@ -194,10 +292,4 @@
     </a>
 
     <footer class="bg-slate-800 dark:bg-black p-8 text-center mt-20">
-        <p class="text-slate-300">© 2025 Webaide. All Rights Reserved.</p>
-    </footer>
-
-    <script src="script.js"></script>
-
-</body>
-</html>
+        <p
