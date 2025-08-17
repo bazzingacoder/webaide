@@ -380,4 +380,53 @@ html.dark #search-and-filter-controls.is-glassy {
   color: var(--color-brand-accent);
   @apply w-8 h-8;
 }
+
+/*================================================================*/
+/* FOOTER STYLES                                                  */
+/*================================================================*/
+.site-footer {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-border);
+  @apply mt-20 py-12 px-6;
+}
+
+.footer-heading {
+  color: var(--color-text-primary);
+  @apply text-lg font-semibold mb-4;
+}
+
+.footer-about p, .footer-connect p {
+  @apply text-sm leading-relaxed;
+}
+
+.footer-links ul {
+  @apply space-y-2;
+}
+
+.footer-links a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  @apply transition-colors hover:text-brand-primary hover:underline;
+}
+
+.github-link {
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  @apply inline-flex items-center gap-2 mt-4 py-2 px-4 rounded-lg font-medium no-underline text-sm transition-all duration-200;
+  color: var(--color-text-primary);
+  transform: translateY(0);
+}
+.github-link:hover {
+  transform: translateY(-2px);
+  color: var(--color-brand-primary);
+  @apply shadow-md;
+}
+.github-link svg {
+  @apply w-5 h-5;
+}
+
+.footer-copyright {
+  border-top: 1px solid var(--color-border);
+  @apply mt-8 pt-6 text-center text-sm;
 }

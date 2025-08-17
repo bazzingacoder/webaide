@@ -441,6 +441,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         resourcesContainer.addEventListener('click', handleResourceCardClick);
         resourcesContainer.addEventListener('keydown', handleResourceCardKeydown);
         setupGlobalShare();
+
+        document.getElementById('footer-suggest-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            showModal();
+        });
     }
 
     function updateActiveFilterButtons() {
