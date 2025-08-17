@@ -1,2 +1,9 @@
 [functions]
   directory = "functions/"
+
+  # Redirect rule to force the .netlify.app URL to the custom domain
+[[redirects]]
+  from = "https://webaide.netlify.app/*"
+  to = "https://webaide.in/:splat"
+  status = 301
+  force = true
