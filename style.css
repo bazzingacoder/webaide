@@ -60,7 +60,7 @@
 /*================================================================*/
 @layer base {
   html {
-    scroll-padding-top: 160px; /* Adjust for sticky header height */
+    scroll-padding-top: 120px; /* Adjust for sticky header height */
   }
 
   body {
@@ -68,6 +68,7 @@
     color: var(--color-text-primary);
     font-family: var(--font-body);
     transition: background-color 0.3s, color 0.3s;
+    line-height: 1.6;
   }
   
   a {
@@ -82,7 +83,7 @@
   /* Section Alternating Backgrounds */
   #resources > section:nth-of-type(even) {
      background-color: var(--color-bg-secondary);
-     @apply py-12 -mx-4 px-4 md:-mx-6 md:px-6;
+     @apply py-8 md:py-12 -mx-4 px-4 md:-mx-6 md:px-6;
   }
 }
 
@@ -92,9 +93,14 @@
 @layer components {
   /* Logo */
   .webaide-logo {
-      height: 40px;
+      height: 32px;
       width: auto;
       transition: var(--transition-medium);
+  }
+  @media (min-width: 768px) {
+    .webaide-logo {
+      height: 40px;
+    }
   }
   .webaide-logo .logo-web-text {
       font-family: 'Arial', sans-serif;
@@ -121,7 +127,7 @@
 
   /* Buttons */
   .btn {
-    @apply inline-block font-semibold py-2 px-5 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    @apply inline-block font-semibold py-2 px-3 sm:px-5 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-sm sm:text-base;
     transform: translateY(0);
   }
   .btn:hover {
@@ -139,7 +145,7 @@
 
   /* Filter Buttons */
   .filter-btn {
-    @apply bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex-shrink-0;
+    @apply bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 px-3 py-2 sm:px-4 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 flex-shrink-0 whitespace-nowrap;
   }
   .filter-btn:hover {
     @apply border-brand-primary text-brand-primary dark:border-brand-primary dark:text-brand-primary bg-indigo-50 dark:bg-slate-600;
@@ -179,7 +185,7 @@
   .resource-card {
     background-color: var(--color-bg-primary);
     border: 1px solid var(--color-border);
-    @apply relative rounded-xl p-6 flex flex-col;
+    @apply relative rounded-xl p-4 sm:p-6 flex flex-col min-h-[140px] sm:min-h-[160px];
     box-shadow: 0 1px 2px hsl(var(--shadow-color) / 0.1),
                 0 2px 4px hsl(var(--shadow-color) / 0.1),
                 0 4px 8px hsl(var(--shadow-color) / 0.1);
@@ -193,29 +199,32 @@
     transform: translateY(0);
   }
   .resource-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px) sm:translateY(-5px);
     box-shadow: 0 2px 4px hsl(var(--shadow-color) / 0.07),
                 0 4px 8px hsl(var(--shadow-color) / 0.07),
                 0 8px 16px hsl(var(--shadow-color) / 0.07);
   }
   .resource-card h3 a {
       color: var(--color-text-primary);
-      @apply text-lg font-semibold no-underline;
+      @apply text-base sm:text-lg font-semibold no-underline leading-tight;
   }
   .resource-card h3 a:hover {
     color: var(--color-brand-primary);
   }
    .resource-card p {
       color: var(--color-text-secondary);
-      @apply text-sm mt-2;
+      @apply text-xs sm:text-sm mt-2 leading-relaxed;
   }
   
   /* Card Menu & Favorite Button */
   .card-actions {
-      @apply absolute top-2 right-2 flex items-center gap-1;
+      @apply absolute top-1 right-1 sm:top-2 sm:right-2 flex items-center gap-1;
   }
   .card-menu-btn, .favorite-btn { 
-    @apply w-10 h-10 flex items-center justify-center rounded-full bg-transparent hover:bg-slate-100 dark:hover:bg-slate-700 focus-visible:ring-2 focus-visible:ring-brand-primary focus:outline-none transition-all;
+    @apply w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-transparent hover:bg-slate-100 dark:hover:bg-slate-700 focus-visible:ring-2 focus-visible:ring-brand-primary focus:outline-none transition-all;
+  }
+  .card-menu-btn svg, .favorite-btn svg {
+    @apply w-4 h-4 sm:w-6 sm:h-6;
   }
   .favorite-btn {
       @apply text-slate-400;
@@ -241,16 +250,16 @@
   }
 
   .card-menu { 
-    @apply absolute top-12 right-0 rounded-md shadow-lg border border-slate-200 dark:border-slate-700 z-20 min-w-[200px] bg-white dark:bg-slate-800 p-1;
+    @apply absolute top-10 sm:top-12 right-0 rounded-md shadow-lg border border-slate-200 dark:border-slate-700 z-20 min-w-[180px] sm:min-w-[200px] bg-white dark:bg-slate-800 p-1;
   }
   .card-menu-item {
-    @apply flex items-center gap-3 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-md transition-colors cursor-pointer focus:bg-slate-100 dark:focus:bg-slate-700 focus:outline-none;
+    @apply flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-md transition-colors cursor-pointer focus:bg-slate-100 dark:focus:bg-slate-700 focus:outline-none;
   }
-  .card-menu-item svg { @apply w-4 h-4; }
+  .card-menu-item svg { @apply w-3 h-3 sm:w-4 sm:h-4; }
   
   /* Search Input */
   #search-input {
-    @apply w-full text-base py-3 pl-12 pr-4 rounded-full transition-all duration-200 focus:outline-none;
+    @apply w-full text-sm sm:text-base py-2 sm:py-3 pl-10 sm:pl-12 pr-4 rounded-full transition-all duration-200 focus:outline-none;
     
     background-color: var(--color-bg-secondary);
     color: var(--color-text-primary);
@@ -268,13 +277,58 @@
   
   /* Search Suggestions */
   #suggestions-list {
-    @apply absolute top-full left-0 right-0 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md mt-1 shadow-lg z-10 overflow-hidden;
+    @apply absolute top-full left-0 right-0 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md mt-1 shadow-lg z-10 overflow-hidden max-h-60 overflow-y-auto;
   }
   .suggestion-item {
-    @apply p-3 hover:bg-indigo-50 dark:hover:bg-slate-600 cursor-pointer text-sm;
+    @apply p-2 sm:p-3 hover:bg-indigo-50 dark:hover:bg-slate-600 cursor-pointer text-xs sm:text-sm;
   }
   .suggestion-item.active {
     @apply bg-indigo-100 dark:bg-slate-600;
+  }
+}
+
+/*================================================================*/
+/* RESPONSIVE GRID IMPROVEMENTS                                   */
+/*================================================================*/
+@media (max-width: 640px) {
+  .container {
+    @apply px-3;
+  }
+  
+  /* Single column on very small screens */
+  #resources .grid {
+    @apply grid-cols-1 gap-3;
+  }
+  
+  /* Reduce hero section spacing on mobile */
+  .hero-section {
+    @apply my-6;
+  }
+  
+  /* Adjust modal on mobile */
+  #feedback-modal {
+    @apply mx-2 max-w-none;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  /* Tablet optimizations */
+  #resources .grid {
+    @apply grid-cols-2 gap-5;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop optimizations */
+  #resources .grid {
+    @apply grid-cols-3 gap-6;
+  }
+}
+
+@media (min-width: 1280px) {
+  /* Large desktop optimizations */
+  #resources .grid {
+    @apply grid-cols-4 gap-6;
   }
 }
 
@@ -306,11 +360,21 @@ html.dark #theme-toggle-sun { display: block; }
 
 /* Hide scrollbar utility */
 .overflow-x-auto::-webkit-scrollbar {
-    display: none;
+    height: 4px;
 }
 .overflow-x-auto {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: auto;  /* IE and Edge */
+    scrollbar-width: thin;  /* Firefox */
+}
+.overflow-x-auto::-webkit-scrollbar-track {
+    background: transparent;
+}
+.overflow-x-auto::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: 2px;
+}
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-text-secondary);
 }
 
 
@@ -321,6 +385,7 @@ html.dark #theme-toggle-sun { display: block; }
 .hero-section {
     background-image: radial-gradient(circle at top left, rgba(79, 70, 229, 0.05), transparent 30%),
                       radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.05), transparent 30%);
+    @apply px-4 sm:px-6;
 }
 html.dark .hero-section {
     background-image: radial-gradient(circle at top left, rgba(79, 70, 229, 0.1), transparent 40%),
@@ -345,7 +410,7 @@ html.dark #search-and-filter-controls.is-glassy {
 
 /* Back to Top Button */
 #back-to-top {
-  @apply fixed bottom-5 right-5 hidden z-[100];
+  @apply fixed bottom-4 right-4 sm:bottom-5 sm:right-5 hidden z-[100] p-2 sm:p-3;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.3s, transform 0.3s;
@@ -354,6 +419,9 @@ html.dark #search-and-filter-controls.is-glassy {
   @apply !block;
   opacity: 1;
   transform: translateY(0);
+}
+#back-to-top svg {
+  @apply w-5 h-5 sm:w-6 sm:h-6;
 }
 
 /* Skeleton Loader */
@@ -367,9 +435,10 @@ html.dark #search-and-filter-controls.is-glassy {
 #feedback-modal-overlay {
   z-index: 500;
   transition: opacity 0.3s ease-in-out;
+  @apply p-2 sm:p-4;
 }
 #feedback-modal {
-  @apply relative bg-white dark:bg-slate-800 w-full max-w-2xl p-8 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto;
+  @apply relative bg-white dark:bg-slate-800 w-full max-w-2xl p-4 sm:p-8 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   transform: scale(0.95);
   opacity: 0;
@@ -383,11 +452,11 @@ html.dark #search-and-filter-controls.is-glassy {
 #resources > section > h2 {
   color: var(--color-text-primary);
   border-color: var(--color-brand-primary);
-  @apply text-3xl font-bold mb-8 border-l-4 pl-4 flex items-center gap-4;
+  @apply text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 border-l-4 pl-3 sm:pl-4 flex items-center gap-2 sm:gap-4;
 }
 #resources > section > h2 svg {
   color: var(--color-brand-accent);
-  @apply w-8 h-8;
+  @apply w-6 h-6 sm:w-8 sm:h-8;
 }
 
 /*================================================================*/
@@ -397,16 +466,16 @@ html.dark #search-and-filter-controls.is-glassy {
   background-color: var(--color-bg-secondary);
   color: var(--color-text-secondary);
   border-top: 1px solid var(--color-border);
-  @apply mt-20 py-12 px-6;
+  @apply mt-12 sm:mt-20 py-8 sm:py-12 px-4 sm:px-6;
 }
 
 .footer-heading {
   color: var(--color-text-primary);
-  @apply text-lg font-semibold mb-4;
+  @apply text-base sm:text-lg font-semibold mb-3 sm:mb-4;
 }
 
 .footer-about p, .footer-connect p {
-  @apply text-sm leading-relaxed;
+  @apply text-xs sm:text-sm leading-relaxed;
 }
 
 .footer-links ul {
@@ -416,13 +485,13 @@ html.dark #search-and-filter-controls.is-glassy {
 .footer-links a {
   color: var(--color-text-secondary);
   text-decoration: none;
-  @apply transition-colors hover:text-brand-primary hover:underline;
+  @apply transition-colors hover:text-brand-primary hover:underline text-xs sm:text-sm;
 }
 
 .github-link {
   background-color: var(--color-bg-primary);
   border: 1px solid var(--color-border);
-  @apply inline-flex items-center gap-2 mt-4 py-2 px-4 rounded-lg font-medium no-underline text-sm transition-all duration-200;
+  @apply inline-flex items-center gap-2 mt-3 sm:mt-4 py-2 px-3 sm:px-4 rounded-lg font-medium no-underline text-xs sm:text-sm transition-all duration-200;
   color: var(--color-text-primary);
   transform: translateY(0);
 }
@@ -432,10 +501,10 @@ html.dark #search-and-filter-controls.is-glassy {
   @apply shadow-md;
 }
 .github-link svg {
-  @apply w-5 h-5;
+  @apply w-4 h-4 sm:w-5 sm:h-5;
 }
 
 .footer-copyright {
   border-top: 1px solid var(--color-border);
-  @apply mt-8 pt-6 text-center text-sm;
+  @apply mt-6 sm:mt-8 pt-4 sm:pt-6 text-center text-xs sm:text-sm;
 }
