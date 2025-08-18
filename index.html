@@ -137,7 +137,7 @@
     <a href="#main-content" id="skip-to-main" class="skip-link">Skip to main content</a>
 
     <header class="sticky top-0 z-50 transition-all duration-300">
-        <nav class="container mx-auto flex flex-wrap justify-between items-center p-4">
+        <nav class="container mx-auto flex flex-wrap justify-between items-center p-3 sm:p-4">
             <a href="#" class="flex items-center" aria-label="Webaide Home">
                 <svg class="webaide-logo" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" role="img">
                   <title>Webaide Logo</title>
@@ -148,8 +148,8 @@
                 </svg>
             </a>
             <div class="flex items-center gap-2 sm:gap-4">
-                <button id="open-feedback-modal-btn" class="btn btn-primary text-sm px-3 py-2 sm:px-5 sm:text-base">Suggest / Feedback</button>
-                <button id="theme-toggle" aria-label="Activate light mode" class="w-10 h-10 p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-300">
+                <button id="open-feedback-modal-btn" class="btn btn-primary text-xs sm:text-sm px-2 py-1 sm:px-5 sm:py-2">Suggest / Feedback</button>
+                <button id="theme-toggle" aria-label="Activate light mode" class="w-8 h-8 sm:w-10 sm:h-10 p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-300">
                     <svg id="theme-toggle-sun" class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     <svg id="theme-toggle-moon" class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
@@ -157,25 +157,25 @@
         </nav>
     </header>
 
-    <main id="main-content" class="container mx-auto p-4 lg:p-8 outline-none">
-        <section class="text-center my-8 sm:my-12 md:my-24 hero-section">
-            <h1 id="main-heading" tabindex="-1" class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-heading font-extrabold leading-tight mb-4 text-slate-800 dark:text-white outline-none">Welcome to <span class="text-brand-primary">Webaide</span></h1>
-            <p class="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-8 sm:mb-10 font-medium px-4">The Accessibility Info & Development Ecosystem.<br class="hidden sm:block"/>Your complete toolkit for building accessible digital experiences.</p>
+    <main id="main-content" class="container mx-auto p-3 sm:p-4 lg:p-8 outline-none">
+        <section class="text-center my-6 sm:my-8 md:my-12 lg:my-16 xl:my-24 hero-section">
+            <h1 id="main-heading" tabindex="-1" class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-extrabold leading-tight mb-3 sm:mb-4 text-slate-800 dark:text-white outline-none">Welcome to <span class="text-brand-primary">Webaide</span></h1>
+            <p class="text-sm sm:text-base md:text-lg lg:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-4 sm:mb-6 lg:mb-8 font-medium px-2 sm:px-4">The Accessibility Info & Development Ecosystem.<br class="hidden sm:block"/>Your complete toolkit for building accessible digital experiences.</p>
             
             <div id="social-share-container">
-                <p class="text-sm sm:text-base md:text-lg font-semibold text-slate-700 dark:text-slate-300 mb-3 sm:mb-4">Share this resource hub:</p>
+                <p class="text-sm sm:text-base md:text-lg font-semibold text-slate-700 dark:text-slate-300 mb-2 sm:mb-3">Share this resource hub:</p>
                 <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-4">
-                    <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on X"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
-                    <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on Facebook"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
-                    <a id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg></a>
-                    <button id="copy-link-btn" class="copy-link-btn" aria-label="Copy page link"><svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span id="copy-link-text">Copy Link</span></button>
+                    <a id="share-twitter" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on X"><svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+                    <a id="share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on Facebook"><svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
+                    <a id="share-linkedin" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn" aria-label="Share this page on LinkedIn"><svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.369c0-2.029 1.56-2.029 1.56 0v8.369h4.98v-10.36c0-4.008-2.903-3.674-4.98-1.745z"></path></svg></a>
+                    <button id="copy-link-btn" class="copy-link-btn" aria-label="Copy page link"><svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span id="copy-link-text" class="text-xs sm:text-sm">Copy Link</span></button>
                 </div>
             </div>
         </section>
 
-        <search id="search-and-filter-controls" class="sticky top-[72px] z-40 -mx-4 px-4 py-4 md:-mx-6 md:px-6" role="search">
+        <search id="search-and-filter-controls" class="sticky top-[60px] sm:top-[72px] z-40 -mx-3 px-3 py-3 sm:-mx-4 sm:px-4 sm:py-4 md:-mx-6 md:px-6" role="search">
             <div class="max-w-4xl mx-auto">
-                <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-3 sm:gap-4">
                     <div id="search-container" class="relative flex-grow">
                         <div class="absolute inset-y-0 left-3 sm:left-4 flex items-center pointer-events-none">
                             <svg class="h-4 w-4 sm:h-5 sm:w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -185,16 +185,16 @@
                         <input type="text" id="search-input" placeholder="Search for any resource..." role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="suggestions-list">
                          <ul id="suggestions-list" role="listbox" aria-label="Search suggestions" class="hidden"></ul>
                     </div>
-                    <div id="filter-container" class="flex items-center gap-1 sm:gap-2 overflow-x-auto pb-4 -mb-4" role="group" aria-label="Resource Categories">
+                    <div id="filter-container" class="flex items-center gap-1 sm:gap-2 overflow-x-auto pb-3 -mb-3 sm:pb-4 sm:-mb-4" role="group" aria-label="Resource Categories">
                         </div>
                 </div>
                  <div id="search-results-announcer" class="sr-only" aria-live="polite"></div>
             </div>
         </search>
         
-        <div id="resources" class="mt-8 sm:mt-12">
+        <div id="resources" class="mt-6 sm:mt-8 lg:mt-12">
             <div id="skeleton-loader">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
                     <div class="skeleton-card"></div>
                     <div class="skeleton-card"></div>
                     <div class="skeleton-card"></div>
@@ -205,20 +205,20 @@
                     <div class="skeleton-card"></div>
                 </div>
             </div>
-            <div id="no-results-message" class="hidden text-center py-16">
-                <h3 class="text-xl sm:text-2xl font-bold text-slate-700 dark:text-slate-200">No Results Found</h3>
+            <div id="no-results-message" class="hidden text-center py-12 sm:py-16">
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-slate-700 dark:text-slate-200">No Results Found</h3>
                 <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-2">Try adjusting your search or filter criteria.</p>
             </div>
         </div>
     </main>
 
-    <div id="feedback-modal-overlay" class="fixed inset-0 items-center justify-center p-4 bg-black/60 hidden">
+    <div id="feedback-modal-overlay" class="fixed inset-0 items-center justify-center p-3 sm:p-4 bg-black/60 hidden">
         <div id="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedback-modal-title">
-            <button id="close-feedback-modal-btn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 dark:hover:text-white transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <button id="close-feedback-modal-btn" class="absolute top-3 right-3 sm:top-4 sm:right-4 text-slate-400 hover:text-slate-800 dark:hover:text-white transition">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 <span class="sr-only">Close dialog</span>
             </button>
-            <h2 id="feedback-modal-title" class="text-2xl font-bold mb-6 text-slate-900 dark:text-slate-100">Submit Feedback or Suggest a Resource</h2>
+            <h2 id="feedback-modal-title" class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-slate-900 dark:text-slate-100">Submit Feedback or Suggest a Resource</h2>
             
             <form id="feedback-form" name="feedback" method="POST" data-netlify="true">
                 <input type="hidden" name="form-name" value="feedback" />
@@ -227,7 +227,7 @@
                 </p>
                 <input type="hidden" id="feedback-context" name="feedback-context" value="">
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
                     <div>
                         <label for="submitter-name" class="form-label">Name <span class="text-red-500">*</span></label>
                         <input type="text" id="submitter-name" name="name" required class="form-input">
@@ -238,9 +238,9 @@
                     </div>
                 </div>
 
-                <fieldset class="mb-6">
+                <fieldset class="mb-4 sm:mb-6">
                     <legend class="form-label mb-2">What would you like to submit? <span class="text-red-500">*</span></legend>
-                    <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-4 sm:gap-6">
                         <div class="flex items-center">
                             <input type="radio" id="type-feedback" name="submission-type" value="feedback" required class="form-radio">
                             <label for="type-feedback" class="ml-2 block text-sm text-slate-900 dark:text-slate-200">Feedback</label>
@@ -280,7 +280,7 @@
                     </div>
                 </div>
 
-                <div class="mt-8 text-right">
+                <div class="mt-6 sm:mt-8 text-right">
                     <button type="submit" class="btn btn-primary disabled:bg-slate-400">Submit</button>
                 </div>
             </form>
@@ -288,11 +288,11 @@
     </div>
     
     <a aria-label="Back to top" href="#" id="back-to-top" class="bg-brand-primary text-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-brand-primary-dark transition">
-        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
     </a>
 
     <footer class="site-footer">
-        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             <div class="footer-about">
                 <h3 class="footer-heading">About Webaide</h3>
                 <p>Webaide is a community-driven resource hub dedicated to making the web more accessible for everyone. Discover tools, guides, and standards to help you build inclusive digital experiences.</p>
@@ -306,11 +306,13 @@
             </div>
             <div class="footer-connect">
                 <h3 class="footer-heading">Connect</h3>
-                <p>This project is open source! Contributions are welcome.</p>
-                <a href="https://github.com/bazzingacoder/webaide" target="_blank" rel="noopener noreferrer" class="github-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-                    <span>View on GitHub</span>
-                </a>
+                <p class="mb-2 sm:mb-3">This project is open source! Contributions are welcome.</p>
+                <div class="github-link-container">
+                    <a href="https://github.com/bazzingacoder/webaide" target="_blank" rel="noopener noreferrer" class="github-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                        <span>View on GitHub</span>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="footer-copyright">

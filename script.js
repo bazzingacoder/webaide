@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             title.innerHTML = `${iconSVG}<span>${category}</span>`;
 
             const grid = document.createElement('div');
-            grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6';
+            grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6';
             section.appendChild(title);
             section.appendChild(grid);
             resourcesContainer.appendChild(section);
@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const favoriteLabel = isFavorite ? `Remove ${item['Resource Text']} from favorites` : `Add ${item['Resource Text']} to favorites`;
                 
                 card.innerHTML = `
-                    <div class="flex-grow pr-24">
+                    <div class="flex-grow pr-16 sm:pr-20 lg:pr-24">
                         <h3><a href="${item.URL}" target="_blank" rel="noopener noreferrer">${item['Resource Text']}</a></h3>
                         ${descriptionHTML}
                     </div>
