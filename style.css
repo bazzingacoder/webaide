@@ -1897,7 +1897,7 @@ label {
 /* Edge/IE compatibility */
 @supports not (backdrop-filter: blur(8px)) {
   #search-and-filter-controls.is-glassy {
-    background-color: var(--color-bg-primary);
+  background-color: var(--color-bg-p  rimary);
   }
 }
 /*================================================================*/
