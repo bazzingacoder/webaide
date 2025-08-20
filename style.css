@@ -1883,6 +1883,7 @@ label {
 @supports (-webkit-appearance: none) {
   .form-input,
   #search-input {
+    appearance: none;
     -webkit-appearance: none;
   }
 }
