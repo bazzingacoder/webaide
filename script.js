@@ -37,6 +37,34 @@ document.addEventListener('DOMContentLoaded', async () => {
     let lastScrollY = window.scrollY;
 
     //================================================================
+    // TOAST NOTIFICATIONS
+    //================================================================
+    function showToast(message, type = 'info', duration = 3000) {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        
+        // Add an icon based on type
+        let icon = 'ℹ️';
+        if (type === 'success') icon = '✅';
+        if (type === 'favorite-add') icon = '★';
+        if (type === 'favorite-remove') icon = '☆';
+
+        toast.innerHTML = `<span>${icon}</span> ${message}`;
+        
+        container.appendChild(toast);
+
+        // Remove the toast after the duration
+        setTimeout(() => {
+            toast.classList.add('removing');
+            // Remove from DOM after animation
+            toast.addEventListener('animationend', () => {
+                toast.remove();
+            });
+        }, duration);
+    }
+
+    //================================================================
     // FAVORITES MANAGEMENT
     //================================================================
     function loadFavorites() {
@@ -58,12 +86,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             button.setAttribute('aria-pressed', 'false');
             button.setAttribute('aria-label', `Add ${resourceTitle} to favorites`);
             announcer.textContent = `${resourceTitle} removed from favorites.`;
+            showToast('Removed from favorites', 'favorite-remove');
         } else {
             favoriteResources.add(resourceURL);
             button.classList.add('active');
             button.setAttribute('aria-pressed', 'true');
             button.setAttribute('aria-label', `Remove ${resourceTitle} from favorites`);
             announcer.textContent = `${resourceTitle} added to favorites.`;
+            showToast('Added to favorites!', 'favorite-add');
         }
         saveFavorites();
         updateFavoritesButton();
@@ -186,13 +216,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         const formData = new FormData(form);
         const submissionType = formData.get('submission-type');
 
-        // ONLY intercept the submission if it's a new resource.
-        // For "feedback", we do nothing and let the form submit normally to Netlify.
         if (submissionType === 'resource') {
-            event.preventDefault(); // Stop the standard Netlify submission
-
-            const announcer = document.getElementById('announcer');
-
+            event.preventDefault(); 
             try {
                 const response = await fetch('/.netlify/functions/submit-resource', {
                     method: 'POST',
@@ -201,7 +226,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
 
                 if (response.ok) {
-                    announcer.textContent = 'Resource submission successful! A pull request will be created for review.';
+                    showToast('Resource submitted successfully!', 'success');
                     form.reset();
                     hideModal();
                 } else {
@@ -209,11 +234,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             } catch (error) {
                 console.error('Submission error:', error);
-                announcer.textContent = 'Sorry, there was an error submitting the resource. Please try again.';
+                showToast('Error submitting resource.', 'error');
             }
         }
     }
-
 
     function showModal(context = {}) {
         const { type = 'general', resourceTitle = '' } = context;
@@ -399,17 +423,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         const searchTerm = searchInput.value.toLowerCase().trim();
         let filteredData = allResourceData;
 
-        // Filter by favorites
         if (activeFilters.showFavorites) {
             filteredData = filteredData.filter(item => favoriteResources.has(item.URL));
         }
 
-        // Filter by categories
         if (activeFilters.categories.size > 0) {
             filteredData = filteredData.filter(item => activeFilters.categories.has(item.Category));
         }
 
-        // Filter by search term
         if (searchTerm) {
             filteredData = filteredData.filter(item => 
                 item['Resource Text'].toLowerCase().includes(searchTerm) || 
@@ -570,21 +591,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     function handleScroll() {
         const currentScrollY = window.scrollY;
 
-        // Back to Top Button
         if (window.pageYOffset > 300) {
             backToTopButton.classList.add('visible');
         } else {
             backToTopButton.classList.remove('visible');
         }
         
-        // Sticky Header Effects
         if (currentScrollY > 50) {
             searchControls.classList.add('is-glassy');
         } else {
             searchControls.classList.remove('is-glassy');
         }
 
-        // Hide search bar on scroll down
         if (currentScrollY > lastScrollY && currentScrollY > 200) {
             searchControls.classList.add('is-hidden');
         } else {
@@ -620,13 +638,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         const copyLinkText = document.getElementById('copy-link-text');
         copyLinkBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(window.location.href).then(() => {
+                const originalText = copyLinkText.textContent;
                 copyLinkText.textContent = 'Copied!';
                 copyLinkBtn.setAttribute('aria-label', 'Link copied to clipboard');
+                showToast('Link copied to clipboard!', 'success');
                 setTimeout(() => {
-                    copyLinkText.textContent = 'Copy Link';
+                    copyLinkText.textContent = originalText;
                     copyLinkBtn.setAttribute('aria-label', 'Copy page link');
                 }, 2000);
-            }).catch(err => { console.error('Failed to copy text: ', err); });
+            }).catch(err => { 
+                console.error('Failed to copy text: ', err);
+                showToast('Failed to copy link.', 'error');
+            });
         });
     }
 
@@ -682,7 +705,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     function toggleMenu(button) {
         const menu = button.nextElementSibling;
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        // Close all other menus
         document.querySelectorAll('.card-menu').forEach(m => {
             if (m !== menu) {
                 const b = m.parentElement.querySelector('.card-menu-btn');
@@ -739,7 +761,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         if (!copyTextSpan) return;
                         const originalText = copyTextSpan.textContent;
                         copyTextSpan.textContent = 'Copied!';
-                        announcer.textContent = `Copied ${data['Resource Text']} to clipboard.`;
+                        showToast(`Copied ${data['Resource Text']}`, 'success');
                         setTimeout(() => {
                             copyTextSpan.textContent = originalText;
                         }, 2000);
