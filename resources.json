@@ -880,5 +880,11 @@
         "Resource Text": "WCAG for humans _ Andrew Hick",
         "URL": "https://andrewhick.com/accessibility/humans/",
         "Description": "This guide groups WCAG by 7 practical themes instead of the traditional structure of Perceivable, Operable, Understandable and Robust (POUR). Overall, it covers 55 success criteria — testable things to ensure you pass WCAG."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "A11yInspect_ Browser Extension for Accessibility Testing",
+        "URL": "https://www.barrierbreak.com/a11yinspect/",
+        "Description": "Streamline Accessibility Testing with Smart Automation\nFaster Issue Detection, Increased Accuracy & More Coverage to meet Accessibility Standards. Let A11yInspect reduce time taken to implement accessibility for your developers & accessibility professionals.."
     }
 ]
