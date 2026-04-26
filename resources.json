@@ -880,5 +880,11 @@
         "Resource Text": "WCAG for humans _ Andrew Hick",
         "URL": "https://andrewhick.com/accessibility/humans/",
         "Description": "This guide groups WCAG by 7 practical themes instead of the traditional structure of Perceivable, Operable, Understandable and Robust (POUR). Overall, it covers 55 success criteria — testable things to ensure you pass WCAG."
+    },
+    {
+        "Category": "Other",
+        "Resource Text": "",
+        "URL": "https://trivia11y.com/multiple-choice/all-questions/22/",
+        "Description": "trivia11y"
     }
 ]
