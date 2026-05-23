@@ -734,19 +734,6 @@ header.is-scrolled + main #search-and-filter-controls {
   flex-direction: column;
 }
 
-.card-category-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-md);
-  margin-bottom: var(--space-3);
-  width: fit-content;
-}
 
 .resource-card h3 {
   margin-bottom: var(--space-2);
@@ -881,21 +868,7 @@ header.is-scrolled + main #search-and-filter-controls {
 }
 
 .resources-list-layout .resource-card .card-content {
-  flex-direction: row;
-  align-items: center;
-  gap: var(--space-4);
-  flex: 1;
   padding-right: var(--space-16);
-}
-
-.resources-list-layout .resource-card .card-category-badge {
-  margin-bottom: 0;
-  flex-shrink: 0;
-}
-
-.resources-list-layout .resource-card .card-text-group {
-  display: flex;
-  flex-direction: column;
 }
 
 .resources-list-layout .resource-card h3 {

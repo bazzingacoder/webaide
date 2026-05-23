@@ -386,18 +386,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             "blogs / people / other resources to follow": "rgba(249, 115, 22, 0.2)"
         };
 
-        const categoryTextClass = {
-            "Accessibility Standards": "text-indigo-600 bg-indigo-50 dark:text-indigo-400 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900/40",
-            "Useful tools, resources and references": "text-emerald-600 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/40",
-            "Guides & Cheat Sheets": "text-amber-600 bg-amber-50 dark:text-amber-400 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/40",
-            "Checklists": "text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/40",
-            "Auditing and Testing tools": "text-cyan-600 bg-cyan-50 dark:text-cyan-400 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-900/40",
-            "License/Certificates": "text-violet-600 bg-violet-50 dark:text-violet-400 dark:bg-violet-950/40 border border-violet-200 dark:border-violet-900/40",
-            "Other": "text-pink-600 bg-pink-50 dark:text-pink-400 dark:bg-pink-950/40 border border-pink-200 dark:border-pink-900/40",
-            "Other must read resources from web accessibility initiative": "text-purple-600 bg-purple-50 dark:text-purple-400 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-900/40",
-            "blogs / people / other resources to follow": "text-orange-600 bg-orange-50 dark:text-orange-400 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-900/40"
-        };
-        
         dataToRender.forEach((item) => {
             const parentSection = Array.from(document.querySelectorAll('#resources section')).find(s => s.querySelector('h2 > span').textContent === item.Category);
             if (parentSection) {
@@ -407,7 +395,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 card.setAttribute('data-category', item.Category);
                 card.style.setProperty('--glow-color', categoryGlowColors[item.Category] || 'rgba(99, 102, 241, 0.15)');
                 
-                const badgeClass = categoryTextClass[item.Category] || "text-slate-600 bg-slate-50 border border-slate-200";
                 const isFavorite = favoriteResources.has(item.URL);
                 const favoriteLabel = isFavorite ? `Remove ${item['Resource Text']} from favorites` : `Add ${item['Resource Text']} to favorites`;
                 const menuId = `menu-for-item-${item.URL.replace(/[^a-zA-Z0-9]/g, "")}`;
@@ -415,10 +402,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 
                 card.innerHTML = `
                     <div class="card-content">
-                        <span class="card-category-badge ${badgeClass}">
-                            ${categoryIconMap[item.Category] || ''}
-                            <span>${item.Category}</span>
-                        </span>
                         <div class="card-text-group">
                             <h3><a href="${item.URL}" target="_blank" rel="noopener noreferrer">${item['Resource Text']}</a></h3>
                             ${descriptionHTML}
