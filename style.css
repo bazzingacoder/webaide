@@ -612,43 +612,34 @@ header.is-scrolled + main #search-and-filter-controls {
   box-shadow: 0 4px 10px hsl(var(--color-brand-primary-h), var(--color-brand-primary-s), var(--color-brand-primary-l) / 0.15);
 }
 
-/* Grid/List Segmented Switcher */
-.view-switcher {
-  display: inline-flex;
-  background: var(--color-bg-tertiary);
-  padding: 3px;
+/* View Toggle Button */
+#view-toggle {
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: var(--radius-full);
+  background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
-  flex-shrink: 0;
-}
-
-.switcher-btn {
-  background: transparent;
-  border: none;
-  color: var(--color-text-tertiary);
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all var(--transition-medium);
+  flex-shrink: 0;
 }
 
-.switcher-btn:hover {
-  color: var(--color-text-primary);
-}
-
-.switcher-btn.active {
-  background: var(--color-bg-secondary);
+#view-toggle:hover {
+  background: var(--color-bg-tertiary);
   color: var(--color-brand-primary);
-  box-shadow: var(--shadow-sm);
+  border-color: var(--color-brand-primary);
+  transform: scale(1.05);
 }
 
-.switcher-btn svg {
-  width: 1.25rem;
-  height: 1.25rem;
-}
+#view-toggle-grid { display: none; }
+#view-toggle-list { display: block; }
+
+.view-mode-list #view-toggle-grid { display: block; }
+.view-mode-list #view-toggle-list { display: none; }
 
 /*================================================================*/
 /* RESOURCE CARDS SYSTEM                                          */

@@ -24,8 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const resourceCategorySelect = document.getElementById('resource-category');
     const noResultsMessage = document.getElementById('no-results-message');
     
-    const gridViewBtn = document.getElementById('grid-view-btn');
-    const listViewBtn = document.getElementById('list-view-btn');
+    const viewToggleBtn = document.getElementById('view-toggle');
     
     //================================================================
     // STATE VARIABLES
@@ -77,24 +76,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     // VIEW SWITCHER MANAGEMENT
     //================================================================
     function initializeViewMode() {
-        gridViewBtn.classList.toggle('active', activeViewMode === 'grid');
-        gridViewBtn.setAttribute('aria-pressed', activeViewMode === 'grid');
-        listViewBtn.classList.toggle('active', activeViewMode === 'list');
-        listViewBtn.setAttribute('aria-pressed', activeViewMode === 'list');
+        // Synchronize initial UI state
+        viewToggleBtn.classList.toggle('view-mode-list', activeViewMode === 'list');
+        viewToggleBtn.setAttribute('aria-label', activeViewMode === 'grid' ? 'Switch to List View' : 'Switch to Grid View');
+        
+        viewToggleBtn.addEventListener('click', toggleViewMode);
+    }
 
-        gridViewBtn.addEventListener('click', () => setViewMode('grid'));
-        listViewBtn.addEventListener('click', () => setViewMode('list'));
+    function toggleViewMode() {
+        const nextMode = activeViewMode === 'grid' ? 'list' : 'grid';
+        setViewMode(nextMode);
     }
 
     function setViewMode(mode) {
-        if (activeViewMode === mode) return;
         activeViewMode = mode;
         localStorage.setItem('webaide_view_mode', mode);
 
-        gridViewBtn.classList.toggle('active', mode === 'grid');
-        gridViewBtn.setAttribute('aria-pressed', mode === 'grid');
-        listViewBtn.classList.toggle('active', mode === 'list');
-        listViewBtn.setAttribute('aria-pressed', mode === 'list');
+        // Update button visual class & aria
+        viewToggleBtn.classList.toggle('view-mode-list', mode === 'list');
+        viewToggleBtn.setAttribute('aria-label', mode === 'grid' ? 'Switch to List View' : 'Switch to Grid View');
 
         // Apply grid/list layout styles
         document.querySelectorAll('#resources .grid').forEach(grid => {
