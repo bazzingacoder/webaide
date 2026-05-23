@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const skeletonLoader = document.getElementById('skeleton-loader');
     const resourcesContainer = document.getElementById('resources');
     const searchInput = document.getElementById('search-input');
+    const clearSearchBtn = document.getElementById('clear-search-btn');
     const suggestionsList = document.getElementById('suggestions-list');
     const announcer = document.getElementById('search-results-announcer');
     const backToTopButton = document.getElementById('back-to-top');
@@ -23,6 +24,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const resourceCategorySelect = document.getElementById('resource-category');
     const noResultsMessage = document.getElementById('no-results-message');
     
+    const gridViewBtn = document.getElementById('grid-view-btn');
+    const listViewBtn = document.getElementById('list-view-btn');
+    
     //================================================================
     // STATE VARIABLES
     //================================================================
@@ -35,6 +39,75 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
     let activeSuggestionIndex = -1;
     let lastScrollY = window.scrollY;
+    let activeViewMode = localStorage.getItem('webaide_view_mode') || 'grid';
+ 
+    //================================================================
+    // TOAST NOTIFICATIONS
+    //================================================================
+    function showToast(message, type = 'success') {
+        const toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) return;
+
+        const toast = document.createElement('div');
+        toast.className = `toast-msg ${type}`;
+        
+        let iconSVG = '';
+        if (type === 'success') {
+            iconSVG = `<svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+        } else {
+            iconSVG = `<svg class="w-5 h-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+        }
+
+        toast.innerHTML = `${iconSVG}<span>${message}</span>`;
+        toastContainer.appendChild(toast);
+
+        // Screen reader announcer notification
+        announcer.textContent = message;
+
+        // Animate slide out and remove toast
+        setTimeout(() => {
+            toast.style.animation = 'slideInToast 300ms cubic-bezier(0.16, 1, 0.3, 1) reverse forwards';
+            setTimeout(() => {
+                toast.remove();
+            }, 300);
+        }, 3000);
+    }
+
+    //================================================================
+    // VIEW SWITCHER MANAGEMENT
+    //================================================================
+    function initializeViewMode() {
+        gridViewBtn.classList.toggle('active', activeViewMode === 'grid');
+        gridViewBtn.setAttribute('aria-pressed', activeViewMode === 'grid');
+        listViewBtn.classList.toggle('active', activeViewMode === 'list');
+        listViewBtn.setAttribute('aria-pressed', activeViewMode === 'list');
+
+        gridViewBtn.addEventListener('click', () => setViewMode('grid'));
+        listViewBtn.addEventListener('click', () => setViewMode('list'));
+    }
+
+    function setViewMode(mode) {
+        if (activeViewMode === mode) return;
+        activeViewMode = mode;
+        localStorage.setItem('webaide_view_mode', mode);
+
+        gridViewBtn.classList.toggle('active', mode === 'grid');
+        gridViewBtn.setAttribute('aria-pressed', mode === 'grid');
+        listViewBtn.classList.toggle('active', mode === 'list');
+        listViewBtn.setAttribute('aria-pressed', mode === 'list');
+
+        // Apply grid/list layout styles
+        document.querySelectorAll('#resources .grid').forEach(grid => {
+            if (mode === 'list') {
+                grid.className = 'grid resources-list-layout';
+            } else {
+                grid.className = 'grid grid-cols-responsive';
+            }
+        });
+        
+        filterAndSearch();
+        showToast(`Layout switched to ${mode} mode.`);
+    }
 
     //================================================================
     // FAVORITES MANAGEMENT
@@ -57,13 +130,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             button.classList.remove('active');
             button.setAttribute('aria-pressed', 'false');
             button.setAttribute('aria-label', `Add ${resourceTitle} to favorites`);
-            announcer.textContent = `${resourceTitle} removed from favorites.`;
+            showToast(`${resourceTitle} removed from favorites.`, 'success');
         } else {
             favoriteResources.add(resourceURL);
             button.classList.add('active');
             button.setAttribute('aria-pressed', 'true');
             button.setAttribute('aria-label', `Remove ${resourceTitle} from favorites`);
-            announcer.textContent = `${resourceTitle} added to favorites.`;
+            showToast(`${resourceTitle} added to favorites!`, 'success');
         }
         saveFavorites();
         updateFavoritesButton();
@@ -86,7 +159,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function toggleTheme() {
         const currentTheme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
-        applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(targetTheme);
+        showToast(`Theme switched to ${targetTheme} mode.`, 'success');
     }
     
     function initializeTheme() {
@@ -96,7 +171,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     //================================================================
-    // DATA FETCHING & INITIAL RENDER
+    // DATA FETCHING
     //================================================================
     async function fetchResources() {
         try {
@@ -107,7 +182,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             console.error("Could not fetch resources:", error);
             skeletonLoader.classList.add('hidden');
-            resourcesContainer.innerHTML = `<p class="text-center text-red-500 dark:text-red-400">Could not load resources. Please try again later.</p>`;
+            resourcesContainer.innerHTML = `<p class="text-center text-red-500 font-bold">Could not load resources. Please try again later.</p>`;
+            showToast("Failed to fetch resource registry database.", "error");
         }
     }
 
@@ -133,7 +209,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const categoriesParam = params.get('categories');
         const favoritesParam = params.get('favorites');
 
-        if (searchTerm) searchInput.value = searchTerm;
+        if (searchTerm) {
+            searchInput.value = searchTerm;
+            clearSearchBtn.classList.remove('hidden');
+        }
         if (favoritesParam === 'true') {
             activeFilters.showFavorites = true;
         }
@@ -186,12 +265,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         const formData = new FormData(form);
         const submissionType = formData.get('submission-type');
 
-        // ONLY intercept the submission if it's a new resource.
-        // For "feedback", we do nothing and let the form submit normally to Netlify.
         if (submissionType === 'resource') {
-            event.preventDefault(); // Stop the standard Netlify submission
-
-            const announcer = document.getElementById('announcer');
+            event.preventDefault(); 
 
             try {
                 const response = await fetch('/.netlify/functions/submit-resource', {
@@ -201,7 +276,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
 
                 if (response.ok) {
-                    announcer.textContent = 'Resource submission successful! A pull request will be created for review.';
+                    showToast('Resource submitted successfully! A Pull Request will be created.', 'success');
                     form.reset();
                     hideModal();
                 } else {
@@ -209,11 +284,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             } catch (error) {
                 console.error('Submission error:', error);
-                announcer.textContent = 'Sorry, there was an error submitting the resource. Please try again.';
+                showToast('Submission error. Please try again later.', 'error');
             }
+        } else {
+            // "feedback" submission let it process standard Netlify post
+            showToast('Feedback submitted successfully. Thank you!', 'success');
         }
     }
-
 
     function showModal(context = {}) {
         const { type = 'general', resourceTitle = '' } = context;
@@ -231,14 +308,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         
         elementToFocusOnClose = document.activeElement;
-        modalOverlay.classList.remove('hidden');
-        modalOverlay.classList.add('flex');
+        modalOverlay.style.display = 'flex';
         setTimeout(() => document.getElementById('submitter-name').focus(), 100);
     }
 
     function hideModal() {
-        modalOverlay.classList.add('hidden');
-        modalOverlay.classList.remove('flex');
+        modalOverlay.style.display = 'none';
         if (elementToFocusOnClose) elementToFocusOnClose.focus();
     }
 
@@ -259,20 +334,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     //================================================================
     // DYNAMIC CONTENT RENDERING
     //================================================================
+    const categoryIconMap = {
+        "Accessibility Standards": `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 17.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A11.953 11.953 0 0 1 12 16.5c-2.998 0-5.74-1.1-7.843-2.918m15.686-5.418A8.959 8.959 0 0 0 21 12c0 .778-.099 1.533-.284 2.253m0 0a8.997 8.997 0 0 1-7.843 4.582M12 16.5a8.997 8.997 0 0 0-7.843-4.582m7.843 0a11.953 11.953 0 0 0 7.843-2.918m-15.686 0A11.953 11.953 0 0 0 12 10.5c2.998 0 5.74 1.1 7.843 2.918"/></svg>`,
+        "Useful tools, resources and references": `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25M19.5 5.25l-7.5 7.5-7.5-7.5m15 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 5.25m16.5 0V3.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v1.5"/></svg>`,
+        "Guides & Cheat Sheets": `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>`,
+        "Checklists": `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.4-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.4-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.4 1.593-3.068a3.745 3.745 0 01 1.043-3.296 3.746 3.746 0 01 3.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.4.63 3.068 1.593a3.746 3.746 0 01 3.296 1.043 3.746 3.746 0 01 1.043 3.296A3.745 3.745 0 0121 12z"/></svg>`,
+        "Auditing and Testing tools": `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9l10.5-3m0 0L21 9M19.5 6l-3 9.75M9 9a3 3 0 11-6 0 3 3 0 016 0zm3 9a3 3 0 11-6 0 3 3 0 016 0zm9 0a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
+        "License/Certificates": `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>`,
+        "Other": `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.007 5.25H3.75v.008h.008V12zm-.007 5.25h.007v.008H3.75v-.008z"/></svg>`,
+        "Other must read resources from web accessibility initiative": `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>`,
+        "blogs / people / other resources to follow": `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`
+    };
+
     function createSections() {
         const allCategories = [...new Set(allResourceData.map(item => item.Category))];
-        const categoryIconMap = {
-            "Accessibility Standards": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A11.953 11.953 0 0 1 12 16.5c-2.998 0-5.74-1.1-7.843-2.918m15.686-5.418A8.959 8.959 0 0 0 21 12c0 .778-.099 1.533-.284 2.253m0 0a8.997 8.997 0 0 1-7.843 4.582M12 16.5a8.997 8.997 0 0 0-7.843-4.582m7.843 0a11.953 11.953 0 0 0 7.843-2.918m-15.686 0A11.953 11.953 0 0 0 12 10.5c2.998 0 5.74 1.1 7.843 2.918" /></svg>`,
-            "Useful tools, resources and references": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h12M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-12a2.25 2.25 0 0 1-2.25-2.25V3.75m16.5 0v16.5h-16.5V3.75m16.5 0L12 14.25 3.75 3.75" /></svg>`,
-            "Guides & Cheat Sheets": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>`,
-            "Checklists": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.4-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.4-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.4 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.4.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" /></svg>`,
-            "Auditing and Testing tools": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>`,
-            "License/Certificates": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>`,
-            "Other": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>`,
-            "Other must read resources from web accessibility initiative": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" /></svg>`,
-            "blogs / people / other resources to follow": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.952a4.5 4.5 0 0 1-9 0m9 0a4.5 4.5 0 0 0-9 0m9 0h.008c.341 0 .62.279.62.62v.008a.62.62 0 0 1-.62.62h-.008a.62.62 0 0 1-.62-.62v-.008c0-.341.279-.62.62-.62Z" /></svg>`
-        };
-
+        
         allCategories.forEach(category => {
             const section = document.createElement('section');
             const title = document.createElement('h2');
@@ -281,7 +357,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             title.innerHTML = `${iconSVG}<span>${category}</span>`;
 
             const grid = document.createElement('div');
-            grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6';
+            grid.className = activeViewMode === 'list' ? 'grid resources-list-layout' : 'grid grid-cols-responsive';
+            
             section.appendChild(title);
             section.appendChild(grid);
             resourcesContainer.appendChild(section);
@@ -296,6 +373,30 @@ document.addEventListener('DOMContentLoaded', async () => {
         } else {
             noResultsMessage.classList.add('hidden');
         }
+
+        const categoryGlowColors = {
+            "Accessibility Standards": "rgba(99, 102, 241, 0.2)",
+            "Useful tools, resources and references": "rgba(16, 185, 129, 0.2)",
+            "Guides & Cheat Sheets": "rgba(245, 158, 11, 0.2)",
+            "Checklists": "rgba(59, 130, 246, 0.2)",
+            "Auditing and Testing tools": "rgba(6, 182, 212, 0.2)",
+            "License/Certificates": "rgba(139, 92, 246, 0.2)",
+            "Other": "rgba(236, 72, 153, 0.2)",
+            "Other must read resources from web accessibility initiative": "rgba(167, 139, 250, 0.2)",
+            "blogs / people / other resources to follow": "rgba(249, 115, 22, 0.2)"
+        };
+
+        const categoryTextClass = {
+            "Accessibility Standards": "text-indigo-600 bg-indigo-50 dark:text-indigo-400 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900/40",
+            "Useful tools, resources and references": "text-emerald-600 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/40",
+            "Guides & Cheat Sheets": "text-amber-600 bg-amber-50 dark:text-amber-400 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/40",
+            "Checklists": "text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/40",
+            "Auditing and Testing tools": "text-cyan-600 bg-cyan-50 dark:text-cyan-400 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-900/40",
+            "License/Certificates": "text-violet-600 bg-violet-50 dark:text-violet-400 dark:bg-violet-950/40 border border-violet-200 dark:border-violet-900/40",
+            "Other": "text-pink-600 bg-pink-50 dark:text-pink-400 dark:bg-pink-950/40 border border-pink-200 dark:border-pink-900/40",
+            "Other must read resources from web accessibility initiative": "text-purple-600 bg-purple-50 dark:text-purple-400 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-900/40",
+            "blogs / people / other resources to follow": "text-orange-600 bg-orange-50 dark:text-orange-400 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-900/40"
+        };
         
         dataToRender.forEach((item) => {
             const parentSection = Array.from(document.querySelectorAll('#resources section')).find(s => s.querySelector('h2 > span').textContent === item.Category);
@@ -303,24 +404,34 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const grid = parentSection.querySelector('.grid');
                 const card = document.createElement('div');
                 card.className = 'resource-card';
-                let descriptionHTML = item.Description ? `<p>${item.Description}</p>` : '';
-                const menuId = `menu-for-item-${item.URL.replace(/[^a-zA-Z0-9]/g, "")}`;
+                card.setAttribute('data-category', item.Category);
+                card.style.setProperty('--glow-color', categoryGlowColors[item.Category] || 'rgba(99, 102, 241, 0.15)');
+                
+                const badgeClass = categoryTextClass[item.Category] || "text-slate-600 bg-slate-50 border border-slate-200";
                 const isFavorite = favoriteResources.has(item.URL);
                 const favoriteLabel = isFavorite ? `Remove ${item['Resource Text']} from favorites` : `Add ${item['Resource Text']} to favorites`;
+                const menuId = `menu-for-item-${item.URL.replace(/[^a-zA-Z0-9]/g, "")}`;
+                let descriptionHTML = item.Description ? `<p>${item.Description}</p>` : '';
                 
                 card.innerHTML = `
-                    <div class="flex-grow pr-16 sm:pr-20 lg:pr-24">
-                        <h3><a href="${item.URL}" target="_blank" rel="noopener noreferrer">${item['Resource Text']}</a></h3>
-                        ${descriptionHTML}
+                    <div class="card-content">
+                        <span class="card-category-badge ${badgeClass}">
+                            ${categoryIconMap[item.Category] || ''}
+                            <span>${item.Category}</span>
+                        </span>
+                        <div class="card-text-group">
+                            <h3><a href="${item.URL}" target="_blank" rel="noopener noreferrer">${item['Resource Text']}</a></h3>
+                            ${descriptionHTML}
+                        </div>
                     </div>
                     <div class="card-actions">
                         <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-url="${item.URL}" data-title="${item['Resource Text']}" aria-pressed="${isFavorite}" aria-label="${favoriteLabel}">
-                            <svg class="w-6 h-6 star-outline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
-                            <svg class="w-6 h-6 star-fill" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 star-outline" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                            <svg class="w-5 h-5 star-fill" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                         </button>
                         <div class="relative">
                             <button class="card-menu-btn text-slate-500 dark:text-slate-400" aria-haspopup="true" aria-expanded="false" aria-controls="${menuId}" aria-label="Options for ${item['Resource Text']}">
-                                <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01"></path></svg>
+                                <svg class="w-5 h-5 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01"></path></svg>
                             </button>
                             <div id="${menuId}" class="card-menu hidden" role="menu" aria-label="Share options for ${item['Resource Text']}">
                                 <button class="card-menu-item" role="menuitem" data-action="share-twitter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>Share on X</button>
@@ -331,15 +442,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </div>
                         </div>
                     </div>
-                    `;
+                `;
                 grid.appendChild(card);
             }
         });
 
+        // Staggered fade in load effect
         requestAnimationFrame(() => {
             const renderedCards = resourcesContainer.querySelectorAll('.resource-card');
             renderedCards.forEach((card, index) => {
-                card.style.setProperty('--delay', `${index * 0.05}s`);
+                card.style.setProperty('--delay', `${index * 0.04}s`);
                 card.classList.add('is-visible');
             });
         });
@@ -446,6 +558,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             e.preventDefault();
             showModal();
         });
+        
+        // Search clear button
+        searchInput.addEventListener('input', () => {
+            if (searchInput.value.trim().length > 0) {
+                clearSearchBtn.classList.remove('hidden');
+            } else {
+                clearSearchBtn.classList.add('hidden');
+            }
+        });
+
+        clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            clearSearchBtn.classList.add('hidden');
+            searchInput.focus();
+            showSuggestions();
+            filterAndSearch();
+            showToast('Search query cleared.', 'success');
+        });
     }
 
     function updateActiveFilterButtons() {
@@ -510,6 +640,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 li.id = `suggestion-${index}`;
                 li.addEventListener('click', () => {
                     searchInput.value = item['Resource Text'];
+                    clearSearchBtn.classList.remove('hidden');
                     suggestionsList.classList.add('hidden');
                     searchInput.setAttribute('aria-expanded', 'false');
                     filterAndSearch();
@@ -569,23 +700,35 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function handleScroll() {
         const currentScrollY = window.scrollY;
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        
+        // Circular progress depth indicator
+        const scrollPercent = totalHeight > 0 ? (currentScrollY / totalHeight) * 100 : 0;
+        const progressCircle = document.querySelector('#back-to-top .bar');
+        if (progressCircle) {
+            // Stroke dasharray is 100
+            const offset = 100 - scrollPercent;
+            progressCircle.style.strokeDashoffset = offset;
+        }
 
-        // Back to Top Button
-        if (window.pageYOffset > 300) {
+        if (currentScrollY > 300) {
             backToTopButton.classList.add('visible');
         } else {
             backToTopButton.classList.remove('visible');
         }
         
-        // Sticky Header Effects
-        if (currentScrollY > 50) {
+        // Floating Nav effects on scroll
+        const headerEl = document.querySelector('header');
+        if (currentScrollY > 40) {
+            headerEl.classList.add('is-scrolled');
             searchControls.classList.add('is-glassy');
         } else {
+            headerEl.classList.remove('is-scrolled');
             searchControls.classList.remove('is-glassy');
         }
 
         // Hide search bar on scroll down
-        if (currentScrollY > lastScrollY && currentScrollY > 200) {
+        if (currentScrollY > lastScrollY && currentScrollY > 200 && modalOverlay.style.display !== 'flex') {
             searchControls.classList.add('is-hidden');
         } else {
             searchControls.classList.remove('is-hidden');
@@ -620,6 +763,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const copyLinkText = document.getElementById('copy-link-text');
         copyLinkBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('Website link copied to clipboard!', 'success');
                 copyLinkText.textContent = 'Copied!';
                 copyLinkBtn.setAttribute('aria-label', 'Link copied to clipboard');
                 setTimeout(() => {
@@ -630,7 +774,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // Card Menu Logic
+    // Card Actions Click Handler
     function handleResourceCardClick(e) {
         const favoriteButton = e.target.closest('.favorite-btn');
         if (favoriteButton) {
@@ -682,7 +826,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     function toggleMenu(button) {
         const menu = button.nextElementSibling;
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        // Close all other menus
+        // Close all other active menus
         document.querySelectorAll('.card-menu').forEach(m => {
             if (m !== menu) {
                 const b = m.parentElement.querySelector('.card-menu-btn');
@@ -735,21 +879,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                     window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(data.URL)}&title=${encodeURIComponent(data['Resource Text'])}`, '_blank');
                 } else if (action === 'copy') {
                     navigator.clipboard.writeText(textToShare).then(() => {
-                        const copyTextSpan = menuItem.querySelector('.copy-text');
-                        if (!copyTextSpan) return;
-                        const originalText = copyTextSpan.textContent;
-                        copyTextSpan.textContent = 'Copied!';
-                        announcer.textContent = `Copied ${data['Resource Text']} to clipboard.`;
-                        setTimeout(() => {
-                            copyTextSpan.textContent = originalText;
-                        }, 2000);
+                        showToast(`Copied ${data['Resource Text']} details to clipboard!`, 'success');
                     });
                 }
                 break;
         }
     }
 
-    // --- Skip Link Logic ---
+    // --- Skip Links Logic ---
     function setupSkipLinks() {
         document.getElementById('skip-to-search').addEventListener('click', (e) => {
             e.preventDefault();
@@ -767,6 +904,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     //================================================================
     async function init() {
         initializeTheme();
+        initializeViewMode();
         loadFavorites();
         await fetchResources();
         if (allResourceData.length > 0) {
