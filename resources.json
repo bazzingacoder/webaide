@@ -886,5 +886,11 @@
         "Resource Text": "A11yInspect_ Browser Extension for Accessibility Testing",
         "URL": "https://www.barrierbreak.com/a11yinspect/",
         "Description": "Streamline Accessibility Testing with Smart Automation\nFaster Issue Detection, Increased Accuracy & More Coverage to meet Accessibility Standards. Let A11yInspect reduce time taken to implement accessibility for your developers & accessibility professionals.."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "FrontendAtlas UI Interview Blueprint",
+        "URL": "https://frontendatlas.com/guides/interview-blueprint/ui-interviews",
+        "Description": "A free frontend UI interview guide covering accessible components, keyboard and ARIA behavior, responsive layouts, and loading, error, and empty states."
     }
 ]
