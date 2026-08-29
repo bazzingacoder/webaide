@@ -892,5 +892,11 @@
         "Resource Text": "FrontendAtlas: Make a Page Accessible",
         "URL": "https://frontendatlas.com/html/trivia/web-accessibility-make-page-accessible",
         "Description": "A practical frontend interview guide covering semantic HTML, keyboard access, focus management, labels, contrast, and screen-reader checks, with explanations of why each improvement matters."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "FrontendAtlas UI Interview Blueprint",
+        "URL": "https://frontendatlas.com/guides/interview-blueprint/ui-interviews",
+        "Description": "A free frontend UI interview guide covering accessible components, keyboard and ARIA behavior, responsive layouts, and loading, error, and empty states."
     }
 ]
