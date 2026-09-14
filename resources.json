@@ -898,5 +898,11 @@
         "Resource Text": "FrontendAtlas UI Interview Blueprint",
         "URL": "https://frontendatlas.com/guides/interview-blueprint/ui-interviews",
         "Description": "A free frontend UI interview guide covering accessible components, keyboard and ARIA behavior, responsive layouts, and loading, error, and empty states."
+    },
+    {
+        "Category": "Other",
+        "Resource Text": "Daily Accessibility",
+        "URL": "https://daily-a11y.com/",
+        "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
     }
 ]
