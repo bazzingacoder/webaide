@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "HeyUtils Contrast Checker",
+        "URL": "https://heyutils.com/tools/contrast-checker/",
+        "Description": "Submitted by the HeyUtils team. Free browser-based checker for foreground/background color pairs. Shows WCAG AA/AAA results, accounts for text size, bold weight and foreground opacity, and provides text previews and adjustable color suggestions. Calculation is local and no account or installation is needed. It checks a color pair rather than an entire website."
     }
 ]
