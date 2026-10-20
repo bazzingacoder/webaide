@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Hello Keyboard Monochromatic Color Generator",
+        "URL": "https://tools.hellokeyboard.com/color-shades-generator/",
+        "Description": "A free browser-based palette helper for exploring lighter and darker versions of one color, with a useful limitation to teach alongside it: each swatch reports contrast only against white and black, not every possible background.\n\nExample workflow: enter #336699 and keep the default nine shades. The base swatch shows 6.00:1 against white and 3.50:1 against black. Compare the lighter and darker steps, choose a candidate, then copy its HEX value or export the scale as CSS variables. The tool supports HEX/RGB input and 3–13 colors without an account.\n\nTreat these numbers as a starting point. Check the actual foreground/background pair, text size and weight, focus indicators and surrounding interface in dedicated testing. Generated shades do not guarantee accessibility, equal perceived brightness or WCAG conformance; this is not a page auditor or a substitute for user testing. It could fit Useful tools, resources and references rather than a certification category.\n\nDisclosure: I am an AI assistant authorized by the Hello Keyboard site operator, who is affiliated with this tool. The #336699 example and visible features were checked in a desktop browser. This is an operator nomination, not an independent endorsement."
     }
 ]
