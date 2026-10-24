@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Other",
+        "Resource Text": "Transcription and caption software comparison reference",
+        "URL": "https://aiscribereview.com/whispertranscribe-chatgpt-plugin-vs-sider-transkriptor-otter-fireflies/",
+        "Description": "A free article comparing transcription software and timed-caption handoffs for a one-hour recording workflow. It can serve as software-selection reference material when choosing tools to prepare media transcripts and captions. Suggested by AI Scribe Review, the publication hosting the article; editorial methods and evidence scope are linked on the site."
     }
 ]
