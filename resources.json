@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Write AI Alt Text: Accessibility Audit",
+        "URL": "https://growaiskills.com/learn/write-ai-alt-text-accessibility-audit/",
+        "Description": "I maintain Grow AI Skills. This guide offers six synthetic practice examples and a downloadable ledger for reviewing AI-generated alt text against image purpose and page context. It is not a certification and does not replace testing or input from disabled people."
     }
 ]
