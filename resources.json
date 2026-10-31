@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Website accessibility for businesses - a practical guide (Polish)",
+        "URL": "https://blog.aeneia.pl/dostepnosc-strony-firmowej",
+        "Description": "A Polish-language introduction to practical accessibility checks for business websites. Published by our company Aeneia with AI assistance; it is not a complete accessibility audit."
     }
 ]
