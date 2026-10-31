@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "WhisperTranscript.ai – YouTube Transcript Generator",
+        "URL": "https://whispertranscript.ai",
+        "Description": "WhisperTranscript.ai generates transcripts, captions and subtitles from audio, video and YouTube links, and translates them. Useful for making video and podcast content accessible. Free to start."
     }
 ]
