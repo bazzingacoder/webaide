@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "TTS Studio AI – E-learning Voiceover Tool",
+        "URL": "https://ttsstudio.ai",
+        "Description": "TTS Studio AI is a web-based e-learning voiceover tool with many AI voices, SSML support and MP3 or WAV export. Teachers use it to make audio versions of reading material, supporting accessibility. A free tier is available."
     }
 ]
