@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "WhisperTranscribe.ai – Live Caption Tool For Meetings",
+        "URL": "https://whispertranscribe.ai",
+        "Description": "WhisperTranscribe.ai is a live caption and real-time transcription tool for meetings, lectures and podcasts. It converts speech to text and supports captions, helping make audio content accessible. Free to start."
     }
 ]
