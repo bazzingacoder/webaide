@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Checklists",
+        "Resource Text": "12 comprobaciones para tus admisiones online",
+        "URL": "https://sunbuho.com/es/guia-admisiones-online/",
+        "Description": "Free Spanish-language interactive checklist published by Sunbuho. School web teams can use it to test an admissions form with a phone and keyboard, check how it handles errors and confirmations, and save their findings as text."
     }
 ]
