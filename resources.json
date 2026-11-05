@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "Effeect Color Contrast Checker",
+        "URL": "https://effeect.com/tools/color-contrast-checker/",
+        "Description": "A free browser tool that calculates the contrast ratio between text and background colours and shows WCAG AA and AAA pass/fail results for normal and large text. No account is required. It checks colour contrast, not the accessibility of an entire website."
     }
 ]
