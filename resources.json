@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Choosing a Presentation Pointer When Color Is Hard to Distinguish",
+        "URL": "https://light-tracer.com/presentation-pointer-color-hard-to-distinguish/",
+        "Description": "A supplementary guide to marking presentation slides with labels, positions and shapes when color alone is hard to distinguish. It applies W3C use-of-color guidance, links to official sources and separates slide-file markings from physical laser light and remote controls. It does not establish WCAG conformance, medical suitability or tested learning outcomes. I represent Light Tracer / Synapse AI Commerce Limited, a retailer; this free guide includes a product link and is funded by our retail business. Codex assisted with the article and this suggestion. No purchase is required to read it. For your editorial consideration in Guides & Cheat Sheets; I claim no accessibility qualification or affiliation with Webaide."
     }
 ]
