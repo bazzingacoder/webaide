@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "How Radio France makes its radio transcripts findable and correctable",
+        "URL": "https://iadujour.fr/en/use-cases/radio-france-transcription-whisper-accessibilite.html",
+        "Description": "This case study is useful for accessibility reviewers testing an audio player. Can a listener open the transcript without playing the programme? Is there a way to report a misheard name or number, and can an editor find the corresponding passage in the recording? Radio France describes how it uses Whisper, which programmes it covers, and how listeners submit corrections at https://www.radiofrance.com/transcription-du-son. Our English guide links to that source and offers a short review exercise. Submitted by IA du Jour, the guide’s publisher."
     }
 ]
