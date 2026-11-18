@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Build Accessible Tabs with JavaScript",
+        "URL": "https://webcheatsheet.com/javascript/accessible-tabs-javascript",
+        "Description": "A concise WebCheatSheet tutorial showing a JavaScript tabs pattern with ARIA roles and relationships, roving tabindex, arrow-key navigation, and synchronized panel visibility. Includes an HTML/JavaScript example and links to the W3C ARIA tabs pattern. Submitted by the publisher for editorial consideration."
     }
 ]
