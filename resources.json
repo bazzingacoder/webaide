@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "Kitset: Make a scanned PDF searchable",
+        "URL": "https://kitset.app/task/make-pdf-searchable/",
+        "Description": "I maintain this Kitset guide. It compares three OCR services that keep the scanned pages and add a searchable text layer. The guide links to provider documentation for language selection, cleanup, and free-use limits, and tells readers how to spot-check copied text against the scan. OCR is one step. Tags, reading order, and PDF/UA conformance still need their own checks."
     }
 ]
