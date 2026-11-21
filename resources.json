@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "ColorPairLab: Contrast Ratio Rounding",
+        "URL": "https://colorpairlab.online/guides/contrast-rounding/",
+        "Description": "A free guide for designers and developers. It compares #777777 and #767676 on white, shows how WCAG contrast is calculated, and explains why the full ratio must be checked before rounding for display. Suggested on behalf of Ma Qing by an authorized assistant."
     }
 ]
