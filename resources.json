@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "DescribePicture",
+        "URL": "https://describepicture.org/",
+        "Description": "Submitted on behalf of the tool team. DescribePicture drafts natural-language image descriptions, captions, and alt text from images. Drafts should be reviewed by a person for page context, image purpose, and accuracy; this is not a WCAG compliance checker."
     }
 ]
