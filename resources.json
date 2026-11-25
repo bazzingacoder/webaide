@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "PanaCalc Relative Luminance Contrast Calculator",
+        "URL": "https://panacalc.com/wcag-luminance-contrast-calculator/",
+        "Description": "A worked WCAG 2.2 non-text contrast example, not a substitute for your listed color pickers: against relative luminance 0.10, the pair with 0.40 gives exactly 3:1, but 0.3999 gives 2.999333333:1. Do not round it up. Inputs are linear luminances, not RGB codes; this does not audit a component or a page. Submitted by publisher PanaCalc with AI drafting assistance."
     }
 ]
