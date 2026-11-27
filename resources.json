@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Useful tools, resources and references",
+        "Resource Text": "Document accessibility providers in India",
+        "URL": "https://revenuebase.ai/companies/document-accessibility-services/india",
+        "Description": "A public source for web teams looking for India-based help remediating linked PDFs and Office documents. It includes BarrierBreak and DigitalA11Y, whose own service pages explain PDF remediation and checks for document structure. Teams can compare supported formats and ask providers how they test reading order and screen-reader behavior. I co-founded RevenueBase, which publishes the directory."
     }
 ]
