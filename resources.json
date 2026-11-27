@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Auditing and Testing tools",
+        "Resource Text": "WCAG Color Contrast Checker",
+        "URL": "https://toolsdock.online/en/tools/color-contrast-checker",
+        "Description": "A free browser-based checker for solid text and background colors. Enter two hex colors to see the contrast ratio, a text preview, and WCAG 2.2 AA and AAA results for normal and large text. Try #777777 on white (4.48:1, below AA for normal text), then #767676 (4.54:1, passes). Suggested by the ToolsDock team, which maintains the tool."
     }
 ]
