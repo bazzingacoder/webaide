@@ -904,5 +904,11 @@
         "Resource Text": "Daily Accessibility",
         "URL": "https://daily-a11y.com/",
         "Description": "site that gives you one success criterion a day: a plain-language explanation, who it affects, a code example, and a quick comprehension check.."
+    },
+    {
+        "Category": "Guides & Cheat Sheets",
+        "Resource Text": "What Every Medical Practice Website Should Include",
+        "URL": "https://careclinicmarketing.com/medical-practice-website-checklist/",
+        "Description": "The accessibility section of this public healthcare website guide covers readable type, contrast, descriptive links, labelled forms, keyboard checks, and useful error messages. Suggested by its publisher, Care Clinic Marketing."
     }
 ]
